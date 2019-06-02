@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Openliber - Login</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Login CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
+</head>
+<body class="bg-1">
+	<div class="container">
+		<div class="d-flex justify-content-center h-100">
+			<div class="card bg-dark">
+				<div class="card-header">
+					<h3>Login</h3>
+				</div>
+				<div class="card-body">
+					<div class="form-group text-center">
+						<button class="btn btn-block login_btn">
+							<i class="fab fa-google mr-1"></i> Login com Google
+						</button>
+					</div>
+					<form>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-primary"><i
+									class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" placeholder="Email">
+
+						</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-primary"><i
+									class="fas fa-key"></i></span>
+							</div>
+							<input type="password" class="form-control" placeholder="Senha">
+						</div>
+						<div class="row remember">
+							<input type="checkbox">Lembrar de mim
+						</div>
+						<div class="form-group">
+							<a th:href="@{/inicio/logado}"
+								class="btn btn-primary float-right">Entrar</a> <a
+								th:href="@{/inicio}" class="btn btn-danger float-right mr-2">Voltar</a>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<div class="d-flex justify-content-center links">
+						Não tem uma conta?<a th:href="@{/cadastro}"><strong>Cadastre-se</strong>
+						</a>
+					</div>
+					<div class="d-flex justify-content-center links">
+						<a th:href="@{/recuperarsenha}"><strong>Esqueceu a senha?</strong></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+</body>
+</html>

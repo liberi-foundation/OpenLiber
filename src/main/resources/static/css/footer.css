@@ -1,0 +1,21 @@
+.brand-footer {
+	font-size: 50px;
+}
+
+.fa-facebook-square:hover {
+	background-color: #fff;
+	color: #3C5A99 !important;
+}
+
+.fa-twitter-square:hover {
+	background-color: #fff;
+	color: #1da1f2 !important;
+}
+
+.fa-instagram:hover {
+	color: #fb3958 !important;	
+}
+
+.link-topo {
+	text-decoration: none !important;
+}

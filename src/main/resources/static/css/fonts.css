@@ -1,0 +1,21 @@
+.font-lobster2 {
+	font-family: 'Lobster Two', cursive;
+}
+
+.font-karla {
+	font-family: 'Karla', sans-serif;
+}
+
+.spotlight {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.spotlight-sm {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.text-shadow {
+	text-shadow: 1px 3px 0 #ddd;
+}

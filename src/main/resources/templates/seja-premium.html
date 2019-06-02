@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Inicio</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<style>
+		.card li {
+			font-size: 22px;
+		}
+	</style>
+	<!-- ################# -->
+</head>
+<body>
+	<a id="skippy" class="sr-only sr-only-focusable" href="#assine">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/assinar/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	<div class="container-fluid mr-3 mt-5">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="./index.html"><i class="fas fa-home"></i> Home</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					Seja premium <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+	
+		<div class="row mt-4 mb-5 mx-md-2" id="conteudo">
+			<div class="col-12">
+				<div class="card bg-5 shadow-lg py-md-5 rounded">
+					<div class="row mx-3 my-md-5 my-2">
+						<div class="col-md-6 col-12">
+							<span class="d-none d-md-block">
+								<h1 class="display-1 font-weight-bold text-primary text-shadow d-inline d-none">Seja Premium</h1>
+							</span>
+							<p class="lead font-weight-bold text-center text-success mb-md-5">Adquira as seguintes vantagêns</p>
+							<ul class="mt-md-5">
+								<li class="text-success font-weight-bold mb-2"><span class="text-light">Obtenha mais visualizações nos seus livros;</span></li>
+								<li class="text-success font-weight-bold mb-2"><span class="text-light">Ganhe destaque na comunidade;</span></li>
+								<li class="text-success font-weight-bold mb-2"><span class="text-light">Habilite a opção de venda;</span></li>
+								<li class="text-success font-weight-bold mb-2"><span class="text-light">Habilite a opção de manter um livro privado.</span></li>
+							</ul>
+						</div>
+						<div class="col-md-6 col-12 mb-md-0 mb-2">
+							<h1 class="text-center display-3 font-weight-bold text-primary text-shadow">Assine Já</h1>
+							<div class="d-flex justify-content-center">
+								<div class="card shadow-lg">
+									<div class="card-body text-center">
+										<h3 class="font-weight-bold mb-2">Premium</h3>
+										<p class="display-4 text-primary font-weight-bold mb-4">R$ 16,90</p>
+										<p class="lead font-weight-bold">Obtenha todas as vantagens no prazo de 30 dias.</p>
+										<p class="lead text-justify">Toda transição é feita via Pagseguro. Depois de efetuado o pagamento demora de 1 a 3 dias para a ativação do plano premium. Ao clicar em assinar você será redirecionado para o site do Pagseguro, onde será feita toda transição.</p>
+										<p class="lead">Pagamento via Pagseguro</p>
+										<button class="btn btn-lg btn-success btn-block">Assinar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mt-5 bg-warning pt-5 pb-3 bg-1">
+			<div class="col-12" id="informacoes">
+				<div class="row text-center">
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>1.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Livros</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>200.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Escritores</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>10.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Leitores</p>
+							</li>
+						</ul>
+					</div>
+				</div> <!-- /.row -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row geral dados -->
+		
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+	
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+</body>
+</html>

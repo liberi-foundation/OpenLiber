@@ -1,0 +1,13 @@
+.capa {
+	width: 100%;
+	height: auto;
+}
+
+.sobre {
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.capa-2 {
+	margin-top: -40px;
+}

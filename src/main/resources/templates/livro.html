@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Eloquent Javascript</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/livro.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
+	<!-- ################# -->
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#livro">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/livro/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	
+	<div class="container-fluid mr-3 mt-5">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#"><i class="fas fa-home"></i> Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Livro</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					Eloquent Javascript <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<div class="row mb-5" id="livro">
+			<div class="col-12 col-md-3">
+				<img th:src="@{/imagem/cover_livro/eloquent_javascript.png}" alt="#" class="capa">
+				<div class="text-right d-block d-md-none mr-2 capa-2">
+					<button class="btn btn-secondary"><i class="fas fa-bookmark mr-1"></i> Adicionar a lista de desejos</button>
+				</div>
+				<ul class="list-inline text-warning text-center mt-3">
+					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+				</ul>
+			</div> <!-- /.col-12 col-md-3 -->
+			<div class="col-12 col-md-9">
+				<div class="mt-2 h-100">
+					<div class="d-none d-md-block">
+						<a href="#" class="btn btn-lg btn-warning float-right"><i class="fas fa-star"></i>  Favoritar</a>
+						<a href="#" class="btn btn-lg btn-primary float-right mr-2"><i class="fab fa-readme mr-1"></i> Ler livro</a>
+					</div>
+					<h2 class="font-weight-bold">Eloquent Javascript <small class="text-muted">Second Edition</small></h2>
+					<h4 style="margin-top: -10px">A Modern Introduction to Programming</h4>
+					<p class="lead">
+						<button class="btn btn-sm btn-secondary float-right d-none d-md-block"><i class="fas fa-bookmark mr-1"></i> Adicionar a lista de desejos</button>
+						<span class="font-weight-bold">Autor</span>
+						<span class="ml-2 mr-2"><a href="#">Marijn Haverbeke</a></span>
+						<button class="btn btn-sm btn-secondary"><i class="fas fa-star"></i> Favoritar Autor</button>
+					</p>
+					<dl class="row">
+						<dt class="col-3">N. Páginas</dt>
+						<dd class="col-9">255</dd>
+						
+						<dt class="col-3">Lançamento</dt>
+						<dd class="col-9">2018</dd>
+						
+						<dt class="col-3">Editora</dt>
+						<dd class="col-9"><span class="text-muted">Não possui</span></dd>
+						
+						<dt class="col-3">Idioma(s)</dt>
+						<dd class="col-9">Português, Inglês</dd>
+					</dl>
+					<div class="sobre mt-3">
+						<p class="lead">
+							This is a book about JavaScript, programming, and the wonders of the digital. You can read it online here, or get your own paperback copy.
+						</p>
+
+						<p class="lead">
+							Atualmente, estamos melhorando o que já está traduzido, focando na qualidade e precisão da tradução e entendimento do texto como um todo, além de tentar aplicar a gramática mais correta possível. Vários contribuidores ajudaram em diferentes partes do livro e, por isso, existem diversas oportunidades de melhorias.
+						</p>
+					</div> <!-- /.sobre -->
+					<div class="mt-2 d-block d-md-none">
+						<a href="#" class="btn btn-lg btn-primary float-right"><i class="fab fa-readme mr-1"></i> Ler livro</a>
+						<div class="text-right">
+							<a href="#" class="btn btn-warning mr-2 mt-2"><i class="fas fa-star"></i>  Favoritar</a>
+						</div>
+						<div class="w-100"></div>
+					</div>
+				</div>
+			</div> <!-- /.col-12 livro col-md-3 -->
+			<div class="col-12 mt-5">
+				<h2 class="font-karla">Livros Recomendados</h2>
+				<ul class="list-inline" id="lightSlider">
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+					<li class="list-inline-item">
+						<div class="card" style="width: 250px;">
+							<div class="container-hover">
+								<img class="image card-img-top" src="./imagens/covers/eloquent_javascript.png" alt="Imagem de capa do card">
+								<div class="middle">
+									<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+								</div>
+							</div> <!-- /.card image header -->
+							<div class="card-body d-none d-md-block">
+								<a href="#">
+									<h4 class="card-title"><strong>Título do livro</strong></h4>
+								</a>
+								<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+								<a href="#" class="card-link">Ler livro</a>
+								<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+							</div>
+						</div> <!-- /.card content -->
+					</li>
+				</ul>
+			</div> <!-- /.col-12 recomendados -->
+		</div> <!-- /.row livro -->
+
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+
+	<!-- Index JS -->
+	<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

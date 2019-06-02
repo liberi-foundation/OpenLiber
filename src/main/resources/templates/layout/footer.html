@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<footer th:fragment="footer" class="row">
+		<div class="col-12">
+			<div class="row py-2 bg-primary spotlight-sm">
+				<div class="col-12 col-md-6 order-md-6 mt-2 text-right">
+					<a href="#topo" class="link-topo text-light mr-2">Voltar ao topo</a>
+					<a href="#"><i class="fab fa-facebook-square text-light mr-2 brand-footer"></i></a>
+					<a href="#"><i class="fab fa-twitter-square text-light mr-2 brand-footer"></i></a>
+					<a href="#"><i class="fab fa-instagram text-light brand-footer"></i></a>
+				</div>
+				<div class="col-12 col-md-6 mt-2">
+					<nav class="nav">
+						<a class="nav-link text-light" href="#">Inicio</a>
+						<a class="nav-link text-light" href="#">Ajuda</a>
+						<a class="nav-link text-light" href="#">Quem somos</a>
+						<a class="nav-link text-light" href="#">Direito Autoral</a>
+						<a class="nav-link text-light" href="#">Termos de uso</a>
+					</nav>
+				</div>
+			</div> <!-- /.row links -->
+			<div class="row mt-2 justify-content-center">
+				<h5 class="text-center">
+					<i class="fas fa-copyright"></i> Openliber 2019. Todos os direitos reservados.
+				</h5>
+			</div>
+		</div> <!-- /.col-12 -->
+	</footer> <!-- /.row footer -->
+
+	<span th:fragment="script">
+		<!-- Jquery 3.4.1 -->
+		<script th:src="@{/js/jquery.js}"></script>
+		<!-- Bootstrap bundle (cotains popper.js) -->
+		<script th:src="@{/js/bootstrap.bundle.js}"></script>
+	</span>
+</body>
+</html>

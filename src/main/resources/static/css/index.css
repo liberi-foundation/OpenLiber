@@ -1,0 +1,20 @@
+header {
+	background-attachment: fixed;
+	background-position: center;
+	height: 300px;
+	margin-top: -10px;
+}
+
+.nav-secundary {
+	margin-top: -84px;
+	margin-bottom: 40px;
+}
+
+.aspas {
+	font-size: 30px;
+}
+
+.blockquote-footer {
+	margin-left: 80px;
+	font-size: 20px;
+}

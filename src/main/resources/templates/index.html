@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Inicio</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
+	<!-- ################# -->
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#ultimosAdicionados">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/inicio/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	<header class="jumbotron jumbotron-fluid bg-1 d-flex align-items-center bg-info text-center">
+		<div class="container mb-5">
+			<h1 class="display-3 font-lobster2 mb-3 text-shadow">Openliber</h1>
+			<form method="get" action="#">
+				<div class="input-group input-group-lg" style="margin-left: auto; margin-right: auto;">
+					<input type="search" name="pesquisa" placeholder="Que livro você procura?" class="form-control py-2 border-right-0 border">
+					<span class="input-group-append">
+						<button class="btn btn-outline-secondary border-left-0 border" type="button">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div> <!-- /.input search -->
+			</form> <!-- /.form -->
+		</div> <!-- container -->
+	</header> <!-- /.jumbotron -->
+	<nav class="nav nav-secundary nav-tabs flex-column flex-sm-row	">
+		<li class="nav-item ">
+			<a class="nav-link bg-secondary" href="#ultimosAdicionados">Ultimos livros adicionados</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#livrosPopulares">Livros populares</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#livrosRecomendados">Livros recomendados</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#">Dicas de livros</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#">Grupos de discurção</a>
+		</li>
+	</nav>
+	
+	<div class="container-fluid mr-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					<i class="fas fa-home"></i> Home <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<div class="row my-4" id="ultimosAdicionados">
+			<div class="col-12">
+				<h1 class="mt-2 font-karla d-inline">Ultimos livros adicionados</h1>
+				<a class="sr-only sr-only-focusable" href="#livrosPopulares">Pular para livros populares.</a>
+				<a href="#">Ver todos</a>
+				<div class="card bg-2">
+					<div class="row mt-3 my-2 mx-4">
+						<div class="col-12">
+							<ul class="list-inline" id="lightSlider">
+								<li class="list-inline-item">
+									<div class="card">
+										<div class="container-hover">
+											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<div class="middle">
+												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+											</div>
+										</div> <!-- /.card image header -->
+										<div class="card-body d-none d-md-block">
+											<a href="#">
+												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											</a>
+											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+											<a href="#" class="card-link">Ler livro</a>
+											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+										</div>
+									</div> <!-- /.card content -->
+								</li>
+								<li class="list-inline-item">
+									<div class="card">
+										<div class="container-hover">
+											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<div class="middle">
+												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+											</div>
+										</div> <!-- /.card image header -->
+										<div class="card-body d-none d-md-block">
+											<a href="#">
+												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											</a>
+											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+											<a href="#" class="card-link">Ler livro</a>
+											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+										</div>
+									</div> <!-- /.card content -->
+								</li>
+								<li class="list-inline-item">
+									<div class="card">
+										<div class="container-hover">
+											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<div class="middle">
+												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+											</div>
+										</div> <!-- /.card image header -->
+										<div class="card-body d-none d-md-block">
+											<a href="#">
+												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											</a>
+											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+											<a href="#" class="card-link">Ler livro</a>
+											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+										</div>
+									</div> <!-- /.card content -->
+								</li>
+								<li class="list-inline-item">
+									<div class="card">
+										<div class="container-hover">
+											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<div class="middle">
+												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+											</div>
+										</div> <!-- /.card image header -->
+										<div class="card-body d-none d-md-block">
+											<a href="#">
+												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											</a>
+											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+											<a href="#" class="card-link">Ler livro</a>
+											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+										</div>
+									</div> <!-- /.card content -->
+								</li>
+								<li class="list-inline-item">
+									<div class="card">
+										<div class="container-hover">
+											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<div class="middle">
+												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+											</div>
+										</div> <!-- /.card image header -->
+										<div class="card-body d-none d-md-block">
+											<a href="#">
+												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											</a>
+											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+											<a href="#" class="card-link">Ler livro</a>
+											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+										</div>
+									</div> <!-- /.card content -->
+								</li>
+							</ul> <!-- /.lista de cards -->
+						</div> <!-- /.col-12 -->
+					</div> <!-- /.row cards -->
+				</div> <!-- /.card geral -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row ultimos livros -->
+
+		<div class="row my-4" id="livrosPopulares">
+			<div class="col-12">
+				<h1 class="mt-2 font-karla d-inline">Livros populares</h1>
+				<a class="sr-only sr-only-focusable" href="#enviarUmLivro">Pular para enviar um livro.</a>
+				<a href="#">Ver todos</a>
+				<div class="card shadow">
+					<div class="row mx-1 my-4">
+						<div class="col-6 col-md-3 mb-2">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3 mb-2">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+					</div> <!-- /.row cards -->
+				</div> <!-- /.card geral -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row livros populares -->
+
+		<div class="row my-4 py-5 bg-1" id="enviarUmLivro">
+			<div class="col-12 text-center">
+				<h1 class="display-3 font-lobster2 text-light">
+					<strong>Ajude-nos a ampliar nossa estante de livros</strong>
+				</h1>
+				<a href="#" class="btn btn-block btn-primary btn-lg w-75 mr-auto ml-auto">
+					Envie-nos um livro
+				</a>
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row envie um livro -->
+
+		<div class="row my-4" id="livrosRecomendados">
+			<div class="col-12">
+				<h1 class="mt-2 font-karla d-inline">Livros recomendados</h1>
+				<a class="sr-only sr-only-focusable" href="#informacoes">Pular para informações.</a>
+				<a href="#">Ver todos</a>
+				<div class="card shadow">
+					<div class="row mx-3 my-4">
+						<div class="col-6 col-md-3 mb-2">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3 mb-2">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+						<div class="col-6 col-md-3">
+							<div class="card">
+								<div class="container-hover">
+									<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+									<div class="middle">
+										<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+									</div>
+								</div> <!-- /.card image header -->
+								<div class="card-body d-none d-md-block">
+									<a href="#">
+										<h4 class="card-title"><strong>Título do livro</strong></h4>
+									</a>
+									<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+									<a href="#" class="card-link">Ler livro</a>
+									<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
+								</div>
+							</div> <!-- /.card content -->
+						</div> <!-- /.col-3 -->
+					</div> <!-- /.row cards -->
+				</div> <!-- /.card geral -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row livros recomendados -->
+
+		<div class="row my-4 bg-warning pt-5 pb-3 bg-1">
+			<div class="col-12" id="informacoes">
+				<div class="row text-center">
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>1.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Livros</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>200.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Escritores</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>10.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Leitores</p>
+							</li>
+						</ul>
+					</div>
+				</div> <!-- /.row -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row geral dados -->
+
+		<div class="row my-4">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3">
+									<i class="fas fa-book-open fa-10x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<p>
+									<span class="spotlight-sm">Leitura gratis</span> <br>
+									lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem  ipsum.
+								</p>
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3 py-2">
+									<i class="fas fa-book-reader fa-9x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<span class="spotlight-sm">Importância da leitura</span> <br>
+								lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem lorem ipsum.
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3 py-2">
+									<i class="fas fa-atlas fa-9x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<span class="spotlight-sm">Diversidade na leitura</span> <br>
+								lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+				</div> <!-- /.row geral interna -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row informações -->
+		<hr>
+
+		<div class="row my-4">
+			<div class="col-12">
+				<blockquote class="blockquote">
+					<p class="mb-0 display-4 font-karla text-center">
+						<i class="align-top fas fa-quote-left aspas"></i> A leitura é a viagem de quem não pode pegar um trem. <i class="align-top fas fa-quote-right aspas"></i>
+					</p>
+					<footer class="blockquote-footer">
+						<cite title="Francis de Croisset">Francis de Croisset</cite>
+					</footer>
+				</blockquote> <!-- /.blockquote -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row citação -->
+
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+
+	<!-- Index JS -->
+	<script th:src="@{/js/index.js}"></script>
+	
+	<script>
+		var url = "[[${#httpServletRequest.requestURI}]]";
+		var parts = url.split("/");
+		var link = "";
+		if (parts.length === 3) {
+			if (parts[2] == "logado") {
+				link = "/logado"
+			}
+		}
+		$('a').each(function(){
+			if ($(this).text() == "Ler livro") {
+				$(this).attr('href', "/livro" + link);
+			}
+		});
+	</script>
+</body>
+</html>

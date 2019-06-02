@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<nav th:fragment="logout" class="navbar navbar-expand-lg navbar-dark bg-primary" id="navbarTop">
+		<a th:href="@{/inicio}" class="navbar-brand mt-2">
+			<h1 class="font-lobster2">
+				<i class="fas fa-book-open"></i>
+				Openliber
+			</h1>
+		</a> <!-- /.logo -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbar" aria-controls="conteudoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+			<span class="navbar-toggler-icon"></span>
+		</button> <!-- /.toggler -->
+		<div class="collapse navbar-collapse" id="conteudoNavbar">
+			<ul class="navbar-nav mr-auto mt-1">
+				<li class="nav-item active">
+					<a th:href="@{/inicio}" class="nav-link">Inicio <span class="sr-only">(página atual)</span></a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Sobre nós</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Contato</a>
+				</li>
+			</ul> <!-- /.links -->
+			<ul class="nav navbar-nav mx-auto">
+			   <li class="nav-item">
+			     <a th:href="@{/assinar}" class="btn btn-warning btn-lg mr-2"><i class="fas fa-star mr-1"></i> Seja Premium</a>
+			   </li>
+			 </ul>
+			<div class="my-2 my-lg-0">
+				<a th:href="@{/login}" class="btn btn-secondary btn-lg mr-2">Login</a>
+				<a th:href="@{/cadastro}" class="btn btn-lg btn-success">Registre-se</a>
+			</div>
+		</div> <!-- /.collapse -->
+	</nav> <!-- /.nav logout -->
+	
+	<nav th:fragment="login" class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a th:href="@{/inicio/logado}" class="navbar-brand mt-2">
+			<h1 class="font-lobster2">
+				<i class="fas fa-book-open"></i>
+				Openliber
+			</h1>
+		</a> <!-- /.logo -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbar" aria-controls="conteudoNavbar" aria-expanded="false" aria-label="Alterna navegação">
+			<span class="navbar-toggler-icon"></span>
+		</button> <!-- /.toggler -->
+		<div class="collapse navbar-collapse" id="conteudoNavbar">
+			<ul class="navbar-nav mr-auto mt-1">
+				<li class="nav-item active">
+					<a th:href="@{/inicio/logado}" class="nav-link">Inicio <span class="sr-only">(página atual)</span></a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Sobre nós</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">Contato</a>
+				</li>
+			</ul> <!-- /.links -->
+			<ul class="nav navbar-nav mx-auto">
+			   <li class="nav-item">
+			     <a th:href="@{/assinar/logado}" class="btn btn-warning btn-lg mr-2"><i class="fas fa-star mr-1"></i> Seja Premium</a>
+			   </li>
+			 </ul>
+			<div class="my-2 my-lg-0">
+				<a th:href="@{/livro/novo}" class="btn btn-success btn-lg mr-2"><i class="fas fa-upload mr-2"></i> Enviar livro</a>
+				<div class="btn-group">
+					<button class="btn btn-outline-primary btn-lg dropdown-toggle text-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fas fa-user mr-1"></i> Minha conta
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" th:href="@{/perfil}"><i class="fas fa-user"></i> Meu perfil</a>
+						<a class="dropdown-item" href="#"><i class="fas fa-star"></i> Meu favoritos</a>
+						<a class="dropdown-item" th:href="@{/perfil/editar}"><i class="fas fa-edit"></i> Editar meu perfil</a>
+						<a class="dropdown-item" th:href="@{/assinar}"><i class="fas fa-medal"></i> Seja Premium</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" th:href="@{/inicio}"><i class="fas fa-sign-out-alt"></i> Sair</a>
+					</div>
+				</div>
+			</div>
+		</div> <!-- /.collapse -->
+	</nav> <!-- /.nav login -->
+</body>
+</html>
