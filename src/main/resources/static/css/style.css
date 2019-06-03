@@ -1,0 +1,71 @@
+.grupo-capa {
+	width: 200px;
+	height: 200px;
+}
+
+.chat-avatar {
+	width: 100px;
+	height: 100px;
+}
+
+.chat-avatar-mini {
+	width: 80px;
+	height: 80px;
+}
+
+.chat-subtitle {
+	margin-top: -10px;
+}
+
+.ml--15 {
+	margin-left: -15px;
+}
+
+.mt--15 {
+	margin-top: -15px;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 2px;
+}
+
+.bottom-20 {
+	position: absolute;
+	bottom: 28px;
+}
+
+.list-members {
+	height: 533px;
+	overflow-y: auto;
+}
+
+.message-div {
+	height: 533px;
+}
+
+.message-box {
+	height: 433px;
+	width: 100%;
+	overflow-y: auto;
+}
+
+.message-div textarea {
+	height: 90px;
+}
+ 
+.send {
+	position: absolute;
+	left: 94%;
+	top: 90%;
+}
+
+.send-mini {
+	position: absolute;
+	left: 85%;
+	top: 90%;
+}
+
+textarea {
+	resize: none;
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Nome do Grupo</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- ################# -->
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#grupo">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/grupo/Nome-do-Grupo/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	
+	<div class="container-fluid mt-3 mr-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#"><i class="fas fa-home"></i> Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Grupos</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					Nome do Grupo <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<div class="row mb-5" id="grupo">
+			<div class="col-12">
+				<div class="mx-md-5">
+					<div th:if="${#httpServletRequest.requestURI == '/grupo/Nome-do-Grupo/logado'}">
+						<a th:href="@{/grupo/editar}" class="btn btn-lg btn-primary float-right">Editar Grupo</a>
+					</div>
+					<div class="row">
+						<div class="col-md-2 col-12">
+							<img th:src="@{/imagem/grupo/placeholder.jpg}" alt="#" class="grupo-capa">
+							<h3 class="ml-3 mt-2 d-block d-md-none">Nome do Grupo</h3>
+						</div>
+						<div class="col-10 d-none d-md-block">
+							<h1 class="font-karla bottom-20">Nome do Grupo</h1>
+							<p class="lead bottom">Descrição descretiva do grupo, descrevendo coisas, as coisas são descritas.</p>
+						</div>
+						
+						
+					</div>
+					<div class="d-block d-md-none">
+						<div class="mb-2">
+							<span class="font-weight-bold">Membros:</span>
+							<span class="font-weight-bold">João Vitor (admin), </span>
+							João (membro), João (membro), João (membro), João (membro), João (membro).
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-3 bg-5 list-members scroll-2 d-none d-md-block" style="width: 0px;">
+							<div class="row my-3">
+								<div class="col-4">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar rounded-circle">
+								</div>
+								<div class="col-8">
+									<h2 class="mt-4 text-white">João Vitor</h2>
+									<h5 class="text-white chat-subtitle">Fundador</h5>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+							<div class="row my-3">
+								<div class="col-4 text-center">
+									<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle">
+								</div>
+								<div class="col-8 ml--15">
+									<h3 class="mt-3 text-white">João</h3>
+									<p class="text-white chat-subtitle">Membro</p>
+								</div>
+							</div> <!-- /.row my-3 -->
+						</div> <!-- col-3 bg-5 -->
+						<div class="col-md-9 col-11 ml-3 ml-md-0 px-0 message-div bg-6">
+							<div class="message-box pl-5 scroll-2">
+								<div class="mt-3 mr-5">
+									<div class="d-flex justify-content-start">
+										<div class="card roundend w-75" style="background-color:rgba(0, 0, 0, 0);">
+											<div class="card-body bg-primary">
+												<h6>João Vitor</h6>
+												<p>Iae</p>
+											</div>
+											<span class="text-white text-right mr-2">
+												Enviada: 02/06/2019 15:18
+												<span class="text-dark ml-2"><i class="fas fa-check"></i></span> <!-- /.check -->
+											</span> <!-- /.footer -->
+										</div> <!-- /.card -->
+										<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle ml-2"> <!-- /.avatar-mini -->
+									</div> <!-- /.d-flex .justify-content-start mensagem 1 -->
+									<div class="d-flex justify-content-end mt-4">
+										<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle mr-2"> <!-- /.avatar-mini -->
+										<div class="card roundend w-75" style="background-color:rgba(0, 0, 0, 0);">
+											<div class="card-body bg-info">
+												<h6>João</h6>
+												<p>Iae</p>
+											</div>
+											<span class="text-white text-right mr-2">
+												Enviada: 02/06/2019 15:18
+												<span class="text-dark ml-2"><i class="fas fa-check"></i></span> <!-- /.check -->
+											</span> <!-- /.footer -->
+										</div> <!-- /.card -->
+									</div> <!-- /.d-flex .justify-content-start mensagem 2 -->
+									<div class="d-flex justify-content-start mt-4">
+										<div class="card roundend w-75" style="background-color:rgba(0, 0, 0, 0);">
+											<div class="card-body bg-primary">
+												<h6>João Vitor</h6>
+												<p>Tudo bem?</p>
+											</div>
+											<span class="text-white text-right mr-2">
+												Enviada: 02/06/2019 15:18
+												<span class="text-dark ml-2"><i class="fas fa-check"></i></span> <!-- /.check -->
+											</span> <!-- /.footer -->
+										</div> <!-- /.card -->
+										<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle ml-2"> <!-- /.avatar-mini -->
+									</div> <!-- /.d-flex .justify-content-start mensagem 3 -->
+									<div class="d-flex justify-content-end mt-4">
+										<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle mr-2"> <!-- /.avatar-mini -->
+										<div class="card roundend w-75" style="background-color:rgba(0, 0, 0, 0);">
+											<div class="card-body bg-info">
+												<h6>João</h6>
+												<p>Sim!</p>
+											</div>
+											<span class="text-white text-right mr-2">
+												Enviada: 02/06/2019 15:18
+												<span class="text-dark ml-2"><i class="fas fa-check"></i></span> <!-- /.check -->
+											</span> <!-- /.footer -->
+										</div> <!-- /.card -->
+									</div> <!-- /.d-flex .justify-content-start mensagem 4 -->
+									<div class="d-flex justify-content-start mt-4">
+										<div class="card roundend w-75" style="background-color:rgba(0, 0, 0, 0);">
+											<div class="card-body bg-primary">
+												<h6>João Vitor</h6>
+												<p>Kibom :)</p>
+											</div>
+											<span class="text-white text-right mr-2">
+												Enviada: 02/06/2019 15:18
+												<span class="text-dark ml-2"><i class="fas fa-check"></i></span> <!-- /.check -->
+											</span> <!-- /.footer -->
+										</div> <!-- /.card -->
+										<img th:src="@{/imagem/avatar/bts.jpg}" alt="#" class="chat-avatar-mini rounded-circle ml-2"> <!-- /.avatar-mini -->
+									</div> <!-- /.d-flex .justify-content-start mensagem 3 -->
+								</div> <!-- /.mt-3 mr-5 -->
+							</div> <!-- /.message-box -->
+							<form>
+								<div class="form-group mt-2 mx-1">
+									<textarea class="form-control"></textarea>
+									<div class="text-right mr-2">
+										<a href="#" class="btn btn-lg btn-success rounded-circle send d-none d-md-block" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Enviar mensagem"><i class="fas fa-paper-plane mr-1"></i></a>
+										<a href="#" class="btn btn-lg btn-success rounded-circle send-mini d-block d-md-none" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Enviar mensagem"><i class="fas fa-paper-plane mr-1"></i></a>
+									</div>
+								</div>
+							</form>
+						</div> <!-- /.col-9 message-div -->
+					</div> <!-- /.row -->
+					
+					<div class="mt-4">
+						<span class="lead font-weight-bold">Descrição 2, descrição mais extensa.</span><br>
+						<p class="lead">Aqui vai uma descrição mais extensa do grupo, pode conter regras e outras coisas.</p>
+					</div>
+				</div> <!-- /.mx-md-5 -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row my-4 -->
+
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+</body>
+</html>

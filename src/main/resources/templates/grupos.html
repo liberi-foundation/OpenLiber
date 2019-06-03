@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Grupos</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- ################# -->
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#grupos">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/grupos/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	
+	<div class="container-fluid mt-3 mr-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#"><i class="fas fa-home"></i> Home</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					Grupos <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<div class="row mb-5" id="ultimosAdicionados">
+			<div class="col-12">
+				<a th:href="@{/grupo/novo}" class="btn btn-lg btn-primary float-right">Criar grupo</a>
+				<h1 class="font-karla ml-5 mb-3">Grupos</h1>
+				<div class="mx-md-5">
+					<div class="card shadow-lg mb-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12 col-md-2 text-center">
+									<img src="./imagens/grupo/placeholder.jpg" class="card-img-top grupo-capa"><br>
+									<a th:href="@{/grupo/Nome-do-Grupo}" class="btn bnt-lg btn-success mt-2">Participar</a>
+								</div> <!-- col-12 col-md-2 -->
+								<div class="col-12 col-md-10">
+									<h2 class="mt-2">Nome do Grupo</h2>
+									<dl class="row">
+										<dt class="col-3">Fundador</dt>
+										<dd class="col-9">João Vitor</dd>
+
+										<dt class="col-3">Data de Fundação</dt>
+										<dd class="col-9">26/10/1998</dd>
+
+										<dt class="col-3">Número de Mebros</dt>
+										<dd class="col-9">12</dd>
+
+										<dt class="col-3">Grupo</dt>
+										<dd class="col-9">Aberto <small>(Qualquer um pode entrar)</small></dd>
+									</dl>
+									<p class="lead">
+										Descrição do grupo, isto é uma descrição. Aqui tem coisas descritivas, que descrevem coisas. Descrevendo coisas.
+									</p>
+								</div> <!-- /.col-12 col-md-10 -->
+							</div> <!-- /.card row -->
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+					<div class="card shadow-lg mb-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12 col-md-2 text-center">
+									<img src="./imagens/grupo/placeholder.jpg" class="card-img-top grupo-capa"><br>
+									<a th:href="@{/grupo/Nome-do-Grupo}" class="btn bnt-lg btn-success mt-2">Participar</a>
+								</div> <!-- col-12 col-md-2 -->
+								<div class="col-12 col-md-10">
+									<h2 class="mt-2">Nome do Grupo</h2>
+									<dl class="row">
+										<dt class="col-3">Fundador</dt>
+										<dd class="col-9">João Vitor</dd>
+
+										<dt class="col-3">Data de Fundação</dt>
+										<dd class="col-9">26/10/1998</dd>
+
+										<dt class="col-3">Número de Mebros</dt>
+										<dd class="col-9">12</dd>
+
+										<dt class="col-3">Grupo</dt>
+										<dd class="col-9">Aberto <small>(Qualquer um pode entrar)</small></dd>
+									</dl>
+									<p class="lead">
+										Descrição do grupo, isto é uma descrição. Aqui tem coisas descritivas, que descrevem coisas. Descrevendo coisas.
+									</p>
+								</div> <!-- /.col-12 col-md-10 -->
+							</div> <!-- /.card row -->
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+					<div class="card shadow-lg mb-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12 col-md-2 text-center">
+									<img src="./imagens/grupo/placeholder.jpg" class="card-img-top grupo-capa"><br>
+									<a th:href="@{/grupo/Nome-do-Grupo}" class="btn bnt-lg btn-success mt-2">Participar</a>
+								</div> <!-- col-12 col-md-2 -->
+								<div class="col-12 col-md-10">
+									<h2 class="mt-2">Nome do Grupo</h2>
+									<dl class="row">
+										<dt class="col-3">Fundador</dt>
+										<dd class="col-9">João Vitor</dd>
+
+										<dt class="col-3">Data de Fundação</dt>
+										<dd class="col-9">26/10/1998</dd>
+
+										<dt class="col-3">Número de Mebros</dt>
+										<dd class="col-9">12</dd>
+
+										<dt class="col-3">Grupo</dt>
+										<dd class="col-9">Aberto <small>(Qualquer um pode entrar)</small></dd>
+									</dl>
+									<p class="lead">
+										Descrição do grupo, isto é uma descrição. Aqui tem coisas descritivas, que descrevem coisas. Descrevendo coisas.
+									</p>
+								</div> <!-- /.col-12 col-md-10 -->
+							</div> <!-- /.card row -->
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+					<div class="card shadow-lg mb-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12 col-md-2 text-center">
+									<img src="./imagens/grupo/placeholder.jpg" class="card-img-top grupo-capa"><br>
+									<a th:href="@{/grupo/Nome-do-Grupo}" class="btn bnt-lg btn-success mt-2">Participar</a>
+								</div> <!-- col-12 col-md-2 -->
+								<div class="col-12 col-md-10">
+									<h2 class="mt-2">Nome do Grupo</h2>
+									<dl class="row">
+										<dt class="col-3">Fundador</dt>
+										<dd class="col-9">João Vitor</dd>
+
+										<dt class="col-3">Data de Fundação</dt>
+										<dd class="col-9">26/10/1998</dd>
+
+										<dt class="col-3">Número de Mebros</dt>
+										<dd class="col-9">12</dd>
+
+										<dt class="col-3">Grupo</dt>
+										<dd class="col-9">Aberto <small>(Qualquer um pode entrar)</small></dd>
+									</dl>
+									<p class="lead">
+										Descrição do grupo, isto é uma descrição. Aqui tem coisas descritivas, que descrevem coisas. Descrevendo coisas.
+									</p>
+								</div> <!-- /.col-12 col-md-10 -->
+							</div> <!-- /.card row -->
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+					<div class="card shadow-lg mb-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12 col-md-2 text-center">
+									<img src="./imagens/grupo/placeholder.jpg" class="card-img-top grupo-capa"><br>
+									<a th:href="@{/grupo/Nome-do-Grupo}" class="btn bnt-lg btn-success mt-2">Participar</a>
+								</div> <!-- col-12 col-md-2 -->
+								<div class="col-12 col-md-10">
+									<h2 class="mt-2">Nome do Grupo</h2>
+									<dl class="row">
+										<dt class="col-3">Fundador</dt>
+										<dd class="col-9">João Vitor</dd>
+
+										<dt class="col-3">Data de Fundação</dt>
+										<dd class="col-9">26/10/1998</dd>
+
+										<dt class="col-3">Número de Mebros</dt>
+										<dd class="col-9">12</dd>
+
+										<dt class="col-3">Grupo</dt>
+										<dd class="col-9">Aberto <small>(Qualquer um pode entrar)</small></dd>
+									</dl>
+									<p class="lead">
+										Descrição do grupo, isto é uma descrição. Aqui tem coisas descritivas, que descrevem coisas. Descrevendo coisas.
+									</p>
+								</div> <!-- /.col-12 col-md-10 -->
+							</div> <!-- /.card row -->
+						</div> <!-- /.card-body -->
+					</div> <!-- /.card -->
+				</div> <!-- /.mx-md-5 -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row my-4 -->
+
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	
+	<script>
+		$('img').each(function() {
+			$(this).attr('src', '../imagem/grupo/placeholder.jpg');
+		});
+		
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+		
+		var url = "[[${#httpServletRequest.requestURI}]]";
+		var parts = url.split("/");
+		var link = "";
+		if (parts.length === 3) {
+			if (parts[2] == "logado") {
+				link = "/logado"
+			}
+		}
+		$('a').each(function(){
+			if ($(this).text() == "Participar") {
+				$(this).attr('href', "/grupo/Nome-do-Grupo" + link);
+			}
+		});
+	</script>
+</body>
+</html>
