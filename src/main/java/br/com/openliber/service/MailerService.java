@@ -13,20 +13,24 @@ import javax.mail.internet.MimeMessage;
 import br.com.openliber.model.Mailer;
 
 public class MailerService {
+	private final String username = "liberifoundation@gmail.com";
+	private final String password = "liberi123";
+
 	public void sendEmailTSL(Mailer mailer) throws MessagingException {
 		// Propriedades do email
 		Properties props = new Properties();
-		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.socketFactory.port", "587");
-		props.put("mail.smtp.socketFactory.class", "javax.net.tls.TLSSocketFactory");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
 
-		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("liberifoundation@gmail.com", "liberi123");
+				return new PasswordAuthentication(username, password);
 			}
 		});
+
+		session.setDebug(true);
 
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(mailer.getRemetente().getEmail()));

@@ -3,9 +3,10 @@ package br.com.openliber.model;
 public class Email {
 	private String nome;
 	private String email;
-	
-	public Email() {}
-	
+
+	public Email() {
+	}
+
 	public Email(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
@@ -25,5 +26,10 @@ public class Email {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "Email [nome=" + nome + ", email=" + email + "]";
 	}
 }

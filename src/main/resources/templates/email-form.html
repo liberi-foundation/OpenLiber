@@ -43,11 +43,11 @@
 					<div class="form-row">
 						<div class="form-group col-4">
 							<label for="remetenteNome">Nome</label>
-							<input type="text" name="remetenteNome" placeholder="Nome do remetente" class="form-control">
+							<input type="text" th:field="*{remetente.nome}" name="remetenteNome" placeholder="Nome do remetente" class="form-control">
 						</div>
 						<div class="form-group col-8">
 							<label for="remetenteEmail">Email</label>
-							<input type="email" name="remetenteEmail" placeholder="Email do remetente" class="form-control">
+							<input type="email" th:field="*{remetente.email}" name="remetenteEmail" placeholder="Email do remetente" class="form-control">
 						</div>
 					</div>
 
@@ -55,20 +55,20 @@
 					<div class="form-row">
 						<div class="form-group col-4">
 							<label for="destinatarioNome">Nome</label>
-							<input type="text" name="destinatarioNome" placeholder="Nome do destinatario" class="form-control">
+							<input type="text" th:field="*{destinatario.nome}" name="destinatarioNome" placeholder="Nome do destinatario" class="form-control">
 						</div>
 						<div class="form-group col-8">
 							<label for="destinatarioEmail">Email</label>
-							<input type="email" name="destinatarioEmail" placeholder="Email do destinatario" class="form-control">
+							<input type="email" th:field="*{destinatario.email}" name="destinatarioEmail" placeholder="Email do destinatario" class="form-control">
 						</div>
 					</div>
 
 					<h4>Mensagem</h4>
 					<div class="form-group">
 						<label for="assunto">Assunto</label>
-						<input type="text" name="assunto" placeholder="Digite o assunto do email" class="form-control">
+						<input type="text" th:field="*{assunto}" name="assunto" placeholder="Digite o assunto do email" class="form-control">
 					</div>
-					<textarea name="mensagem" id="" cols="30" rows="10" class="form-control" placeholder="Digite a mensagem"></textarea>
+					<textarea th:field="*{mensagem}" name="mensagem" id="mensage" cols="30" rows="10" class="form-control" placeholder="Digite a mensagem"></textarea>
 
 					<button type="submit" class="btn btn-success btn-lg mt-3 float-right">Enviar</button>
 				</form>

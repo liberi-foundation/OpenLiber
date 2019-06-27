@@ -6,6 +6,13 @@ public class Mailer {
 	private String assunto;
 	private String mensagem;
 
+	public Mailer() {}
+	
+	public Mailer (Email remetente, Email destinatario) {
+		this.remetente = remetente;
+		this.destinatario = destinatario;
+	}
+	
 	public Email getRemetente() {
 		return remetente;
 	}
@@ -36,5 +43,11 @@ public class Mailer {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	@Override
+	public String toString() {
+		return "Mailer [remetente=" + remetente + ", destinatario=" + destinatario + ", assunto=" + assunto
+				+ ", mensagem=" + mensagem + "]";
 	}
 }
