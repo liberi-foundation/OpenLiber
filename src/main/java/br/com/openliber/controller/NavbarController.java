@@ -22,11 +22,6 @@ public class NavbarController {
 		return "/login";
 	}
 	
-	@GetMapping("/cadastro")
-	public String registro() {
-		return "/cadastro";
-	}
-	
 	@GetMapping("/perfil")
 	public String perfil() {
 		return "/perfil";

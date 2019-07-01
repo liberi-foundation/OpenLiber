@@ -10,8 +10,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.stereotype.Service;
+
 import br.com.openliber.model.Mailer;
 
+@Service
 public class MailerService {
 	private final String username = "liberifoundation@gmail.com";
 	private final String password = "liberi123";

@@ -11,22 +11,26 @@ import br.com.openliber.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
-
+	
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@GetMapping("/cadastro")
 	public ModelAndView exibirTelaCadastro() {
 		ModelAndView mv = new ModelAndView("/cadastro");
 		mv.addObject("usuario", new Usuario());
 		return mv;
 	}
-	
+
 	@PostMapping("/cadastro")
 	public String salvarUsuario(Usuario usuario) {
-	
+		try {
+			this.usuarioService.criarUsuario(usuario);
+		} catch (Exception e) {
+			return "redirect:/cadastro?erro";
+		}
+		
+		return "redirect:/cadastro";
 	}
-	
-	
-	
+
 }

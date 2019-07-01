@@ -1,6 +1,6 @@
 package br.com.openliber.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,40 +12,53 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.persistence.Transient;
 
 @Entity
 public class Usuario {
-	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_usuario")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
 	private Integer id;
-	@Column(length=100, nullable=false)
+
+	@Column(length = 100, nullable = false)
 	private String email;
+
 	@Column(length = 255, nullable = false)
 	private String senha;
+
+	@Transient
+	private String confirmarSenha;
+
 	@Column(length = 50, nullable = false)
 	private String nome;
+
 	@Column(length = 50, nullable = false)
 	private String sobrenome;
+
 	@Temporal(TemporalType.DATE)
-	private LocalDate dataNascimento;
+	private Date dataNascimento;
+
 	private Nacionalidade nacionalidade;
 	@Enumerated(EnumType.ORDINAL)
 	@Embedded
 	private TipoUsuario tipoUsuario;
+
 	@Column(length = 255)
 	private String foto;
+
 	@Column(length = 255)
 	private String cover;
+
 	@Column(length = 255)
 	private String sobre;
 
-	public Integer getid() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setid(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -65,6 +78,14 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public String getConfirmarSenha() {
+		return confirmarSenha;
+	}
+
+	public void setConfirmarSenha(String confirmarSenha) {
+		this.confirmarSenha = confirmarSenha;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -81,11 +102,11 @@ public class Usuario {
 		this.sobrenome = sobrenome;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

@@ -9,19 +9,13 @@ import br.com.openliber.model.Usuario;
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 
-	@Query("select u from Usuario where u.email = :email")
+	@Query("SELECT u from Usuario u WHERE u.email = :email")
 	public Usuario findByEmail(String email);
-	
-	@Query("select u from Usuario where u.nome like %:nome% or u.email like %:email%")
+
+	@Query("SELECT u FROM Usuario u WHERE u.nome LIKE %:nome% OR u.email LIKE %:email%")
 	public Usuario findByNomeEmailAprox(String nome, String email);
-	
-	@Query("select u from Usuario where u.email = :email and u.senha = :senha")
+
+	@Query("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")
 	public Usuario efetuarLogin(String email, String senha);
-	
-	
-	
-	
-	
-	
-	
+
 }

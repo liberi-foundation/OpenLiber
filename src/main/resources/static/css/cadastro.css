@@ -14,7 +14,7 @@ html, body {
 }
 
 .card {
-	height: 435px;
+	height: auto;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 400px;
@@ -33,6 +33,10 @@ html, body {
 
 .card-header h3 {
 	color: white;
+}
+
+.card-body {
+	padding: 20px 20px 0 20px;
 }
 
 .social_icon {

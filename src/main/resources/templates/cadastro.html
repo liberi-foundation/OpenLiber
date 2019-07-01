@@ -23,38 +23,49 @@
 							<i class="fab fa-google mr-1"></i> Login com Google
 						</button>
 					</div>
-					<form action="#" method="POST">
+					<form th:action="@{/cadastro}" th:object="${usuario}" method="POST" id="form" class="needs-validation" novalidate>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="Nome">
-
+							<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" placeholder="Nome" required onkeyup="validarNome(false)">
+							<div id="nome-feedback" class="d-none"></div>
 						</div>
+						<div class="input-group form-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>
+							</div>
+							<input type="text" class="form-control" id="sobrenome" name="sobrenome" th:field="*{sobrenome}" placeholder="Sobrenome" required onkeyup="validarSobrenome(false)">
+							<div id="sobrenome-feedback" class="d-none"></div>
+						</div>
+
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa fa-envelope"></i></span>
 							</div>
-							<input type="text" class="form-control" placeholder="Email">
+							<input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email" required onkeyup="validarEmail(false)">
+							<div id="email-feedback" class="d-none"></div>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" class="form-control" placeholder="Senha">
+							<input type="password" class="form-control" id="senha" name="senha" th:field="*{senha}" placeholder="Senha" required onkeyup="validarSenha(false)">
+							<div id="senha-feedback" class="d-none"></div>
 						</div>
 
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" class="form-control" placeholder="Confirmar Senha">
+							<input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha" th:field="*{confirmarSenha}" placeholder="Confirmar Senha" required onkeyup="validarConfirmarSenha(false)">
+							<div id="confirmarSenha-feedback" class="d-none"></div>
 						</div>
 
 						<div class="form-group">
 						<!--<input type="submit" value="Cadastrar" class="btn float-right login_btn btn-block">-->
-						<a th:href="@{/inicio/logado}" class="btn btn-block btn-primary">Cadastrar</a>
+						<input type="submit" class="btn btn-block btn-primary" value="Cadastrar">
 						<a th:href="@{/inicio}" class="mt-1 btn btn-block btn-danger">Voltar</a>
 						</div>
 					</form>
@@ -71,5 +82,13 @@
 	
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
+	<!-- # Cadastro JS -->
+	<script type="text/javascript" th:src="@{/js/cadastro.js}"></script>
+	<script type="text/javascript">
+		$("#form").submit(function(event) {
+			event.preventDefault();
+			validarFormulario();
+		});
+	</script>
 </body>
 </html>
