@@ -21,7 +21,7 @@
 			<span class="skiplink-text">Pular para conteúdo principal</span>
 		</div>
 	</a> <!-- /.atalho para o conteudo -->
-	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/inicio/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
 	<header class="jumbotron jumbotron-fluid bg-1 d-flex align-items-center bg-info text-center">
 		<div class="container mb-5">
 			<h1 class="display-3 font-lobster2 mb-3 text-shadow">Openliber</h1>
