@@ -21,7 +21,17 @@ public class UsuarioService {
 		if (this.findUsuarioByEmail(usuario.getEmail()) != null) {
 			throw new ServiceException("Já existe um usuário com este e-mail:" + usuario.getEmail());
 		}
-		
+
 		this.usuarioDAO.save(usuario);
+	}
+
+	public Usuario efetuarLogin(String email, String senha) throws ServiceException {
+		Usuario usuario = this.usuarioDAO.efetuarLogin(email, senha);
+		
+		if (usuario == null) {
+			throw new ServiceException("Login/senha não encontrados");
+		}
+		
+		return usuario; 
 	}
 }

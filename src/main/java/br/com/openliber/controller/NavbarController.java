@@ -17,11 +17,6 @@ public class NavbarController {
 		return "/index";
 	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "/login";
-	}
-	
 	@GetMapping("/perfil")
 	public String perfil() {
 		return "/perfil";

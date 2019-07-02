@@ -1,5 +1,6 @@
 package br.com.openliber.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.openliber.model.Usuario;
 import br.com.openliber.service.UsuarioService;
+import br.com.openliber.util.ServiceException;
 
 @Controller
 public class UsuarioController {
@@ -43,6 +45,29 @@ public class UsuarioController {
 		}
 		
 		return "redirect:/login";
+	}
+	
+	@GetMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("/login");
+		mv.addObject("usuario", new Usuario());
+		
+		return mv;
+	}
+	
+	@PostMapping("/login")
+	public String efetuarLogin(Usuario usuario, RedirectAttributes ra, HttpSession session) {
+		Usuario usuarioLogado;
+		try {
+			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getEmail(), usuario.getSenha());
+			session.setAttribute("usuarioLogado", usuarioLogado);
+		} catch (ServiceException e) {
+			ra.addFlashAttribute("mensagemErro", e.getMessage());
+			
+			return "redirect:/login";
+		}
+		
+		return "redirect:/inicio";
 	}
 
 }
