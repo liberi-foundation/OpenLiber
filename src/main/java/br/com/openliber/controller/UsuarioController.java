@@ -18,7 +18,7 @@ import br.com.openliber.util.ServiceException;
 
 @Controller
 public class UsuarioController {
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -43,18 +43,18 @@ public class UsuarioController {
 				return "redirect:/cadastro";
 			}
 		}
-		
+
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("usuario", new Usuario());
-		
+
 		return mv;
 	}
-	
+
 	@PostMapping("/login")
 	public String efetuarLogin(Usuario usuario, RedirectAttributes ra, HttpSession session) {
 		Usuario usuarioLogado;
@@ -63,11 +63,17 @@ public class UsuarioController {
 			session.setAttribute("usuarioLogado", usuarioLogado);
 		} catch (ServiceException e) {
 			ra.addFlashAttribute("mensagemErro", e.getMessage());
-			
+
 			return "redirect:/login";
 		}
-		
+
 		return "redirect:/inicio";
 	}
 
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+
+		return "redirect:/inicio";
+	}
 }
