@@ -86,8 +86,9 @@
 	<script type="text/javascript" th:src="@{/js/cadastro.js}"></script>
 	<script type="text/javascript">
 		$("#form").submit(function(event) {
-			event.preventDefault();
-			validarFormulario();
+			if (!validarFormulario()) {
+				event.preventDefault();
+			}
 		});
 	</script>
 </body>

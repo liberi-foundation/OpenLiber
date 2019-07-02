@@ -115,8 +115,8 @@ function validarSobrenome(submited) {
 				sobrenome.addClass("is-valid");
 			}
 
-			if (nomeFeedback.hasClass("d-block")) {
-				nomeFeedback.toggleClass("d-block", "d-none");
+			if (sobrenomeFeedback.hasClass("d-block")) {
+				sobrenomeFeedback.toggleClass("d-block", "d-none");
 			}
 		}
 	} else if (submited == true) {
