@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import br.com.openliber.DAO.TipoUsuario;
+
 @Entity
 public class Usuario {
 
