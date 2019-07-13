@@ -1,4 +1,4 @@
-package br.com.openliber.DAO;
+package br.com.openliber.enums;
 
 public enum TipoUsuario {
 
