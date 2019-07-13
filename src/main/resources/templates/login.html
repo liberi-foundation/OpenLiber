@@ -63,5 +63,13 @@
 	
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
+	
+	<script th:if="${contaCriada != null}" type="text/javascript">
+		Swal.fire(
+		  'Sucesso!',
+		  'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
+		  'success'
+		);
+	</script>
 </body>
 </html>

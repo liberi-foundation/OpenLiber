@@ -44,11 +44,12 @@ public class UsuarioController {
 			}
 		}
 
+		ra.addFlashAttribute("contaCriada", true);
 		return "redirect:/login";
 	}
 
 	@GetMapping("/login")
-	public ModelAndView login() {
+	public ModelAndView login(RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("usuario", new Usuario());
 
@@ -67,6 +68,7 @@ public class UsuarioController {
 			return "redirect:/login";
 		}
 
+		ra.addFlashAttribute("loginEfetuado", true);
 		return "redirect:/inicio";
 	}
 

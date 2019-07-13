@@ -459,6 +459,14 @@
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
 	
+	<script th:if="${loginEfetuado != null}" type="text/javascript">
+		Swal.fire(
+		  'Sucesso!',
+		  'Login efetuado com sucesso!',
+		  'success'
+		);
+	</script>
+	
 	<script>
 		var url = "[[${#httpServletRequest.requestURI}]]";
 		var parts = url.split("/");
