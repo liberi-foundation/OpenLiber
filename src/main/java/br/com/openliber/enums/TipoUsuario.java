@@ -2,7 +2,9 @@ package br.com.openliber.enums;
 
 public enum TipoUsuario {
 
-	ADMIN("Admnistrador"), PADRAO("Usuário");
+	ADMIN("Admnistrador"),
+	PADRAO("Usuário"),
+	PREMIUM("Premium");
 
 	public String texto;
 
