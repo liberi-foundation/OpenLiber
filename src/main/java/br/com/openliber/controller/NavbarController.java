@@ -6,17 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NavbarController {
-	
-	@GetMapping("/inicio")
-	public String index(Model model) {
-		return "/index";
-	}
-	
-	@GetMapping("/inicio/logado")
-	public String indexLogado() {
-		return "/index";
-	}
-	
 	@GetMapping("/perfil")
 	public String perfil() {
 		return "/perfil";

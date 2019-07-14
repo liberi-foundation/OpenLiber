@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import br.com.openliber.enums.TipoUsuario;
+import br.com.openliber.enums.TipoUsuarioEnum;
 
 @Entity
 public class Usuario {
@@ -45,7 +45,7 @@ public class Usuario {
 	private Nacionalidade nacionalidade;
 	@Enumerated(EnumType.ORDINAL)
 	@Embedded
-	private TipoUsuario tipoUsuario;
+	private TipoUsuarioEnum tipoUsuario;
 
 	@Column(length = 255)
 	private String foto;
@@ -55,7 +55,7 @@ public class Usuario {
 
 	@Column(length = 255)
 	private String sobre;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -120,11 +120,11 @@ public class Usuario {
 		this.nacionalidade = nacionalidade;
 	}
 
-	public TipoUsuario getTipoUsuario() {
+	public TipoUsuarioEnum getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+	public void setTipoUsuario(TipoUsuarioEnum tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 

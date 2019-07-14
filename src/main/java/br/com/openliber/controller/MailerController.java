@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.openliber.model.Email;
 import br.com.openliber.model.Mailer;
 import br.com.openliber.service.MailerService;
 

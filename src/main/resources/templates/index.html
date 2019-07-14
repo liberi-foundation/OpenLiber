@@ -73,92 +73,20 @@
 					<div class="row mt-3 my-2 mx-4">
 						<div class="col-12">
 							<ul class="list-inline" id="lightSlider">
-								<li class="list-inline-item">
+								<li class="list-inline-item" th:each="livro : ${livros}">
 									<div class="card">
 										<div class="container-hover">
-											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
+											<img class="image card-img-top" th:src="@{${livro.capa}}" alt="Imagem de capa do card">
 											<div class="middle">
-												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
+												<a th:href="@{|/livro/${livro.id}|}" class="btn btn-primary btn-lg">Ler livro</a>
 											</div>
 										</div> <!-- /.card image header -->
 										<div class="card-body d-none d-md-block">
-											<a href="#">
-												<h4 class="card-title"><strong>Título do livro</strong></h4>
+											<a th:href="@{|/livro/${livro.id}|}">
+												<h4 class="card-title"><strong th:text="${livro.titulo}"></strong></h4>
 											</a>
-											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-											<a href="#" class="card-link">Ler livro</a>
-											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
-										</div>
-									</div> <!-- /.card content -->
-								</li>
-								<li class="list-inline-item">
-									<div class="card">
-										<div class="container-hover">
-											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
-											<div class="middle">
-												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
-											</div>
-										</div> <!-- /.card image header -->
-										<div class="card-body d-none d-md-block">
-											<a href="#">
-												<h4 class="card-title"><strong>Título do livro</strong></h4>
-											</a>
-											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-											<a href="#" class="card-link">Ler livro</a>
-											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
-										</div>
-									</div> <!-- /.card content -->
-								</li>
-								<li class="list-inline-item">
-									<div class="card">
-										<div class="container-hover">
-											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
-											<div class="middle">
-												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
-											</div>
-										</div> <!-- /.card image header -->
-										<div class="card-body d-none d-md-block">
-											<a href="#">
-												<h4 class="card-title"><strong>Título do livro</strong></h4>
-											</a>
-											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-											<a href="#" class="card-link">Ler livro</a>
-											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
-										</div>
-									</div> <!-- /.card content -->
-								</li>
-								<li class="list-inline-item">
-									<div class="card">
-										<div class="container-hover">
-											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
-											<div class="middle">
-												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
-											</div>
-										</div> <!-- /.card image header -->
-										<div class="card-body d-none d-md-block">
-											<a href="#">
-												<h4 class="card-title"><strong>Título do livro</strong></h4>
-											</a>
-											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-											<a href="#" class="card-link">Ler livro</a>
-											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
-										</div>
-									</div> <!-- /.card content -->
-								</li>
-								<li class="list-inline-item">
-									<div class="card">
-										<div class="container-hover">
-											<img class="image card-img-top" src="#" alt="Imagem de capa do card">
-											<div class="middle">
-												<a href="#" class="btn btn-primary btn-lg">Ler livro</a>
-											</div>
-										</div> <!-- /.card image header -->
-										<div class="card-body d-none d-md-block">
-											<a href="#">
-												<h4 class="card-title"><strong>Título do livro</strong></h4>
-											</a>
-											<p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-											<a href="#" class="card-link">Ler livro</a>
+											<p class="card-text" th:text="${livro.sinopse}"></p>
+											<a th:href="@{|/livro/${livro.id}|}" class="card-link">Ler livro</a>
 											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
 										</div>
 									</div> <!-- /.card content -->
@@ -465,22 +393,6 @@
 		  'Login efetuado com sucesso!',
 		  'success'
 		);
-	</script>
-	
-	<script>
-		var url = "[[${#httpServletRequest.requestURI}]]";
-		var parts = url.split("/");
-		var link = "";
-		if (parts.length === 3) {
-			if (parts[2] == "logado") {
-				link = "/logado"
-			}
-		}
-		$('a').each(function(){
-			if ($(this).text() == "Ler livro") {
-				$(this).attr('href', "/livro" + link);
-			}
-		});
 	</script>
 </body>
 </html>

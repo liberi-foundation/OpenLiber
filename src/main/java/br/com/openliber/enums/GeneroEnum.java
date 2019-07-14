@@ -1,6 +1,6 @@
 package br.com.openliber.enums;
 
-public enum Genero {
+public enum GeneroEnum {
 	// Gêneros Literarios
 	POESIA("Poesia"),
 	SATIRA("Sátira"),
@@ -42,7 +42,11 @@ public enum Genero {
 	
 	public String texto;
 	
-	Genero(String t) {
+	GeneroEnum(String t) {
 		texto = t;
+	}
+	
+	public String getTexto() {
+		return this.texto;
 	}
 }

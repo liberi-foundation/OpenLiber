@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.openliber.exception.ServiceException;
 import br.com.openliber.model.Usuario;
 import br.com.openliber.service.UsuarioService;
-import br.com.openliber.util.ServiceException;
 
 @Controller
 public class UsuarioController {

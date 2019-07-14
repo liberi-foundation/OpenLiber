@@ -1,16 +1,18 @@
 package br.com.openliber.model;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import br.com.openliber.enums.Genero;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Livro {
@@ -19,13 +21,43 @@ public class Livro {
 	@Column(name = "id_livro")
 	private Integer id;
 
-	@Lob
-	private Byte[] capa;
+	@NotNull(message = "Selecione uma foto para capa")
+	@Transient
+	private MultipartFile capaTemp;
+	@Column(nullable = false)
+	private String capa;
+
+	@NotBlank(message = "Titulo não pode ser vazio")
+	@Column(length = 150, nullable = false)
 	private String titulo;
-	private LocalDate anoLancamento;
+
+	@Column(length = 70)
+	private String subtitulo;
+
+	@Column(length = 50)
+	private String edicao;
+
+	@JoinColumn(nullable = false)
+	@ManyToOne
+	private Usuario autor;
+
+	@Min(0)
+	private Integer anoLancamento;
+
+	@Min(0)
 	private Integer numPaginas;
-	private ArrayList<Genero> generos;
+
+	private String generos;
+
+	@NotBlank(message = "Sinopse não pode ser vazia")
+	@Column(nullable = false)
 	private String sinopse;
+
+	@NotNull(message = "Selecione o arquivo .epub")
+	@Transient
+	private MultipartFile epubTemp;
+
+	@Column(nullable = false)
 	private String epub;
 
 	public Integer getId() {
@@ -36,11 +68,11 @@ public class Livro {
 		this.id = id;
 	}
 
-	public Byte[] getCapa() {
+	public String getCapa() {
 		return capa;
 	}
 
-	public void setCapa(Byte[] capa) {
+	public void setCapa(String capa) {
 		this.capa = capa;
 	}
 
@@ -52,11 +84,35 @@ public class Livro {
 		this.titulo = titulo;
 	}
 
-	public LocalDate getAnoLancamento() {
+	public String getSubtitulo() {
+		return subtitulo;
+	}
+
+	public void setSubtitulo(String subtitulo) {
+		this.subtitulo = subtitulo;
+	}
+
+	public String getEdicao() {
+		return edicao;
+	}
+
+	public void setEdicao(String edicao) {
+		this.edicao = edicao;
+	}
+
+	public Usuario getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
+	}
+
+	public Integer getAnoLancamento() {
 		return anoLancamento;
 	}
 
-	public void setAnoLancamento(LocalDate anoLancamento) {
+	public void setAnoLancamento(Integer anoLancamento) {
 		this.anoLancamento = anoLancamento;
 	}
 
@@ -68,11 +124,11 @@ public class Livro {
 		this.numPaginas = numPaginas;
 	}
 
-	public ArrayList<Genero> getGeneros() {
+	public String getGeneros() {
 		return generos;
 	}
 
-	public void setGeneros(ArrayList<Genero> generos) {
+	public void setGeneros(String generos) {
 		this.generos = generos;
 	}
 
@@ -90,5 +146,21 @@ public class Livro {
 
 	public void setEpub(String epub) {
 		this.epub = epub;
+	}
+
+	public MultipartFile getCapaTemp() {
+		return capaTemp;
+	}
+
+	public void setCapaTemp(MultipartFile capaTemp) {
+		this.capaTemp = capaTemp;
+	}
+
+	public MultipartFile getEpubTemp() {
+		return epubTemp;
+	}
+
+	public void setEpubTemp(MultipartFile epubTemp) {
+		this.epubTemp = epubTemp;
 	}
 }

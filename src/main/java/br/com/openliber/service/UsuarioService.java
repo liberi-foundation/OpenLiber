@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.openliber.DAO.UsuarioDAO;
+import br.com.openliber.exception.ServiceException;
 import br.com.openliber.model.Usuario;
-import br.com.openliber.util.ServiceException;
 
 @Service
 public class UsuarioService {

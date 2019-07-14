@@ -1,6 +1,6 @@
 package br.com.openliber.enums;
 
-public enum TipoUsuario {
+public enum TipoUsuarioEnum {
 
 	ADMIN("Admnistrador"),
 	PADRAO("Usuário"),
@@ -8,7 +8,7 @@ public enum TipoUsuario {
 
 	public String texto;
 
-	TipoUsuario(String t) {
+	TipoUsuarioEnum(String t) {
 		texto = t;
 	}
 

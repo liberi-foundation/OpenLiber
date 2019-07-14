@@ -11,3 +11,8 @@
 .capa-2 {
 	margin-top: -40px;
 }
+
+.cover-preview {
+	max-width: 366px;
+	max-heith: 550px;
+}
