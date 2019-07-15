@@ -24,6 +24,7 @@
 						</button>
 					</div>
 					<form th:action="@{/login}" th:object="${usuario}" method="post">
+						<input th:if="${acessoNegado != null}" name="retorno" type="hidden" th:value="${retorno}">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i
@@ -69,6 +70,14 @@
 		  'Sucesso!',
 		  'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
 		  'success'
+		);
+	</script>
+	
+	<script th:if="${acessoNegado != null}" type="text/javascript">
+		Swal.fire(
+		  'Acesso Negado!',
+		  'Faça o login para ter acesso a esta página!',
+		  'error'
 		);
 	</script>
 </body>

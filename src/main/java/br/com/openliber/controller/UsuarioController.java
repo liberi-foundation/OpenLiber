@@ -1,5 +1,6 @@
 package br.com.openliber.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -9,6 +10,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -49,15 +51,27 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/login")
-	public ModelAndView login(RedirectAttributes ra) {
+	public ModelAndView login(HttpServletRequest request, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("usuario", new Usuario());
+		
+		boolean acessoNegado = (boolean) request.getAttribute("acessoNegado");
+		String retorno = (String) request.getAttribute("retorno");
+		if (acessoNegado == true) {
+			mv.addObject("acessoNegado", request.getRequestURI());
+			mv.addObject("retorno", retorno);
+		}
 
 		return mv;
 	}
 
 	@PostMapping("/login")
-	public String efetuarLogin(Usuario usuario, RedirectAttributes ra, HttpSession session) {
+	public String efetuarLogin(HttpServletRequest request, @ModelAttribute Usuario usuario, @RequestParam(name = "retorno") String retorno, RedirectAttributes ra, HttpSession session) {
+		String redirect = "redirect:/inicio";
+		if (retorno != null) {
+			redirect = "redirect:" + retorno;
+		}
+		
 		Usuario usuarioLogado;
 		try {
 			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getEmail(), usuario.getSenha());
@@ -69,7 +83,7 @@ public class UsuarioController {
 		}
 
 		ra.addFlashAttribute("loginEfetuado", true);
-		return "redirect:/inicio";
+		return redirect;
 	}
 
 	@PostMapping("/logout")

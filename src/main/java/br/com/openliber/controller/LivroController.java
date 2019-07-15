@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.openliber.enums.GeneroEnum;
+import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
 import br.com.openliber.model.Livro;
 import br.com.openliber.model.Usuario;
@@ -27,7 +28,7 @@ public class LivroController {
 	@Autowired
 	private LivroService livroService;
 
-	@GetMapping("/livro/upload")
+	@GetMapping("/upload")
 	public ModelAndView exibirForm() {
 		ModelAndView mv = new ModelAndView("/livro-form");
 
@@ -38,7 +39,7 @@ public class LivroController {
 		return mv;
 	}
 
-	@PostMapping("/livro/upload")
+	@PostMapping("/upload")
 	public String savarLivroEpub(@RequestParam(name = "capaTemp") MultipartFile capa,
 			@RequestParam(name = "epubTemp") MultipartFile epub, @Valid @ModelAttribute Livro livro,
 			HttpServletRequest request, BindingResult br, RedirectAttributes ra) {
@@ -48,15 +49,16 @@ public class LivroController {
 		livro.setEpubTemp(epub);
 
 		if (br.hasErrors()) {
-			return "redirect:/livro/upload";
+			return "redirect:/upload";
 		}
 
 		try {
 			this.livroService.salvarLivroEpub(livro);
-			return "redirect:/";
-		} catch (StorageException e) {
+
+			return "redirect:/" + livro.getAutor().getEmail() + "/" + livro.getTitulo() + "/preview";
+		} catch (StorageException | ServiceException e) {
 			ra.addFlashAttribute("erro", e.getMessage());
-			return "redirect:/livro/upload";
+			return "redirect:/upload";
 		}
 	}
 

@@ -28,10 +28,10 @@ public class Livro {
 	private String capa;
 
 	@NotBlank(message = "Titulo não pode ser vazio")
-	@Column(length = 150, nullable = false)
+	@Column(length = 70, nullable = false)
 	private String titulo;
 
-	@Column(length = 70)
+	@Column(length = 150)
 	private String subtitulo;
 
 	@Column(length = 50)
@@ -47,6 +47,7 @@ public class Livro {
 	@Min(0)
 	private Integer numPaginas;
 
+	@NotBlank(message = "Selecione um gênero")
 	private String generos;
 
 	@NotBlank(message = "Sinopse não pode ser vazia")
