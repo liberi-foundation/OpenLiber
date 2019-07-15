@@ -78,7 +78,7 @@
 										<div class="container-hover">
 											<img class="image card-img-top" th:src="${livro.capa}" alt="Imagem de capa do card">
 											<div class="middle">
-												<a th:href="@{|/${livro.autor.email}/${livro.titulo}|}" class="btn btn-primary btn-lg">Ler livro</a>
+												<a th:href="@{|/${livro.autor.email}/${livro.titulo}/preview|}" class="btn btn-primary btn-lg">Ler livro</a>
 											</div>
 										</div> <!-- /.card image header -->
 										<div class="card-body d-none d-md-block">
@@ -86,7 +86,7 @@
 												<h4 class="card-title"><strong th:text="${livro.titulo}"></strong></h4>
 											</a>
 											<p class="card-text" th:text="${livro.sinopse}"></p>
-											<a th:href="@{|/${livro.autor.email}/${livro.titulo}|}" class="card-link">Ler livro</a>
+											<a th:href="@{|/${livro.autor.email}/${livro.titulo}/preview|}" class="card-link">Ler livro</a>
 											<a href="#" class="card-link float-right" title="adicionar a lista de desejos"><i class="fas fa-bookmark fa-lg"></i></a>
 										</div>
 									</div> <!-- /.card content -->

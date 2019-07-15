@@ -21,6 +21,10 @@ public class LivroService {
 		return this.livroRep.findAll();
 	}
 	
+	public Livro findByEmailOfAutorAndTitulo(String email, String titulo) {
+		return this.livroRep.findByEmailOfAutorAndTitulo(email, titulo);
+	}
+	
 	// ## Save ##
 	public void save(Livro livro) {
 		this.livroRep.save(livro);

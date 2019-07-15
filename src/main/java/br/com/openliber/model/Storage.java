@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.openliber.exception.StorageException;
 
 public class Storage {
-	private final String dirBase = "/var/www/openliber/src/main/resources/uploads";
+	private String dirBase;
 	private String dirOwner;
 
 	private String dirLivros = "livros";
@@ -18,6 +18,7 @@ public class Storage {
 	private String dirEPubs = "epub";
 
 	public Storage(String dirOwner) {
+		this.dirBase = Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "static", "uploads").toString();
 		this.dirOwner = dirOwner;
 	}
 
@@ -42,14 +43,14 @@ public class Storage {
 	}
 
 	public String salvar(String diretorio, MultipartFile arquivo) throws StorageException {
-		Path dirPath = Paths.get(System.getProperty("user.home"), this.getDirBase(), this.getDirOwner(), diretorio);
+		Path dirPath = Paths.get(this.getDirBase(), this.getDirOwner(), diretorio);
 		Path arquivoPath = dirPath.resolve(arquivo.getOriginalFilename());
 
 		try {
 			new File(dirPath.toString()).mkdirs();
 			arquivo.transferTo(arquivoPath.toFile());
 
-			return arquivoPath.toString();
+			return Paths.get("uploads", this.getDirOwner(), diretorio, arquivo.getOriginalFilename()).toString();
 		} catch (IOException e) {
 			throw new StorageException("Não foi possivel salvar o arquivo: " + arquivo.getOriginalFilename() + "\n" + e.getMessage());
 		}

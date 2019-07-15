@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,13 +22,12 @@ import br.com.openliber.model.Usuario;
 import br.com.openliber.service.LivroService;
 
 @Controller
-@RequestMapping("/livro")
 public class LivroController {
 
 	@Autowired
 	private LivroService livroService;
 
-	@GetMapping("/upload")
+	@GetMapping("/livro/upload")
 	public ModelAndView exibirForm() {
 		ModelAndView mv = new ModelAndView("/livro-form");
 
@@ -39,7 +38,7 @@ public class LivroController {
 		return mv;
 	}
 
-	@PostMapping("/upload")
+	@PostMapping("/livro/upload")
 	public String savarLivroEpub(@RequestParam(name = "capaTemp") MultipartFile capa,
 			@RequestParam(name = "epubTemp") MultipartFile epub, @Valid @ModelAttribute Livro livro,
 			HttpServletRequest request, BindingResult br, RedirectAttributes ra) {
@@ -59,6 +58,15 @@ public class LivroController {
 			ra.addFlashAttribute("erro", e.getMessage());
 			return "redirect:/livro/upload";
 		}
+	}
 
+	@GetMapping("/{email}/{titulo}/preview")
+	public ModelAndView exibirLivro(@PathVariable(name = "email", required = true) String email, @PathVariable(name = "titulo", required = true) String titulo) {
+		ModelAndView mv = new ModelAndView("/livro");
+
+		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(email, titulo);
+		mv.addObject("livro", livro);
+
+		return mv;
 	}
 }
