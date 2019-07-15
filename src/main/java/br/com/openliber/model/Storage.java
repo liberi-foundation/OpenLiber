@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import br.com.openliber.exception.StorageException;
 
 public class Storage {
-	private final String dirBase = "/tmp/openliber/uploads";
+	private final String dirBase = "/var/www/openliber/src/main/resources/uploads";
 	private String dirOwner;
 
 	private String dirLivros = "livros";

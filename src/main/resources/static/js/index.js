@@ -1,7 +1,3 @@
-$('img').each(function(){
-	$(this).attr('src', '../imagem/cover_livro/eloquent_javascript.png');
-});
-
 $(function () {
 	$('[data-toggle="tooltip"]').tooltip()
 })
