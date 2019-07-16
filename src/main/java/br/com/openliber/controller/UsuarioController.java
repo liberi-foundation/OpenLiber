@@ -54,24 +54,27 @@ public class UsuarioController {
 	public ModelAndView login(HttpServletRequest request, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("usuario", new Usuario());
-		
-		boolean acessoNegado = (boolean) request.getAttribute("acessoNegado");
-		String retorno = (String) request.getAttribute("retorno");
-		if (acessoNegado == true) {
-			mv.addObject("acessoNegado", request.getRequestURI());
-			mv.addObject("retorno", retorno);
+
+		if (request.getAttribute("acessoNegado") != null) {
+			boolean acessoNegado = (boolean) request.getAttribute("acessoNegado");
+			String retorno = (String) request.getAttribute("retorno");
+			if (acessoNegado == true) {
+				mv.addObject("acessoNegado", request.getRequestURI());
+				mv.addObject("retorno", retorno);
+			}
 		}
 
 		return mv;
 	}
 
 	@PostMapping("/login")
-	public String efetuarLogin(HttpServletRequest request, @ModelAttribute Usuario usuario, @RequestParam(name = "retorno") String retorno, RedirectAttributes ra, HttpSession session) {
+	public String efetuarLogin(HttpServletRequest request, @ModelAttribute Usuario usuario,
+			@RequestParam(name = "retorno", required = false) String retorno, RedirectAttributes ra, HttpSession session) {
 		String redirect = "redirect:/inicio";
 		if (retorno != null) {
 			redirect = "redirect:" + retorno;
 		}
-		
+
 		Usuario usuarioLogado;
 		try {
 			usuarioLogado = this.usuarioService.efetuarLogin(usuario.getEmail(), usuario.getSenha());

@@ -387,11 +387,11 @@
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
 	
-	<script th:if="${loginEfetuado != null}" type="text/javascript">
+	<script th:if="${alertErro != null}" type="text/javascript">
 		Swal.fire(
-		  'Sucesso!',
-		  'Login efetuado com sucesso!',
-		  'success'
+		  'Ops!',
+		  'Livro não encontrado!',
+		  'error'
 		);
 	</script>
 </body>

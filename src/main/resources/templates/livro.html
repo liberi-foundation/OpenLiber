@@ -56,7 +56,7 @@
 				<div class="mt-2 h-100">
 					<div class="d-none d-md-block">
 						<a href="#" class="btn btn-lg btn-warning float-right"><i class="fas fa-star"></i>  Favoritar</a>
-						<a href="#" class="btn btn-lg btn-primary float-right mr-2"><i class="fab fa-readme mr-1"></i> Ler livro</a>
+						<a th:href="@{|/leitor?book=${livro.autor.email}/${livro.titulo}.epub|}" class="btn btn-lg btn-primary float-right mr-2"><i class="fab fa-readme mr-1"></i> Ler livro</a>
 					</div>
 					<h2 class="font-weight-bold" th:text="${livro.titulo}"> <small class="text-muted" th:text="${livro.edicao}"></small></h2>
 					<h4 style="margin-top: -10px" th:text="${livro.subtitulo}"></h4>

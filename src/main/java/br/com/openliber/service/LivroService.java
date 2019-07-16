@@ -41,9 +41,9 @@ public class LivroService {
 			throw new ServiceException("Você já possui um livro com esse nome");
 		}
 
-		Storage s = new Storage(livro.getAutor().getEmail());
+		Storage s = new Storage(livro.getAutor());
 		livro.setCapa(s.savarImagem(livro.getCapaTemp()));
-		livro.setEpub(s.salvarEPub(livro.getEpubTemp()));
+		livro.setEpub(s.salvarEPub(livro.getEpubTemp(), livro.getTitulo()));
 
 		this.save(livro);
 	}
