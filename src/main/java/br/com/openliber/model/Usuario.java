@@ -24,7 +24,7 @@ public class Usuario {
 	@Column(name = "id_usuario")
 	private Integer id;
 
-	@Column(length = 100, nullable = false)
+	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
 	@Column(length = 255, nullable = false)

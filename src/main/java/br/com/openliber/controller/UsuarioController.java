@@ -39,7 +39,7 @@ public class UsuarioController {
 			try {
 				this.usuarioService.criarUsuario(usuario);
 				ra.addFlashAttribute("mensagem", "Conta criada com sucesso!");
-			} catch (Exception e) {
+			} catch (ServiceException e) {
 				ra.addFlashAttribute("mensagemErro", "Não foi possível criar usuário: " + e.getMessage());
 
 				return "redirect:/cadastro";

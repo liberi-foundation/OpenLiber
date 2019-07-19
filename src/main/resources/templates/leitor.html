@@ -1,46 +1,104 @@
 <!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Inicio</title>
 
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
 
-
-<html id="bibi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-
-	<head>
-
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=4.0, user-scalable=yes, shrink-to-fit=no" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-		<title>Openliber - Leitor</title>
-
-		<!-- # BiB/i ... Copyright (c) Satoru MATSUSHIMA - http://bibi.epub.link or https://github.com/satorumurmur/bibi (Licensed under the MIT license.) -->
-		<!-- - The Elegant Icon Font ... Copyright (c) Elegant Themes, Inc. - http://www.elegantthemes.com/blog/resources/elegant-icon-font (Dual licensed under the GPL 2.0 and MIT license.) -->
-		<!-- - Font Awesome ... Copyright (c) Dave Gandy - http://fontawesome.io (Licensed under SIL Open Font License (OFL) 1.1) -->
-		<!-- - Material Icons ... Copyright (c) Material Design Authors / Google Inc. - https://material.io/icons/ (Licensed under the Apache License Version 2.0) -->
-		<!-- - Native Promise Only ... Copyright (c) Kyle Simpson - https://github.com/getify/native-promise-only (Licensed under the MIT license.) -->
-		<!-- - easing.js ... Copyright (c) Dan Rogers - https://github.com/danro/easing-js (Licensed under the MIT license.) -->
-		<!-- - sML ... Copyright (c) Satoru MATSUSHIMA - https://github.com/satorumurmur/sML (Licensed under the MIT license.) -->
-		<link rel="stylesheet" id="bibi-style" th:href="@{/bib/i/res/styles/bibi.css}" />
-		<script id="bibi-script" th:src="@{/bib/i/res/scripts/bibi.js}"></script>
-		<script id="bibi-preset" th:src="@{/bib/i/presets/default.js}"></script>
-
-	</head>
-
-
-	<body data-bibi-book="">
-
-		<!-- 「わたしのことは『ビビ』と呼んでください。『ビビ』はわたしの名前なんです」 —— エレクトラ・パブリケーヌ『ビビのみぎくるぶし』 -->
-		<!-- 「まあ！　それじゃあ、やっぱり、『ビビ』はわたしの“名前”なのね？」　　　 —— ソフィア・パインアイランド『ビビさんたちのこと』 -->
-		<!-- 「このあたりにビビさんという人がいると聞いたのですが、あなたですか？」と。 —— ビビ・ララルー『ポケットに眼鏡』 -->
-
-		<div id="bibi-info">
-			<h1>Openliber</h1>
-			<ul>
-				<li><a href="locahost:8090/openliber">Openliber</a></li>
-			</ul>
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
+	<!-- ################# -->
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#ultimosAdicionados">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
 		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	<header class="jumbotron jumbotron-fluid bg-1 d-flex align-items-center bg-info text-center">
+		<div class="container mb-5">
+			<h1 class="display-3 font-lobster2 mb-3 text-shadow">Openliber</h1>
+			<form method="get" action="#">
+				<div class="input-group input-group-lg" style="margin-left: auto; margin-right: auto;">
+					<input type="search" name="pesquisa" placeholder="Que livro você procura?" class="form-control py-2 border-right-0 border">
+					<span class="input-group-append">
+						<button class="btn btn-outline-secondary border-left-0 border" type="button">
+							<i class="fa fa-search"></i>
+						</button>
+					</span>
+				</div> <!-- /.input search -->
+			</form> <!-- /.form -->
+		</div> <!-- container -->
+	</header> <!-- /.jumbotron -->
+	<nav class="nav nav-secundary nav-tabs flex-column flex-sm-row	">
+		<li class="nav-item ">
+			<a class="nav-link bg-secondary" href="#ultimosAdicionados">Ultimos livros adicionados</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#livrosPopulares">Livros populares</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#livrosRecomendados">Livros recomendados</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" href="#">Dicas de livros</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link bg-secondary" th:href="@{${#httpServletRequest.requestURI == '/inicio/logado'} ? '/grupos/logado' : '/grupos'}">Grupos de discurção</a>
+		</li>
+	</nav>
+	
+	<div class="container-fluid mr-3">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					<i class="fas fa-home"></i> Home <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
 
-	</body>
+		<div class="row my-4" id="ultimosAdicionados">
+			<iframe th:src="@{/bibi-iframe(book=${param.book[0]})}"></iframe>
+		</div>
+		<hr>
 
+		<div class="row my-4">
+			<div class="col-12">
+				<blockquote class="blockquote">
+					<p class="mb-0 display-4 font-karla text-center">
+						<i class="align-top fas fa-quote-left aspas"></i> A leitura é a viagem de quem não pode pegar um trem. <i class="align-top fas fa-quote-right aspas"></i>
+					</p>
+					<footer class="blockquote-footer">
+						<cite title="Francis de Croisset">Francis de Croisset</cite>
+					</footer>
+				</blockquote> <!-- /.blockquote -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row citação -->
 
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+
+	<!-- Index JS -->
+	<script th:src="@{/js/index.js}"></script>
+	
+	<script th:if="${alertErro != null}" type="text/javascript">
+		Swal.fire(
+		  'Ops!',
+		  'Livro não encontrado!',
+		  'error'
+		);
+	</script>
+</body>
 </html>

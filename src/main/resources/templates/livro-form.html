@@ -36,7 +36,7 @@
 			</ol>
 		</nav> <!-- /.breadcrumb -->
 
-		<form th:action="@{/upload}" th:object="${livro}" method="post" enctype="multipart/form-data">
+		<form th:action="@{/upload}" th:object="${livro}" method="post" id="form-livro" enctype="multipart/form-data" onclick="formSubmit();return(false);" class="needs-validation" novalidate>
 			<div class="row mb-5">
 				<div th:if="${erro != null}">
 					<div class="alert alert-danger" th:text="${erro}"></div>
@@ -62,37 +62,44 @@
 					<div class="mt-md-5 mt-3 mr-md-5">
 						<h4>Informação do livro</h4>
 						<div class="form-group mx-auto">
-							<label class="control-label">Título</label>
-							<input type="text" th:field="*{titulo}" class="form-control" placeholder="Digite o Título do livro">
+							<label class="control-label" for="titulo">Título</label>
+							<input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="Digite o Título do livro" onkeyup="validarTitulo();">
+							<div id="titulo-feedback" class="d-none"></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Subtitulo</label>
-							<input type="text" th:field="*{subtitulo}" class="form-control" placeholder="Digite o titulo do livro">
+							<label class="control-label" for="subtitulo">Subtitulo</label>
+							<input type="text" th:field="*{subtitulo}" class="form-control" id="subtitulo" placeholder="Digite o titulo do livro" onkeyup="validarSubtitulo();">
+							<div id="subtitulo-feedback" class="d-none"></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Edição</label>
-							<input type="text" th:field="*{edicao}" class="form-control" placeholder="Digite a edição do livro">
+							<label class="control-label" for="edicao">Edição</label>
+							<input type="text" th:field="*{edicao}" class="form-control" id="edicao" placeholder="Digite a edição do livro" onkeyup="validarEdicao();">
+							<div id="edicao-feedback" class="d-none"></div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-6">
-								<label class="control-label">Ano de Lançamento</label>
-								<input type="number" th:field="*{anoLancamento}" class="form-control" placeholder="Digite o Ano de Lançamento do Livro">
+								<label class="control-label" for="anoLancamento">Ano de Lançamento</label>
+								<input type="number" th:field="*{anoLancamento}" class="form-control" id="anoLancamento" placeholder="Digite o Ano de Lançamento do Livro" onkeyup="validarAnoLancamento();">
+								<div id="anoLancamento-feedback" class="d-none"></div>
 							</div>
 							<div class="form-group col-6">
-								<label class="control-label">Número de Páginas</label>
-								<input type="number" th:field="*{numPaginas}" class="form-control" placeholder="Digite o Número de Páginas do Livro">
+								<label class="control-label" for="numPaginas">Número de Páginas</label>
+								<input type="number" th:field="*{numPaginas}" class="form-control" id="numPaginas" placeholder="Digite o Número de Páginas do Livro" onkeyup="validarNumPaginas();">
+								<div id="numPaginas-feedback" class="d-none"></div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Gênero</label>
-							<select th:field="*{generos}" class="custom-select">
+							<label class="control-label" for="genero">Gênero</label>
+							<select th:field="*{generos}" class="custom-select" id="genero" onchange="validarGenero();">
 								<option value="" selected class="d-none">Selecione o gênero do livro</option>
 								<option th:each="genero : ${generos}" th:text="${genero.texto}" th:value="${genero.texto}"></option>
 							</select>
+							<div id="genero-feedback" class="d-none"></div>
 						</div>
 						<div class="form-group">
-							<label class="control-label">Sinopse</label>
-							<textarea class="form-control" th:field="*{sinopse}"  placeholder="Digite a sinopse do livro" style="rezise: none" rows="5"></textarea>
+							<label class="control-label" for="sinopse">Sinopse</label>
+							<textarea class="form-control" id="sinopse" th:field="*{sinopse}"  placeholder="Digite a sinopse do livro" style="rezise: none" rows="5" onkeyup="validarSinopse();"></textarea>
+							<div id="sinopse-feedback" class="d-none"></div>
 						</div>
 						
 						<h4 class="mt-5">Upload do livro</h4>
@@ -118,7 +125,8 @@
 
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
-	
+	<script th:src="@{/js/livro-form.js}"></script>
+
 	<script>
 		function readURL(input) {
 		  if (input.files && input.files[0]) {

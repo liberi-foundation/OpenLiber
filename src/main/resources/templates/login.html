@@ -24,21 +24,21 @@
 						</button>
 					</div>
 					<form th:action="@{/login}" th:object="${usuario}" method="post">
+						<div th:if="${mensagemErro != null}" th:text="${mensagemErro}" class="alert alert-danger"></div>
 						<input th:if="${acessoNegado != null}" name="retorno" type="hidden" th:value="${retorno}">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text bg-primary"><i
-									class="fas fa-user"></i></span>
+								<span class="input-group-text bg-primary"><i class="fas fa fa-envelope"></i></span>
 							</div>
-							<input type="text" id="email" name="email" th:field="*{email}" class="form-control" placeholder="Email">
-
+							<input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email" required onkeyup="validarEmail(false)">
+							<div id="email-feedback" class="d-none"></div>
 						</div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
-								<span class="input-group-text bg-primary"><i
-									class="fas fa-key"></i></span>
+								<span class="input-group-text bg-primary"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" id="senha" name="senha" th:field="*{senha}" class="form-control" placeholder="Senha">
+							<input type="password" class="form-control" id="senha" name="senha" th:field="*{senha}" placeholder="Senha" required onkeyup="validarSenha(false)">
+							<div id="senha-feedback" class="d-none"></div>
 						</div>
 						<div class="row remember">
 							<input type="checkbox">Lembrar de mim
@@ -64,21 +64,26 @@
 	
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
+	<script th:src="@{/js/cadastro.js}"></script>
 	
 	<script th:if="${contaCriada != null}" type="text/javascript">
-		Swal.fire(
-		  'Sucesso!',
-		  'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
-		  'success'
-		);
+		Swal.fire({
+			title: 'Sucesso!',
+			text: 'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
+			type: 'success',
+			showConfirmButton: false,
+			timer: 2000
+		});
 	</script>
 	
 	<script th:if="${acessoNegado != null}" type="text/javascript">
-		Swal.fire(
-		  'Acesso Negado!',
-		  'Faça o login para ter acesso a esta página!',
-		  'error'
-		);
+		Swal.fire({
+			'Acesso Negado!',
+			'Faça o login para ter acesso a esta página!',
+			'error',
+			showConfirmButton: false,
+			timer: 1500
+		});
 	</script>
 </body>
 </html>

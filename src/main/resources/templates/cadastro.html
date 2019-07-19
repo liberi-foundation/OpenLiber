@@ -24,6 +24,7 @@
 						</button>
 					</div>
 					<form th:action="@{/cadastro}" th:object="${usuario}" method="POST" id="form" class="needs-validation" novalidate>
+						<div th:if="${mensagemErro != null}" th:text="${mensagemErro}" class="alert alert-danger"></div>
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>

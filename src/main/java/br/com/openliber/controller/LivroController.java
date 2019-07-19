@@ -91,4 +91,8 @@ public class LivroController {
 		return "/leitor";
 	}
 	
+	@GetMapping("/bibi-iframe")
+	public String carregarIframe(@RequestParam String book) {
+		return "/bibi-iframe";
+	}
 }

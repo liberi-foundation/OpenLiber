@@ -17,9 +17,9 @@ public class UsuarioService {
 		return usuarioDAO.findByEmail(email);
 	}
 
-	public void criarUsuario(Usuario usuario) throws Exception {
+	public void criarUsuario(Usuario usuario) throws ServiceException {
 		if (this.findUsuarioByEmail(usuario.getEmail()) != null) {
-			throw new ServiceException("Já existe um usuário com este e-mail:" + usuario.getEmail());
+			throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
 		}
 
 		this.usuarioDAO.save(usuario);
