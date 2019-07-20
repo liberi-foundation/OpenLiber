@@ -17,12 +17,16 @@
 				<div class="card-header">
 					<h3>Login</h3>
 				</div>
+				
+				
 				<div class="card-body">
 					<div class="form-group text-center">
 						<button class="btn btn-block login_btn">
 							<i class="fab fa-google mr-1"></i> Login com Google
 						</button>
 					</div>
+					
+					
 					<form th:action="@{/login}" th:object="${usuario}" method="post">
 						<div th:if="${mensagemErro != null}" th:text="${mensagemErro}" class="alert alert-danger"></div>
 						<input th:if="${acessoNegado != null}" name="retorno" type="hidden" th:value="${retorno}">
