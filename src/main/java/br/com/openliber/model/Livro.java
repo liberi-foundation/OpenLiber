@@ -41,10 +41,10 @@ public class Livro {
 	@ManyToOne
 	private Usuario autor;
 
-	@Min(0)
+	@Min(value = 0000, message = "Ano de lançamento inválido")
 	private Integer anoLancamento;
 
-	@Min(0)
+	@Min(value = 0000, message = "Numero de páginas inválido")
 	private Integer numPaginas;
 
 	@NotBlank(message = "Selecione um gênero")

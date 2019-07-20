@@ -14,6 +14,17 @@
 	<!-- ligthSlider CSS -->
 	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
 	<!-- ################# -->
+	<style type="text/css">
+		html, body {
+			height: 100% !important;
+		}
+		.container-fluid {
+			height: 100% !important;
+		}
+		iframe {
+			height: 100% !important;
+		}
+	</style>
 </head>
 <body id="topo">
 	<a id="skippy" class="sr-only sr-only-focusable" href="#ultimosAdicionados">
@@ -22,67 +33,14 @@
 		</div>
 	</a> <!-- /.atalho para o conteudo -->
 	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
-	<header class="jumbotron jumbotron-fluid bg-1 d-flex align-items-center bg-info text-center">
-		<div class="container mb-5">
-			<h1 class="display-3 font-lobster2 mb-3 text-shadow">Openliber</h1>
-			<form method="get" action="#">
-				<div class="input-group input-group-lg" style="margin-left: auto; margin-right: auto;">
-					<input type="search" name="pesquisa" placeholder="Que livro você procura?" class="form-control py-2 border-right-0 border">
-					<span class="input-group-append">
-						<button class="btn btn-outline-secondary border-left-0 border" type="button">
-							<i class="fa fa-search"></i>
-						</button>
-					</span>
-				</div> <!-- /.input search -->
-			</form> <!-- /.form -->
-		</div> <!-- container -->
-	</header> <!-- /.jumbotron -->
-	<nav class="nav nav-secundary nav-tabs flex-column flex-sm-row	">
-		<li class="nav-item ">
-			<a class="nav-link bg-secondary" href="#ultimosAdicionados">Ultimos livros adicionados</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link bg-secondary" href="#livrosPopulares">Livros populares</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link bg-secondary" href="#livrosRecomendados">Livros recomendados</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link bg-secondary" href="#">Dicas de livros</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link bg-secondary" th:href="@{${#httpServletRequest.requestURI == '/inicio/logado'} ? '/grupos/logado' : '/grupos'}">Grupos de discurção</a>
-		</li>
-	</nav>
-	
-	<div class="container-fluid mr-3">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
-					<i class="fas fa-home"></i> Home <span class="sr-only">(página atual)</span>
-				</li>
-			</ol>
-		</nav> <!-- /.breadcrumb -->
-
-		<div class="row my-4" id="ultimosAdicionados">
-			<iframe th:src="@{/bibi-iframe(book=${param.book[0]})}"></iframe>
+	<div class="container-fluid p-0 m-0">
+		<div class="row m-0 p-0" id="ultimosAdicionados">
+			<div class="col-12 m-0 p-0">
+				<iframe class="w-100" th:src="@{/bibi-iframe(book=${param.book[0]})}"></iframe>
+			</div>
 		</div>
-		<hr>
 
-		<div class="row my-4">
-			<div class="col-12">
-				<blockquote class="blockquote">
-					<p class="mb-0 display-4 font-karla text-center">
-						<i class="align-top fas fa-quote-left aspas"></i> A leitura é a viagem de quem não pode pegar um trem. <i class="align-top fas fa-quote-right aspas"></i>
-					</p>
-					<footer class="blockquote-footer">
-						<cite title="Francis de Croisset">Francis de Croisset</cite>
-					</footer>
-				</blockquote> <!-- /.blockquote -->
-			</div> <!-- /.col-12 -->
-		</div> <!-- /.row citação -->
-
-		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+		<footer th:replace="layout/footer :: leitor"></footer> <!-- /.footer -->
 	</div> <!-- /.container geral -->
 
 	<!-- # Script Import -->

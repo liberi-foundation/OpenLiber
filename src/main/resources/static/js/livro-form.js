@@ -24,8 +24,8 @@ function inputInvalido(input, inputFeedback, mensagem) {
 	feedbackInvalido(inputFeedback, mensagem);
 }
 
-function feedbackValido(inputFeedback, feedback) {
-	if (feedback != "" || feedback != null || feedback != undefined) {
+function feedbackValido(inputFeedback, feedback = null) {
+	if (feedback != undefined) {
 		if (inputFeedback.hasClass("invalid-feedback")) {
 			inputFeedback.removeClass("invalid-feedback");
 		}
