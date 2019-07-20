@@ -47,16 +47,16 @@ public class LivroController {
 	}
 
 	@PostMapping("/upload")
-	public String savarLivroEpub(@RequestParam(name = "capaTemp") MultipartFile capa,
+	public String savarLivroEpub(HttpServletRequest request, @RequestParam(name = "capaTemp") MultipartFile capa,
 			@RequestParam(name = "epubTemp") MultipartFile epub, @Valid @ModelAttribute Livro livro,
-			HttpServletRequest request, BindingResult br, RedirectAttributes ra) {
+			BindingResult br, RedirectAttributes ra) {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		livro.setAutor(usuario);
 		livro.setCapaTemp(capa);
 		livro.setEpubTemp(epub);
 
 		if (br.hasErrors()) {
-			ra.addFlashAttribute("livro", livro);
+			ra.addAttribute("livro", livro);
 			return "redirect:/upload";
 		}
 

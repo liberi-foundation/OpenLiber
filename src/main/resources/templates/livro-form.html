@@ -36,11 +36,11 @@
 			</ol>
 		</nav> <!-- /.breadcrumb -->
 
-		<form th:action="@{/upload}" th:object="${livro}" method="post" id="form-livro" enctype="multipart/form-data" onclick="formSubmit();return(false);" class="needs-validation" novalidate>
+		<div th:if="${erro != null}">
+			<div class="alert alert-danger" th:text="${erro}"></div>
+		</div>
+		<form th:action="@{/upload}" th:object="${livro}" method="post" id="form-livro" enctype="multipart/form-data" onsubmit="formSubmit();return(false);" class="needs-validation" novalidate>
 			<div class="row mb-5">
-				<div th:if="${erro != null}">
-					<div class="alert alert-danger" th:text="${erro}"></div>
-				</div>
 				<div class="col-12 col-md-3">
 					<div class="container-hover mt-5">
 						<img id="cover-preview" th:src="@{${capa}}" alt="#" class="image capa cover-preview">

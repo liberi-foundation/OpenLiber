@@ -35,7 +35,17 @@ public class LivroService {
 		if (livro.getAutor() == null) {
 			throw new StorageException("Erro ao salvar: Autor ausente");
 		}
-		
+
+		if (livro.getCapaTemp() == null || livro.getCapaTemp().getOriginalFilename() == ""
+				|| livro.getCapaTemp().getOriginalFilename() == null) {
+			throw new StorageException("Selecione uma capa para o livro");
+		}
+
+		if (livro.getEpubTemp() == null || livro.getEpubTemp().getOriginalFilename() == ""
+				|| livro.getEpubTemp().getOriginalFilename() == null) {
+			throw new StorageException("Selecione um livro para enviar");
+		}
+
 		Livro other = this.findByEmailOfAutorAndTitulo(livro.getAutor().getEmail(), livro.getTitulo());
 		if (other != null) {
 			throw new ServiceException("Você já possui um livro com esse nome");
