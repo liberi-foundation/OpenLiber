@@ -33,13 +33,13 @@ public class LivroController {
 	public ModelAndView exibirForm(Model model) {
 		ModelAndView mv = new ModelAndView("/livro-form");
 
-		Livro livro = (Livro) model.asMap().get("livro"); 
+		Livro livro = (Livro) model.asMap().get("livro");
 		if (livro != null) {
 			mv.addObject("livro", livro);
 		} else {
 			mv.addObject("livro", new Livro());
 		}
-		
+
 		mv.addObject("capa", "/imagem/cover_livro/placeholder.jpg");
 		mv.addObject("generos", GeneroEnum.values());
 
@@ -48,8 +48,8 @@ public class LivroController {
 
 	@PostMapping("/upload")
 	public String savarLivroEpub(HttpServletRequest request, @RequestParam(name = "capaTemp") MultipartFile capa,
-			@RequestParam(name = "epubTemp") MultipartFile epub, @Valid @ModelAttribute Livro livro,
-			BindingResult br, RedirectAttributes ra) {
+			@RequestParam(name = "epubTemp") MultipartFile epub, @Valid @ModelAttribute Livro livro, BindingResult br,
+			RedirectAttributes ra) {
 		Usuario usuario = (Usuario) request.getSession().getAttribute("usuarioLogado");
 		livro.setAutor(usuario);
 		livro.setCapaTemp(capa);
@@ -71,7 +71,8 @@ public class LivroController {
 	}
 
 	@GetMapping("/{email}/{titulo}/preview")
-	public ModelAndView exibirLivro(@PathVariable(name = "email", required = true) String email, @PathVariable(name = "titulo", required = true) String titulo, RedirectAttributes ra) {
+	public ModelAndView exibirLivro(@PathVariable(name = "email", required = true) String email,
+			@PathVariable(name = "titulo", required = true) String titulo, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/livro");
 
 		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(email, titulo);
@@ -84,15 +85,37 @@ public class LivroController {
 
 		return mv;
 	}
-	
-	@GetMapping("/leitor")
-	public String leitor(@RequestParam String book) {
 
-		return "/leitor";
+	@GetMapping("/leitor")
+	public ModelAndView leitor(@RequestParam String book, RedirectAttributes ra) {
+		ModelAndView mv = new ModelAndView("/leitor");
+
+		String owner = book.split("/")[0];
+		String epub = book.split("/")[1].split(".epub")[0];
+
+		mv.addObject("autor", owner);
+		mv.addObject("titulo", epub);
+
+		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(owner, epub);
+		if (livro == null) {
+			ra.addFlashAttribute("alertErro", "Livro não encontrado");
+			mv.setViewName("redirect:/inicio");
+		}
+
+		return mv;
 	}
-	
+
 	@GetMapping("/bibi-iframe")
-	public String carregarIframe(@RequestParam String book) {
+	public String carregarIframe(@RequestParam String book, RedirectAttributes ra) {
+		String owner = book.split("/")[0];
+		String epub = book.split("/")[1].split(".epub")[0];
+
+		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(owner, epub);
+		if (livro == null) {
+			ra.addFlashAttribute("alertErro", "Livro não encontrado");
+			return "redirect:/inicio";
+		}
+
 		return "/bibi-iframe";
 	}
 }

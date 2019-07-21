@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Openliber - Inicio</title>
+	<title th:text="|${titulo} (${autor})|">Openliber</title>
 
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
@@ -15,33 +15,28 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
 	<!-- ################# -->
 	<style type="text/css">
-		html, body {
-			height: 100% !important;
-		}
-		.container-fluid {
-			height: 100% !important;
+		.my-container {
+			width: 100vw !important;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
 		}
 		iframe {
-			height: 100% !important;
+			height: 100%;
 		}
 	</style>
 </head>
 <body id="topo">
-	<a id="skippy" class="sr-only sr-only-focusable" href="#ultimosAdicionados">
-		<div class="container">
-			<span class="skiplink-text">Pular para conteúdo principal</span>
-		</div>
-	</a> <!-- /.atalho para o conteudo -->
-	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
-	<div class="container-fluid p-0 m-0">
-		<div class="row m-0 p-0" id="ultimosAdicionados">
-			<div class="col-12 m-0 p-0">
-				<iframe class="w-100" th:src="@{/bibi-iframe(book=${param.book[0]})}"></iframe>
+	
+	<div class="my-container">
+		<a id="skippy" class="sr-only sr-only-focusable" href="#ultimosAdicionados">
+			<div class="container">
+				<span class="skiplink-text">Pular para conteúdo principal</span>
 			</div>
-		</div>
-
-		<footer th:replace="layout/footer :: leitor"></footer> <!-- /.footer -->
-	</div> <!-- /.container geral -->
+		</a> <!-- /.atalho para o conteudo -->
+		<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+		<iframe class="w-100" id="leitor" th:src="@{/bibi-iframe(book=${param.book[0]})}"></iframe>
+	</div>
 
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
@@ -50,13 +45,5 @@
 
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
-	
-	<script th:if="${alertErro != null}" type="text/javascript">
-		Swal.fire(
-		  'Ops!',
-		  'Livro não encontrado!',
-		  'error'
-		);
-	</script>
 </body>
 </html>
