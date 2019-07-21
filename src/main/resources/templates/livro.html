@@ -21,7 +21,7 @@
 			<span class="skiplink-text">Pular para conteúdo principal</span>
 		</div>
 	</a> <!-- /.atalho para o conteudo -->
-	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/livro/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
 	
 	<div class="container-fluid mr-3 mt-5">
 		<nav aria-label="breadcrumb">
@@ -64,7 +64,10 @@
 						<button class="btn btn-sm btn-secondary float-right d-none d-md-block"><i class="fas fa-bookmark mr-1"></i> Adicionar a lista de desejos</button>
 						<span class="font-weight-bold">Autor</span>
 						<span class="ml-2 mr-2"><a th:href="|/${livro.autor.email}|" th:text="|${livro.autor.nome} ${livro.autor.sobrenome}|"></a></span>
-						<button class="btn btn-sm btn-secondary"><i class="fas fa-star"></i> Favoritar Autor</button>
+						<button th:if="${session.usuarioLogado} == null" class="btn btn-sm btn-secondary"><i class="fas fa-star"></i> Favoritar Autor</button>
+						<thymeleaf th:if="${session.usuarioLogado} != null">
+							<a th:if="${livro.autor.email} == ${session.usuarioLogado.email}" class="btn btn-sm btn-secondary" th:href="|/${livro.autor.email}/${livro.titulo}/editar|"><i class="fas fa-edit"></i> Editar este livro</a>
+						</thymeleaf>
 					</p>
 					<dl class="row">
 						<dt class="col-3">N. Páginas</dt>

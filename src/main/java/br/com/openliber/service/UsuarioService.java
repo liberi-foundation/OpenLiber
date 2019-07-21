@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.openliber.DAO.UsuarioDAO;
+import br.com.openliber.enums.TipoUsuarioEnum;
 import br.com.openliber.exception.ServiceException;
 import br.com.openliber.model.Usuario;
 
@@ -22,6 +23,8 @@ public class UsuarioService {
 			throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
 		}
 
+		usuario.setTipoUsuario(TipoUsuarioEnum.PADRAO);
+		
 		this.usuarioDAO.save(usuario);
 	}
 

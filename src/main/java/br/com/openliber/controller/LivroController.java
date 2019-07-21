@@ -29,6 +29,9 @@ public class LivroController {
 	@Autowired
 	private LivroService livroService;
 
+	/*
+	 * Upload
+	 */
 	@GetMapping("/upload")
 	public ModelAndView exibirForm(Model model) {
 		ModelAndView mv = new ModelAndView("/livro-form");
@@ -70,6 +73,9 @@ public class LivroController {
 		}
 	}
 
+	/*
+	 * VIEW
+	 */
 	@GetMapping("/{email}/{titulo}/preview")
 	public ModelAndView exibirLivro(@PathVariable(name = "email", required = true) String email,
 			@PathVariable(name = "titulo", required = true) String titulo, RedirectAttributes ra) {
@@ -117,5 +123,24 @@ public class LivroController {
 		}
 
 		return "/bibi-iframe";
+	}
+
+	/*
+	 * EDITAR
+	 */
+	@GetMapping("/{email}/{titulo}/editar")
+	public ModelAndView editarForm(@PathVariable(name = "email") String email,
+			@PathVariable(name = "titulo") String titulo, RedirectAttributes ra) {
+		ModelAndView mv = new ModelAndView("/livro-form");
+
+		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(email, titulo);
+		if (livro == null) {
+			ra.addFlashAttribute("alertErro", "Não foi possível encontrar o livro");
+			mv.setViewName("redirect:/inicio");
+		}
+
+		mv.addObject("livro", livro);
+
+		return mv;
 	}
 }

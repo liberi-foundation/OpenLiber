@@ -3,7 +3,6 @@ package br.com.openliber.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -43,8 +42,8 @@ public class Usuario {
 	private Date dataNascimento;
 
 	private Nacionalidade nacionalidade;
+
 	@Enumerated(EnumType.ORDINAL)
-	@Embedded
 	private TipoUsuarioEnum tipoUsuario;
 
 	@Column(length = 255)
