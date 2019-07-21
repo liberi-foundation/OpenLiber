@@ -30,10 +30,10 @@
 					<a href="#"><i class="fas fa-home"></i> Home</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="#">Livro</a>
+					<a href="#">Livros</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
-					Eloquent Javascript <span class="sr-only">(página atual)</span>
+					<span th:text="${livro.titulo}"></span> <span class="sr-only">(página atual)</span>
 				</li>
 			</ol>
 		</nav> <!-- /.breadcrumb -->
