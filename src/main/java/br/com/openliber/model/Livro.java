@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +20,6 @@ public class Livro {
 	@Column(name = "id_livro")
 	private Integer id;
 
-	@NotNull(message = "Selecione uma foto para capa")
 	@Transient
 	private MultipartFile capaTemp;
 	@Column(nullable = false)
@@ -54,7 +52,6 @@ public class Livro {
 	@Column(nullable = false)
 	private String sinopse;
 
-	@NotNull(message = "Selecione o arquivo .epub")
 	@Transient
 	private MultipartFile epubTemp;
 

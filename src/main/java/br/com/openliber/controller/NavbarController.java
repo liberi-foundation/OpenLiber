@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NavbarController {
-	@GetMapping("/perfil")
-	public String perfil() {
-		return "/perfil";
-	}
-	
 	@GetMapping("/perfil/editar")
 	public String editarPerfil() {
 		return "/perfil-editar";

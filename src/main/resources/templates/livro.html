@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Openliber - Eloquent Javascript</title>
+	<title th:text="|Openliber - ${livro.titulo}|"></title>
 
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
@@ -63,7 +63,7 @@
 					<p class="lead">
 						<button class="btn btn-sm btn-secondary float-right d-none d-md-block"><i class="fas fa-bookmark mr-1"></i> Adicionar a lista de desejos</button>
 						<span class="font-weight-bold">Autor</span>
-						<span class="ml-2 mr-2"><a th:href="|/${livro.autor.email}|" th:text="|${livro.autor.nome} ${livro.autor.sobrenome}|"></a></span>
+						<span class="ml-2 mr-2"><a th:href="|/perfil/${livro.autor.email}|" th:text="|${livro.autor.nome} ${livro.autor.sobrenome}|"></a></span>
 						<button th:if="${session.usuarioLogado} == null" class="btn btn-sm btn-secondary"><i class="fas fa-star"></i> Favoritar Autor</button>
 						<thymeleaf th:if="${session.usuarioLogado} != null">
 							<a th:if="${livro.autor.email} == ${session.usuarioLogado.email}" class="btn btn-sm btn-secondary" th:href="|/${livro.autor.email}/${livro.titulo}/editar|"><i class="fas fa-edit"></i> Editar este livro</a>

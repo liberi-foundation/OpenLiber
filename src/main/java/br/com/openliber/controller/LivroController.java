@@ -1,6 +1,7 @@
 package br.com.openliber.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,13 @@ import br.com.openliber.exception.StorageException;
 import br.com.openliber.model.Livro;
 import br.com.openliber.model.Usuario;
 import br.com.openliber.service.LivroService;
+import br.com.openliber.service.UsuarioService;
 
 @Controller
 public class LivroController {
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@Autowired
 	private LivroService livroService;
@@ -130,17 +135,81 @@ public class LivroController {
 	 */
 	@GetMapping("/{email}/{titulo}/editar")
 	public ModelAndView editarForm(@PathVariable(name = "email") String email,
-			@PathVariable(name = "titulo") String titulo, RedirectAttributes ra) {
+			@PathVariable(name = "titulo") String titulo, RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/livro-form");
 
-		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(email, titulo);
+		// Verificando se o usuario está logado
+		if (session.getAttribute("usuarioLogado") == null) {
+			ra.addFlashAttribute("alertErro", "Você precisa está logado para editar um livro");
+			ra.addAttribute("acessoNegado", true);
+			ra.addAttribute("retorno", "/" + email + "/" + titulo + "/editar");
+
+			mv.setViewName("redirect:/login");
+			return mv;
+		}
+
+		// Pegado usuario logado
+		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
+
+		// pegando usuario dono do livro
+		Usuario usuarioOwner = this.usuarioService.findUsuarioByEmail(email);
+
+		// Uma primeira validaçao para saber se o usuario é o dono do livro
+		if (!(usuarioLogado.getId() == usuarioOwner.getId())) {
+			ra.addFlashAttribute("alertErro", "Acesso negado");
+			mv.setViewName("redirect:/inicio");
+			return mv;
+		}
+
+		// Procurando livro com o email do usuario logado e o titulo passado no path,
+		// para validar se o usuario logado é o dono do livro.
+		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(usuarioLogado.getEmail(), titulo);
 		if (livro == null) {
 			ra.addFlashAttribute("alertErro", "Não foi possível encontrar o livro");
 			mv.setViewName("redirect:/inicio");
 		}
 
 		mv.addObject("livro", livro);
+		mv.addObject("generos", GeneroEnum.values());
 
 		return mv;
+	}
+
+	@PostMapping("/{email}/{titulo}/editar")
+	public String salvarEdicao(@PathVariable(name = "email") String autor, @PathVariable(name = "titulo") String titulo,
+			@Valid @ModelAttribute Livro livro, BindingResult br, RedirectAttributes ra,
+			HttpSession session, Model model, HttpServletRequest request) {
+		// Verificando se o usuario está logado
+		if (session.getAttribute("usuarioLogado") == null) {
+			ra.addFlashAttribute("alertErro", "Você precisa está logado para editar um livro");
+			ra.addAttribute("acessoNegado", true);
+			ra.addAttribute("retorno", "/" + autor + "/" + titulo + "/editar");
+			
+			return "redirect:/login";
+		}
+
+		// Pegado usuario logado
+		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
+		
+		// Pegando livro original
+		Livro livroOriginal = this.livroService.findById(livro.getId());
+
+		// setando autor do livro
+		livro.setAutor(livroOriginal.getAutor());
+		livro.setCapa(livroOriginal.getCapa());
+		livro.setEpub(livroOriginal.getEpub());
+		
+		try {
+			this.livroService.editarLivro(livro, usuarioLogado);
+			ra.addFlashAttribute("alertSucesso", "Livro editado com sucesso");
+
+			return "redirect:/" + autor + "/" + titulo + "/preview";
+		} catch (ServiceException e) {
+			ra.addFlashAttribute("erro", e.getMessage());
+			model.addAttribute("livro", livro);
+			model.addAttribute("generos", GeneroEnum.values());
+
+			return "redirect:/" + autor + "/" + titulo + "/editar";
+		}
 	}
 }

@@ -28,10 +28,10 @@
 					<a href="#"><i class="fas fa-home"></i> Home</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a href="#">Livro</a>
+					<a th:href="@{${livro.id != null} ? |/${livro.autor.email}/${livro.titulo}/preview| : '/livros'}" th:text="${livro.id} != null ? ${livro.titulo} : 'Livros'"></a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
-					Novo <span class="sr-only">(página atual)</span>
+					<span th:text="${livro.id != null ? 'Editar' : 'Novo'}"></span> <span class="sr-only">(página atual)</span>
 				</li>
 			</ol>
 		</nav> <!-- /.breadcrumb -->
@@ -39,29 +39,39 @@
 		<div th:if="${erro != null}">
 			<div class="alert alert-danger" th:text="${erro}"></div>
 		</div>
-		<form th:action="@{/upload}" th:object="${livro}" method="post" id="form-livro" enctype="multipart/form-data" onsubmit="formSubmit();return(false);" class="needs-validation" novalidate>
+		<div th:if="${erros != null}">
+			<p th:each="erro : ${erros}" class="alert alert-danger" th:text="${erro.getDefaultMessage()}"></p>
+		</div>
+		<form th:action="@{${livro.id} != null ? |/${livro.autor.email}/${livro.titulo}/editar| : '/upload'}" th:object="${livro}" method="post" id="form-livro" enctype="multipart/form-data" onsubmit="formSubmit();return(false);" class="needs-validation" novalidate>
 			<div class="row mb-5">
 				<div class="col-12 col-md-3">
-					<div class="container-hover mt-5">
-						<img id="cover-preview" th:src="@{${capa}}" alt="#" class="image capa cover-preview">
-						<div class="middle">
+					<div th:if="${livro.id} == null">
+						<div class="container-hover mt-5">
+							<img id="cover-preview" th:src="@{${capa}}" alt="#" class="image capa cover-preview">
+							<div class="middle">
+								<label class="btn btn-info btn-lg">
+									Escolher Capa
+									<input name="capaTemp" type="file" accept=".jpeg, .jpg, .png" class="d-none">
+								</label>
+							</div>
+						</div>
+						<div class="text-center mt-3">
 							<label class="btn btn-info btn-lg">
-								Escolher Capa
+								Escolher Capa <span class="small">(Obrigatório)</span>
 								<input name="capaTemp" type="file" accept=".jpeg, .jpg, .png" class="d-none">
 							</label>
 						</div>
-					</div>
-					<div class="text-center mt-3">
-						<label class="btn btn-info btn-lg">
-							Escolher Capa <span class="small">(Obrigatório)</span>
-							<input name="capaTemp" type="file" accept=".jpeg, .jpg, .png" class="d-none">
-						</label>
-					</div>
+					</div> <!-- edição de capa -->
+					<div th:if="${livro.id} != null" class="mt-5">
+						<img th:src="${livro.capa}" th:alt="|Capa do livro ${livro.titulo}|">
+						<p class="alert alert-warning mt-2 text-center">Não é possível editar a capa</p>
+					</div> <!-- capa fixa -->
 				</div> <!-- /.col-12 col-md-3 -->
 				<div class="col-12 col-md-9" id="upload">
 					<div class="mt-md-5 mt-3 mr-md-5">
 						<h2 class="mb-0">Informação do livro</h2>
 						<p class="mt-0">Campos marcados com <span class="text-danger">*</span> são obrigatórios.</p>
+						<input type="hidden" th:field="*{id}">
 						<div class="form-group mx-auto">
 							<label class="control-label" for="titulo">Título<span class="text-danger">*</span></label>
 							<input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="Digite o Título do livro" onkeyup="validarTitulo();">
@@ -93,7 +103,7 @@
 							<label class="control-label" for="genero">Gênero<span class="text-danger">*</span></label>
 							<select th:field="*{generos}" class="custom-select" id="genero" onchange="validarGenero();">
 								<option value="" selected class="d-none">Selecione o gênero do livro</option>
-								<option th:each="genero : ${generos}" th:text="${genero.texto}" th:value="${genero.texto}"></option>
+								<option th:each="genero : ${generos}" th:text="${genero.texto}" th:value="${genero.texto}" th:selected="${livro.generos} == ${genero} ? 'true' : 'false'"></option>
 							</select>
 							<div id="genero-feedback" class="d-none"></div>
 						</div>
@@ -103,18 +113,19 @@
 							<div id="sinopse-feedback" class="d-none"></div>
 						</div>
 						
-						<h4 class="mt-5">Upload do livro</h4>
-						<div class="form-group">
-	      					<label>Selecione abaixo o livro a ser enviado, o livro deve estar no formato epub.</label>
-	      					<div class="custom-file">
+						<p th:if="${livro.id} != null" class="alert alert-warning text-center">Não é possível alterar o arquivo fonte do epub</p>
+						<h4 th:if="${livro.id} == null" class="mt-5">Upload do livro</h4>
+						<div class="form-group" th:if="${livro.id} == null">
+      					<label>Selecione abaixo o livro a ser enviado, o livro deve estar no formato epub.</label>
+      					<div class="custom-file">
 								<input type="file" name="epubTemp"  class="custom-file-input" accept=".epub">
 								<label class="custom-file-label" for="epubUpload">Escolher livro (obrigatório)</label>
-							</div>
-	      				</div>
+							</div> 
+	      			</div> <!-- input upload -->
 	      				
-	      				<div class="text-center mt-5">
-							<button type="submit" class="btn btn-lg mr-3 mt-2 btn-primary w-50">Salvar</button>
-							<button type="reset" class="btn btn-lg mt-2 btn-warning">Apagar</button>
+	      			<div class="text-center mt-5">
+							<button type="submit" class="btn btn-lg mr-3 mt-2 btn-primary w-75">Salvar</button>
+							<button th:if="${livro.id} != null" type="reset" class="btn btn-lg mt-2 btn-warning">Apagar</button>
 						</div>
 					</div>
 				</div> <!-- /.col-12 livro col-md-3 -->

@@ -71,7 +71,7 @@
 						<i class="fas fa-user mr-1"></i> <span th:text="${session.usuarioLogado.nome}"></span>
 					</button>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" th:href="@{/perfil}"><i class="fas fa-user"></i> Meu perfil</a>
+						<a class="dropdown-item" th:href="@{|/perfil/${session.usuarioLogado.email}|}"><i class="fas fa-user"></i> Meu perfil</a>
 						<a class="dropdown-item" href="#"><i class="fas fa-star"></i> Meu favoritos</a>
 						<a class="dropdown-item" th:href="@{/perfil/editar}"><i class="fas fa-edit"></i> Editar meu perfil</a>
 						<a class="dropdown-item" th:href="@{/assinar}"><i class="fas fa-medal"></i> Seja Premium</a>

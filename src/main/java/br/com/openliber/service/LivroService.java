@@ -10,6 +10,7 @@ import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
 import br.com.openliber.model.Livro;
 import br.com.openliber.model.Storage;
+import br.com.openliber.model.Usuario;
 
 @Service
 public class LivroService {
@@ -18,12 +19,31 @@ public class LivroService {
 	private LivroDAO livroRep;
 
 	// ## Find ##
+	public Livro findById(Integer id) {
+		return this.livroRep.findByID(id);
+
+	}
+
 	public List<Livro> findAll() {
 		return this.livroRep.findAll();
 	}
 
 	public Livro findByEmailOfAutorAndTitulo(String email, String titulo) {
 		return this.livroRep.findByEmailOfAutorAndTitulo(email, titulo);
+	}
+
+	public List<Livro> findByEmailOfAutor(String email) {
+		return this.livroRep.findByEmailOfAutor(email);
+	}
+
+	public List<Livro> findLastsByAutor(Usuario usuario, int max) {
+		List<Livro> result = this.livroRep.findByEmailOfAutorLasts(usuario.getEmail());
+
+		if (result.size() > max) {
+			return result.subList(0, max);
+		}
+
+		return result;
 	}
 
 	// ## Save ##
@@ -56,5 +76,21 @@ public class LivroService {
 		livro.setEpub(s.salvarEPub(livro.getEpubTemp(), livro.getTitulo()));
 
 		this.save(livro);
+	}
+
+	public void editarLivro(Livro livro, Usuario usuarioLogado) throws ServiceException {
+		if (livro.getAutor().getId() != usuarioLogado.getId()) {
+			throw new ServiceException("Você não tem permissão para editar esse livro");
+		}
+
+		Livro livroOriginal = this.findById(livro.getId());
+		if (!(livroOriginal.getTitulo().equals(livro.getTitulo()))) {
+			Livro other = this.findByEmailOfAutorAndTitulo(livro.getAutor().getEmail(), livro.getTitulo());
+			if (other != null) {
+				throw new ServiceException("Você já possui um livro com esse nome");
+			}
+		}
+
+		this.livroRep.save(livro);
 	}
 }

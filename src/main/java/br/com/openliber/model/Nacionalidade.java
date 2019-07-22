@@ -17,6 +17,13 @@ public class Nacionalidade {
 		return cidade;
 	}
 
+	public Nacionalidade(String cidade, String estado, String pais) {
+		super();
+		this.cidade = cidade;
+		this.estado = estado;
+		this.pais = pais;
+	}
+
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}

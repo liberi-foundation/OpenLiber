@@ -2,13 +2,11 @@ package br.com.openliber;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.HandlerMapping;
 
 public class AutorizadorInterceptor implements HandlerInterceptor {
 	

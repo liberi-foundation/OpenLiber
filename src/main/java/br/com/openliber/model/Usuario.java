@@ -3,6 +3,7 @@ package br.com.openliber.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -41,16 +42,17 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
+	@Embedded
 	private Nacionalidade nacionalidade;
 
 	@Enumerated(EnumType.ORDINAL)
 	private TipoUsuarioEnum tipoUsuario;
 
 	@Column(length = 255)
-	private String foto;
+	private String foto = "/imagem/avatar/no_image.jpg";
 
 	@Column(length = 255)
-	private String cover;
+	private String cover = "/imagem/cover_user/galaxia.jpg";
 
 	@Column(length = 255)
 	private String sobre;
