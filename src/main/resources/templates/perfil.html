@@ -76,7 +76,7 @@
 			<div class="col-md-2 offset-md-3 perfil-favoritar d-none d-md-block">
 				<button th:if="${session.usuarioLogado} == null" class="btn btn-lg btn-warning text-right"><i class="fas fa-star"></i> Favoritar</button>
 				<div th:if="${session.usuarioLogado} != null">
-					<button th:if="${session.usuarioLogado.email} == ${usuario.email}" class="btn btn-lg btn-info text-right"><i class="fas fa-edit"></i> Editar meu perfil</button>
+					<a th:if="${session.usuarioLogado.email} == ${usuario.email}" class="btn btn-lg btn-info text-right" th:href="@{/perfil/editar}"><i class="fas fa-edit"></i> Editar meu perfil</a>
 					<button th:if="${session.usuarioLogado.email} != ${usuario.email}" class="btn btn-lg btn-warning text-right"><i class="fas fa-star"></i> Favoritar</button>
 				</div>
 			</div>

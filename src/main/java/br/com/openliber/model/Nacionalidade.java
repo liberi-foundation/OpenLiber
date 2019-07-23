@@ -13,8 +13,8 @@ public class Nacionalidade {
 	@Column(length = 80)
 	private String pais;
 
-	public String getCidade() {
-		return cidade;
+	public Nacionalidade() {
+
 	}
 
 	public Nacionalidade(String cidade, String estado, String pais) {
@@ -22,6 +22,10 @@ public class Nacionalidade {
 		this.cidade = cidade;
 		this.estado = estado;
 		this.pais = pais;
+	}
+
+	public String getCidade() {
+		return cidade;
 	}
 
 	public void setCidade(String cidade) {

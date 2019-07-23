@@ -6,16 +6,19 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.openliber.exception.ServiceException;
+import br.com.openliber.exception.StorageException;
 import br.com.openliber.model.Nacionalidade;
 import br.com.openliber.model.Usuario;
 import br.com.openliber.service.LivroService;
@@ -129,14 +132,56 @@ public class UsuarioController {
 		}
 
 		int livrosPostados = this.livroService.findByEmailOfAutor(usuario.getEmail()).size();
-		
+
 		mv.addObject("usuario", usuario);
 		mv.addObject("livrosPostados", livrosPostados);
-		
+
 		if (livrosPostados > 0) {
 			mv.addObject("livros", this.livroService.findLastsByAutor(usuario, 4));
 		}
 
 		return mv;
+	}
+
+	@GetMapping("/perfil/editar")
+	public ModelAndView exibirEditarPerfil(HttpSession session, RedirectAttributes ra) {
+		ModelAndView mv = new ModelAndView("/perfil-editar");
+
+		if (session.getAttribute("usuarioLogado") == null) {
+			ra.addFlashAttribute("acessoNegado", true);
+			ra.addFlashAttribute("retorno", "/perfil/editar");
+
+			mv.setViewName("redirect:/login");
+			return mv;
+		}
+
+		Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+
+		mv.addObject(usuario);
+
+		return mv;
+	}
+
+	@PostMapping("/perfil/editar")
+	public String editarPerfil(@RequestParam(name = "fotoArquivo", required = false) MultipartFile fotoArquivo,
+			@Valid @ModelAttribute Usuario usuario, BindingResult br, HttpSession session, RedirectAttributes ra) {
+		usuario.setFotoTemp(fotoArquivo);
+
+		if (br.hasErrors()) {
+			ra.addFlashAttribute("erros", br.getAllErrors());
+
+			return "redirect:/perfil/editar";
+		}
+
+		try {
+			this.usuarioService.atualizarUsuario(usuario);
+			session.setAttribute("usuarioLogado", usuario);
+
+			return "redirect:/perfil/" + usuario.getEmail();
+		} catch (ServiceException | StorageException e) {
+			ra.addFlashAttribute("erro", e.getMessage());
+
+			return "redirect:/perfil/editar";
+		}
 	}
 }

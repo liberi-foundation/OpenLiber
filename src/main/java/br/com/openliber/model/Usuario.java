@@ -14,6 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.com.openliber.enums.TipoUsuarioEnum;
 
 @Entity
@@ -43,10 +45,13 @@ public class Usuario {
 	private Date dataNascimento;
 
 	@Embedded
-	private Nacionalidade nacionalidade;
+	private Nacionalidade nacionalidade = new Nacionalidade("", "", "");
 
 	@Enumerated(EnumType.ORDINAL)
-	private TipoUsuarioEnum tipoUsuario;
+	private TipoUsuarioEnum tipoUsuario = TipoUsuarioEnum.PADRAO;
+
+	@Transient
+	private MultipartFile fotoTemp;
 
 	@Column(length = 255)
 	private String foto = "/imagem/avatar/no_image.jpg";
@@ -56,7 +61,7 @@ public class Usuario {
 
 	@Column(length = 255)
 	private String sobre;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -135,6 +140,14 @@ public class Usuario {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public MultipartFile getFotoTemp() {
+		return fotoTemp;
+	}
+
+	public void setFotoTemp(MultipartFile fotoTemp) {
+		this.fotoTemp = fotoTemp;
 	}
 
 	public String getCover() {

@@ -1,153 +1,189 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-	<title>Openliber - Editar perfil</title>
+	<title th:text="|Openliber - ${usuario.nome} ${usuario.sobrenome}|">Openliber</title>
 
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
 
 	<!-- # CSS da página # -->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/perfil.css}">
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
 	<!-- ################# -->
+	<style type="text/css">
+		.avatar {
+			position: relative;
+			width: 100%;
+			height: auto;
+		}
+	</style>
 </head>
-<body id="topo">
-	<a id="skippy" class="sr-only sr-only-focusable" href="#perfil">
-		<div class="container">
-			<span class="skiplink-text">Pular para conteúdo principal</span>
-		</div>
-	</a> <!-- /.atalho para o conteudo -->
-	<nav th:replace="layout/navbar :: login"></nav> <!-- ./navbar -->
-	
-	<div class="container-fluid mr-3">
-		<div class="row mb-5">
-			<div class="cover d-none d-md-block">
-				<img th:src="@{/imagem/cover_user/galaxia.jpg}" alt="#">
-				<div class="text-right mr-5 btn-capa">
-					<button class="btn btn-lg btn-info rounded">Editar Capa</button>
-				</div>
-			</div>
-			<div class="cover-sm d-block d-md-none">
-				<img th:src="@{/imagem/cover_user/galaxia.jpg}" alt="#">
-			</div>
-			<div class="col-md-3 col-12">
-				<div class="avatar d-none d-md-block">
-					<div class="img-wrapper">
-						<img th:src="@{/imagem/avatar/bts.jpg}">
-						<div class="img-overlay">
-							<button class="btn btn-lg btn-info rounded">Editar Foto</button>
-						</div>
-					</div>
-					<div class="text-center">
-						<h1>Jung Jungkook</h1>
-					</div>
-				</div>
-				<div class="avatar-sm d-block d-md-none">
-					<div class="text-center">
-						<button class="btn btn-capa-sm btn-info rounded">Editar Capa</button>
-					</div>
-					<div class="img-wrapper">
-						<img th:src="@{/imagem/avatar/bts.jpg}">
-						<div class="img-overlay">
-							<button class="btn btn btn-info rounded">Editar Foto</button>
-						</div>
-					</div>
-					<div class="text-center">
-						<h3>Jung Jungkook</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-12">
-				<form class="mt-3" id="perfil">
-					<h4>Informação pessoal</h4>
-					<div class="form-group">
-						<label class="control-label">Nome</label>
-						<div class="input-disabled">
-							<input type="text" value="Jung" class="form-control" disabled>
-							<div class="ativador"></div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="control-label">Sobrenome</label>
-						<div class="input-disabled">
-							<input type="text" value="ungkook" class="form-control" disabled>
-							<div class="ativador"></div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="control-label">Email</label>
-						<div class="input-disabled">
-							<input type="email" value="jung.bts@contato.com" class="form-control" disabled>
-							<div class="ativador"></div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="control-label">Data Nascimento</label>
-						<div class="input-disabled">
-							<input type="date" value="1997-09-01" class="form-control" disabled>
-							<div class="ativador"></div>
-						</div>
-					</div>
-					
-					<h4 class="mt-5">Sobre</h4>
-					<div class="form-group">
-						<label class="control-label">Biografia</label>
-						<div class="input-disabled">
-							<textarea class="form-control" rows="5" disabled>Sou um cantor e compositor sul-coreano. Estreei como membro do grupo BTS em junho de 2013.</textarea>
-							<div class="ativador"></div>
-						</div>
-					</div>
-					
-					<h4 class="mt-5">Alterar Senha</h4>
-					<div class="form-group">
-						<label class="control-label">Senha</label>
-						<input type="password" class="form-control">
-					</div>
-					<div class="form-group">
-						<label class="control-label">Repita a senha</label>
-						<input type="password" class="form-control">
-					</div>
-					
-					<div class="text-center">
-						<button type="submit" class="btn btn-lg mr-3 mt-2 btn-primary w-50">Salvar</button>
-						<button type="reset" class="btn btn-lg mt-2 btn-warning">Apagar</button>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-3 d-none d-md-block">
-				<div class="card border-dark mt-3">
-					<div class="card-header">
-						<h3 class="fas fa-book-open"> Livros Publicados</h3>
-					</div>
-					<div class="card-body">
-						<ul class="bullet-list list-unstyled">
-							<li class="red">
-								<h3><a href="#">O Guia do Mochileiro das Galáxias</a></h3>
-							</li>
-							<li class="green">
-								<h3><a href="#">O Código da Vinci</a></h3>
-							</li>
-							<li class="blue">
-								<h3><a href="#">Origem</a></h3>
-							</li>
-							<li class="orange">
-								<h3><a href="#">O Símbolo Perdido</a></h3>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
-	</div> <!-- /.container geral -->
-	
+<body id="topo">
+
+	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+
+	<div class="container-fluid mt-5">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="#"><i class="fas fa-home"></i> Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a th:href="|/perfil/${usuario.email}|">Perfil</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom"
+					title="Página atual">
+					<span>Editar</span> <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<form th:action="@{/perfil/editar}" th:object="${usuario}" method="POST">
+			<div class="row mb-5">
+				<div class="col-12 col-md-3">
+					<section>
+						<img class="avatar" id="foto-preview" th:src="${usuario.foto}"
+							th:alt="|Foto do perfil de ${usuario.nome} ${usuario.sobrenome}|">
+						<div class="mt-1 text-center">
+							<span class="btn btn-info">
+								<label style="padding: 0; margin: 0" for="fotoArquivo">Escolher imagem</label>
+								<input class="d-none" type="file" id="fotoArquivo" name="fotoArquivo">
+							</span>
+						</div>
+						<h1 class="text-center mt-2" th:text="|${usuario.nome} ${usuario.sobrenome}|"></h1>
+						<p class="text-center" th:text="${usuario.sobre}"></p>
+					</section>
+				</div>
+				<div class="col-12 col-md-9">
+					<section>
+						<!-- ERROS -->
+						<div th:if="${erro} != null" class="alert alert-danger" th:text="${erro}"></div>
+						<div th:if="${erros} != null" th:each="erro : ${erros}" class="alert alert-danger"
+							th:text="${erro}"></div>
+
+						<!-- ID -->
+						<input type="hidden" th:field="*{id}">
+
+						<h4>Informação pessoal</h4>
+						<fieldset>
+							<div class="form-row">
+								<div class="col">
+									<div class="form-group">
+										<label for="nome">Nome</label>
+										<input type="text" th:field="*{nome}" class="form-control" id="nome"
+											placeholder="Digite seu nome">
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+										<label for="sobrenome">Sobrenome</label>
+										<input type="text" th:field="*{sobrenome}" class="form-control" id="sobrenome"
+											placeholder="Digite seu sobrenome">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" th:field="*{email}" class="form-control" id="email"
+									placeholder="Digite seu email">
+							</div>
+						</fieldset>
+
+						<h4 class="mt-2">Sobre</h4>
+						<fieldset>
+							<div class="form-row">
+								<div class="col">
+									<div class="form-group">
+										<label class="label-control" for="cidade">Cidade</label>
+										<input class="form-control" type="text" th:field="*{nacionalidade.cidade}"
+											id="cidade" placeholder="Digite sua cidade">
+									</div>
+								</div>
+								<div class="col">
+									<label class="label-control" for="estado">Estado</label>
+									<input class="form-control" type="text" th:field="*{nacionalidade.estado}"
+										id="estado" placeholder="Digite seu estado">
+								</div>
+								<div class="col">
+									<label class="label-control" for="pais">Pais</label>
+									<input class="form-control" type="text" th:field="*{nacionalidade.pais}" id="pais"
+										placeholder="Digite sua pais">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="label-control" for="sobre">Sobre você</label>
+								<textarea th:field="*{sobre}" class="form-control" style="resize: none" rows="4"
+									id="sobre" placeholder="Escerva aqui sobre você"></textarea>
+							</div>
+						</fieldset>
+
+						<h4 class="mt-2">Alterar senha</h4>
+						<fieldset>
+							<div class="form-row">
+								<div class="col">
+									<div class="form-group">
+										<label class="label-control" for="senha">Digite a senha</label>
+										<input class="form-control" type="password" th:field="*{senha}" id="senha"
+											placeholder="Senha">
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+										<label class="label-control" for="senhaRepita">Repita a senha</label>
+										<input class="form-control" type="password" th:field="*{confirmarSenha}"
+											id="senhaRepita" placeholder="Senha">
+									</div>
+								</div>
+							</div>
+						</fieldset>
+
+						<div class="mt-2">
+							<button class="btn btn-success btn-lg btn-block" type="submit">
+								<i class="fas fa-save"></i>
+								Salvar
+							</button>
+						</div>
+
+					</section>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div>
+
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
-	
-	<!-- Perfil JS -->
-	<script th:src="@{/js/perfil.js}"></script>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+
+	<!-- Index JS -->
+	<script th:src="@{/js/index.js}"></script>
+
+	<script type="text/javascript">
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#foto-preview').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$('input[name="fotoArquivo"]').change(function () {
+			readURL(this);
+		});
+	</script>
 </body>
+
 </html>

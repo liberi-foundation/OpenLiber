@@ -1,8 +1,5 @@
 package br.com.openliber;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +7,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 public class AutorizadorInterceptor implements HandlerInterceptor {
 	
-	private static final ArrayList<String> RECURSOS_BLOQUEADOS = new ArrayList<>(Arrays.asList("/upload"));
+	private static final String[] RECURSOS_BLOQUEADOS = { "/upload", "/perfil/editar" };
 	private static final String[] RECURSOS_BLOQUEADOS_USUARIO = {"/login", "/cadastro"};
 	private static final String PAGINA_ACESSO_NEGADO_PADRAO = "/login";
 

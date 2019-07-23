@@ -18,4 +18,6 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 	@Query("SELECT u FROM Usuario u WHERE u.email = :email AND u.senha = :senha")
 	public Usuario efetuarLogin(String email, String senha);
 
+	@Query("FROM Usuario u WHERE u.id = :id")
+	public Usuario findByID(Integer id);
 }

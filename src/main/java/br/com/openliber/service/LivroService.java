@@ -3,6 +3,7 @@ package br.com.openliber.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.openliber.DAO.LivroDAO;
@@ -26,6 +27,14 @@ public class LivroService {
 
 	public List<Livro> findAll() {
 		return this.livroRep.findAll();
+	}
+
+	public List<Livro> findAll(Sort sort) {
+		return this.livroRep.findAll(sort);
+	}
+
+	public List<Livro>findByTituloContainingIgnoreCase(String titulo){
+		return this.livroRep.findByTituloContainingIgnoreCase(titulo);
 	}
 
 	public Livro findByEmailOfAutorAndTitulo(String email, String titulo) {
