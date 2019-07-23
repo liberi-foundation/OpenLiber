@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.openliber.model.Mailer;
-import br.com.openliber.service.MailerService;
+import br.com.openliber.service.EmailService;
 
 @Controller
 @RequestMapping("/email")
 public class MailerController {
-	private MailerService mailerService = new MailerService();
+	private EmailService mailerService = new EmailService();
 
 	@GetMapping("/novo")
 	public ModelAndView novoEmail() {

@@ -26,6 +26,9 @@ public class Usuario {
 	@Column(name = "id_usuario")
 	private Integer id;
 
+	@Column(unique = true, nullable = false)
+	private String token;
+
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
@@ -61,6 +64,9 @@ public class Usuario {
 
 	@Column(length = 255)
 	private String sobre;
+	
+	@Column(nullable = false)
+	private Boolean ativo = false;
 
 	public Integer getId() {
 		return id;
@@ -68,6 +74,14 @@ public class Usuario {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getEmail() {

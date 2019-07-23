@@ -1,5 +1,7 @@
 package br.com.openliber.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +33,8 @@ public class UsuarioService {
 		}
 
 		usuario.setTipoUsuario(TipoUsuarioEnum.PADRAO);
-
+		usuario.setToken(UUID.randomUUID().toString());
+		
 		this.usuarioDAO.save(usuario);
 	}
 
