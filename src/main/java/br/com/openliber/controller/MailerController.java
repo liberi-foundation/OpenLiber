@@ -1,20 +1,20 @@
 package br.com.openliber.controller;
 
-import javax.mail.MessagingException;
+//import javax.mail.MessagingException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.openliber.model.Mailer;
-import br.com.openliber.service.EmailService;
+//import br.com.openliber.service.EmailService;
 
 @Controller
 @RequestMapping("/email")
 public class MailerController {
-	private EmailService mailerService = new EmailService();
+//	private EmailService mailerService = new EmailService();
 
 	@GetMapping("/novo")
 	public ModelAndView novoEmail() {
@@ -23,16 +23,16 @@ public class MailerController {
 		return mv;
 	}
 
-	@PostMapping("/enviar")
-	public String enviarEmail(Mailer mailer) {
-		try {
-			this.mailerService.sendEmailTSL(mailer);
-		} catch (MessagingException e) {
-			e.printStackTrace();
-			
-			return "redirect:/email/novo?fracasso";
-		}
-
-		return "redirect:/email/novo?sucesso";
-	}
+//	@PostMapping("/enviar")
+//	public String enviarEmail(Mailer mailer) {
+//		try {
+//			this.mailerService.sendEmailTSL(mailer);
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//			
+//			return "redirect:/email/novo?fracasso";
+//		}
+//
+//		return "redirect:/email/novo?sucesso";
+//	}
 }

@@ -2,21 +2,39 @@ package br.com.openliber.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Email {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String nomeRemetente;
 	private String emailRemetente;
 	private String nomeDestiantario;
 	private String emailDestinatario;
 	private String assunto;
-	private String mensagem;
+
+	@Embedded
+	private EmailMensagem mensagem;
+
 	private String token;
 	private LocalDate validade;
 
 	public Email() {
 
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNomeRemetente() {
@@ -59,11 +77,11 @@ public class Email {
 		this.assunto = assunto;
 	}
 
-	public String getMensagem() {
+	public EmailMensagem getMensagem() {
 		return mensagem;
 	}
 
-	public void setMensagem(String mensagem) {
+	public void setMensagem(EmailMensagem mensagem) {
 		this.mensagem = mensagem;
 	}
 
