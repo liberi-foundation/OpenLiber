@@ -65,8 +65,8 @@ public class EmailMensagem {
 		mensagem.append("<p>" + this.getMensagem() + "</p><br>");
 
 		// Gerando link token
-		mensagem.append("<p>" + "<a href=\"localhost:8090/" + this.getController() + "?token=" + this.getTokenEmail()
-				+ "\">" + "localhost:8090/" + this.getController() + "?token=" + this.getTokenEmail() + "</a>");
+		mensagem.append("<p>" + "<a href=\"localhost:8090" + this.getController() + "?token=" + this.getTokenEmail()
+				+ "\">" + "localhost:8090" + this.getController() + "?token=" + this.getTokenEmail() + "</a>");
 
 		return mensagem.toString();
 	}

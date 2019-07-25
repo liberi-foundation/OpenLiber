@@ -22,7 +22,8 @@ import br.com.openliber.model.Usuario;
 @Service
 public class UsuarioService {
 
-	private EmailService emailService = new EmailService();
+	@Autowired
+	private EmailService emailService;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -33,6 +34,14 @@ public class UsuarioService {
 
 	public Usuario findById(Integer id) {
 		return this.usuarioDAO.findByID(id);
+	}
+
+	public boolean save(Usuario usuario) {
+		if (this.usuarioDAO.save(usuario) != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void criarUsuario(Usuario usuario) throws ServiceException {
@@ -47,14 +56,14 @@ public class UsuarioService {
 		 * Envio do email
 		 */
 		// Setando validade
-		LocalDate validade = LocalDate.now();
-		validade.plusDays(5);
+		LocalDate agora = LocalDate.now();
+		LocalDate validade = agora.plusDays(5);
 
 		// Criando mensagem do email
 		EmailMensagem mensagem = new EmailMensagem();
 		mensagem.setTitulo("Olá, " + usuario.getNome() + ". Ative sua conta!");
 		mensagem.setMensagem("Para ter acesso total ao nosso site ative sua conta. (este email vence em: "
-				+ validade.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ".");
+				+ validade.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
 		;
 		mensagem.setController("/ativarConta");
 
@@ -68,13 +77,13 @@ public class UsuarioService {
 		emailConfirmacao.setEmailDestinatario(usuario.getEmail());
 		emailConfirmacao.setValidade(validade);
 
-		try {
-			this.emailService.sendEmailTSL(emailConfirmacao);
-			this.emailService.salvarRegistro(emailConfirmacao);
-		} catch (MessagingException e) {
+		if (this.save(usuario)) {
+			try {
+				this.emailService.sendEmailTSL(emailConfirmacao);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 		}
-
-		this.usuarioDAO.save(usuario);
 	}
 
 	public void atualizarUsuario(Usuario usuario) throws ServiceException, StorageException {
@@ -108,6 +117,10 @@ public class UsuarioService {
 
 		if (usuario == null) {
 			throw new ServiceException("Login/senha não encontrados");
+		}
+		
+		if (usuario.getAtivado() == false) {
+			throw new ServiceException("Conta desativada");
 		}
 
 		return usuario;

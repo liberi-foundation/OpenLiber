@@ -184,4 +184,14 @@ public class UsuarioController {
 			return "redirect:/perfil/editar";
 		}
 	}
+	
+	/*
+	 * Ativar conta
+	 */
+	@GetMapping("/ativarConta")
+	public String ativarConta(@RequestParam(name = "token", required = false) String token) {
+		String retorno = "redirect:/login";
+		
+		return retorno;
+	}
 }

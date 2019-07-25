@@ -55,6 +55,8 @@ public class Usuario {
 
 	@Transient
 	private MultipartFile fotoTemp;
+	
+	private Boolean ativado = false;
 
 	@Column(length = 255)
 	private String foto = "/imagem/avatar/no_image.jpg";
@@ -178,6 +180,22 @@ public class Usuario {
 
 	public void setSobre(String sobre) {
 		this.sobre = sobre;
+	}
+
+	public Boolean getAtivado() {
+		return ativado;
+	}
+
+	public void setAtivado(Boolean ativado) {
+		this.ativado = ativado;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 }

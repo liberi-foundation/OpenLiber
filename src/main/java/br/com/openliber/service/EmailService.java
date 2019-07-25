@@ -55,11 +55,9 @@ public class EmailService {
 		message.setFrom(new InternetAddress(email.getEmailRemetente()));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getEmailDestinatario()));
 		message.setSubject(email.getAssunto());
-
-		/*
-		 * COLOCAR METODO PRA ENVIAR MENSAGEM HTML AQ
-		 */
+		message.setContent(email.getMensagem().gerarMensagem(), "text/html");
 
 		Transport.send(message);
+		this.emailRep.save(email);
 	}
 }
