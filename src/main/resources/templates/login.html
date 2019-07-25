@@ -70,16 +70,6 @@
 	<span th:replace="layout/footer :: script"></span>
 	<script th:src="@{/js/cadastro.js}"></script>
 	
-	<script th:if="${contaCriada != null}" type="text/javascript">
-		Swal.fire({
-			title: 'Sucesso!',
-			text: 'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
-			type: 'success',
-			showConfirmButton: false,
-			timer: 2000
-		});
-	</script>
-	
 	<script th:if="${acessoNegado != null}" type="text/javascript">
 		Swal.fire({
 			'Acesso Negado!',

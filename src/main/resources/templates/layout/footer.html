@@ -54,6 +54,14 @@
 				text: '[[${alertErro}]]'
 			});
 		</script>
+		<script th:if="${alertSucesso} != null">
+			Swal.fire({
+				type: 'success',
+				title: 'Sucesso!',
+				timer: 2000,
+				text: '[[${alertSucesso}]]'
+			});
+		</script>
 	</span>
 </body>
 </html>

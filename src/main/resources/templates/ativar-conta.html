@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Email de Confirmação</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
+	<!-- ################# -->
+</head>
+<body id="topo">    
+    <a id="skippy" class="sr-only sr-only-focusable" href="#container">
+        <div class="container">
+            <span class="skiplink-text">Pular para conteúdo principal</span>
+        </div>
+    </a> <!-- /.atalho para o conteudo -->
+    <nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+
+    <div class="container-fluid my-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a th:href="@{/inicio}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a th:href="@{/cadastro}">Cadastro</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+                    <span>Email de Confirmação</span> <span class="sr-only">(página atual)</span>
+                </li>
+            </ol>
+        </nav> <!-- /.breadcrumb -->
+    </div>
+
+	<div class="container">
+		<div class="row text-center">
+            <div class="col-12">
+                <h1 class="font-lobster2 text-primary display-3">
+                    <i class="fas fa-book-open"></i>
+                    Openliber
+                </h1>
+            </div>
+            <div class="col-12 mt-2">
+                <h3>Ative sua conta</h3>
+                <p class="lead">Enviamos um email para seu endereço de email com um link para efetuar a ativação da sua conta.</p>
+                <p>
+                    Ative sua conta para ter acesso total ao
+                    <span class="ml-1 font-lobster2 text-primary">
+                        <i class="fas fa-book-open"></i>
+                        Openliber
+                    </span>
+                </p>
+            </div>
+            <section class="col-12 mt-4 text-left">
+                <h4>Re-enviar email de confirmação</h4>
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-lg text-primary font-weight-bold" id="email" name="email" placeholder="Digite seu email" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-success" type="submit"><i class="fas fa-paper-plane mr-1"></i> Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+	</div>
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+	<!-- Index JS -->
+    <script th:src="@{/js/index.js}"></script>
+
+    <script th:if="${contaCriada != null}" type="text/javascript">
+		Swal.fire({
+			title: 'Sucesso!',
+			text: 'Cadastro criado com sucesso, faça o login para ter acesso a sua conta!',
+			type: 'success',
+			showConfirmButton: false,
+			timer: 2000
+		});
+	</script>
+</body>
+</html>

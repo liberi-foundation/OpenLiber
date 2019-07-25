@@ -31,6 +31,10 @@ public class UsuarioService {
 	public Usuario findUsuarioByEmail(String email) {
 		return usuarioDAO.findByEmail(email);
 	}
+	
+	public Usuario findByEmail(String email) {
+		return usuarioDAO.findByEmail(email);
+	}
 
 	public Usuario findById(Integer id) {
 		return this.usuarioDAO.findByID(id);

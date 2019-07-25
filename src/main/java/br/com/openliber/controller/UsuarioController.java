@@ -19,8 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
+import br.com.openliber.model.Email;
 import br.com.openliber.model.Nacionalidade;
 import br.com.openliber.model.Usuario;
+import br.com.openliber.service.EmailService;
 import br.com.openliber.service.LivroService;
 import br.com.openliber.service.UsuarioService;
 
@@ -32,6 +34,9 @@ public class UsuarioController {
 
 	@Autowired
 	private LivroService livroService;
+
+	@Autowired
+	private EmailService emailService;
 
 	/*
 	 * Cadastro
@@ -59,7 +64,7 @@ public class UsuarioController {
 		}
 
 		ra.addFlashAttribute("contaCriada", true);
-		return "redirect:/login";
+		return "redirect:/cadastro/ativar";
 	}
 
 	/*
@@ -184,14 +189,37 @@ public class UsuarioController {
 			return "redirect:/perfil/editar";
 		}
 	}
-	
+
 	/*
 	 * Ativar conta
 	 */
+	// mensagem que o email foi enviado
+	@GetMapping("/cadastro/ativar")
+	public String ativeSuaConta() {
+		return "/ativar-conta";
+	}
+
+	// Ativar conta no bd
 	@GetMapping("/ativarConta")
-	public String ativarConta(@RequestParam(name = "token", required = false) String token) {
-		String retorno = "redirect:/login";
-		
-		return retorno;
+	public String ativarConta(@RequestParam(name = "token", required = false) String token, RedirectAttributes ra) {
+
+		if (token == "" || token == null) {
+			ra.addFlashAttribute("alertErro", "Token de ativação inválido");
+			return "redirect:/cadastro/ativar";
+		}
+
+		Email email = this.emailService.findByToken(token);
+
+		if (this.emailService.validarVencimento(email)) {
+			Usuario usuario = this.usuarioService.findByEmail(email.getEmailDestinatario());
+			usuario.setAtivado(true);
+			this.usuarioService.save(usuario);
+		} else {
+			ra.addFlashAttribute("alertErro", "Token de ativação vencido, por favor re-envie o email de ativação");
+			return "redirect:/cadastro/ativar";
+		}
+
+		ra.addFlashAttribute("alertSucesso", "Conta Ativada com sucesso!");
+		return "redirect:/login";
 	}
 }

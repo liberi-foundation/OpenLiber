@@ -1,5 +1,6 @@
 package br.com.openliber.service;
 
+import java.time.LocalDate;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -25,8 +26,22 @@ public class EmailService {
 	@Autowired
 	private EmailDAO emailRep;
 
+	public Email findByToken(String token) {
+		return this.emailRep.findByToken(token);
+	}
+
 	public void salvarRegistro(Email email) {
 		this.emailRep.save(email);
+	}
+
+	public boolean validarVencimento(Email email) {
+		LocalDate agora = LocalDate.now();
+
+		if (email.getValidade().isAfter(agora)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void sendEmailTSL(Email email) throws MessagingException {
