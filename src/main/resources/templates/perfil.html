@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title th:text="|Openliber - ${usuario.nome} ${usuario.sobrenome}|"></title>
+	<title th:text="|Openliber - ${usuario.apelido}|"></title>
 
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
@@ -42,7 +42,7 @@
 						</div>
 					</div>
 					<div class="card-body">
-						<h1 class="d-md-none d-block" th:text="|${usuario.nome} ${usuario.sobrenome}|"></h1>
+						<h1 class="d-md-none d-block" th:text="|${usuario.apelido}|"></h1>
 						<h2 class="font-karla">Sobre</h2>
 						<p class="lead" th:text="${usuario.sobre} == null ? 'Estou no Openliber' : ${usuario.sobre}">
 						</p>
@@ -70,7 +70,7 @@
 				</div>
 			</div> <!-- /.col-3 avatar -->
 			<div class="col-md-4 perfil-nome d-none d-md-block" id="perfil">
-				<h1 class="display-4 font-karla text-light text-left" th:text="|${usuario.nome} ${usuario.sobrenome}|"></h1>
+				<h1 class="display-4 font-karla text-light text-left" th:text="|${usuario.apelido}|"></h1>
 				<p class="lead font-karla text-white text-monospace" style="margin-top: -10px;" th:text="|${usuario.nacionalidade.cidade}, ${usuario.nacionalidade.estado}, ${usuario.nacionalidade.pais}|"></p>
 			</div> <!-- /.col-4 nome -->
 			<div class="col-md-2 offset-md-3 perfil-favoritar d-none d-md-block">

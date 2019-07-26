@@ -21,4 +21,7 @@ public interface LivroDAO extends JpaRepository<Livro, Integer> {
 	public List<Livro> findByEmailOfAutorLasts(String emailOfAutor);
 
 	public List<Livro> findByTituloContainingIgnoreCase(String titulo);
+
+	@Query("FROM Livro l WHERE lower(l.autor.apelido) = :apelido AND lower(l.titulo) = :titulo")
+	public Livro findByAutorApelidoAndTitulo(String apelido, String titulo);
 }

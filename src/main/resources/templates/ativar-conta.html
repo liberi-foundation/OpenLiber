@@ -60,7 +60,7 @@
             </div>
             <section class="col-12 mt-4 text-left">
                 <h4>Re-enviar email de confirmação</h4>
-                <form>
+                <form th:action="@{/cadastro/reenviarConfirmacao}" method="POST">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="email" class="form-control form-control-lg text-primary font-weight-bold" id="email" name="email" placeholder="Digite seu email" required>

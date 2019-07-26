@@ -23,13 +23,11 @@ import br.com.openliber.enums.TipoUsuarioEnum;
 
 @Entity
 public class Usuario {
-	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Integer id;
 
-	@NotBlank
 	@Size(max = 255)
 	@Column(unique = true, nullable = false)
 	private String token;

@@ -72,7 +72,7 @@ public class LivroController {
 		try {
 			this.livroService.salvarLivroEpub(livro);
 
-			return "redirect:/" + livro.getAutor().getEmail() + "/" + livro.getTitulo() + "/preview";
+			return "redirect:/" + livro.getAutor().getApelido() + "/" + livro.getTitulo() + "/preview";
 		} catch (StorageException | ServiceException e) {
 			ra.addFlashAttribute("erro", e.getMessage());
 			return "redirect:/upload";
@@ -82,12 +82,12 @@ public class LivroController {
 	/*
 	 * VIEW
 	 */
-	@GetMapping("/{email}/{titulo}/preview")
-	public ModelAndView exibirLivro(@PathVariable(name = "email", required = true) String email,
+	@GetMapping("/{apelido}/{titulo}/preview")
+	public ModelAndView exibirLivro(@PathVariable(name = "apelido", required = true) String apelido,
 			@PathVariable(name = "titulo", required = true) String titulo, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/livro");
 
-		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(email, titulo);
+		Livro livro = this.livroService.findByAutorApelidoAndTitulo(apelido, titulo);
 		if (livro != null) {
 			mv.addObject("livro", livro);
 		} else {
@@ -108,7 +108,7 @@ public class LivroController {
 		mv.addObject("autor", owner);
 		mv.addObject("titulo", epub);
 
-		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(owner, epub);
+		Livro livro = this.livroService.findByAutorApelidoAndTitulo(owner, epub);
 		if (livro == null) {
 			ra.addFlashAttribute("alertErro", "Livro não encontrado");
 			mv.setViewName("redirect:/inicio");
@@ -122,7 +122,7 @@ public class LivroController {
 		String owner = book.split("/")[0];
 		String epub = book.split("/")[1].split(".epub")[0];
 
-		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(owner, epub);
+		Livro livro = this.livroService.findByAutorApelidoAndTitulo(owner, epub);
 		if (livro == null) {
 			ra.addFlashAttribute("alertErro", "Livro não encontrado");
 			return "redirect:/inicio";
@@ -134,8 +134,8 @@ public class LivroController {
 	/*
 	 * EDITAR
 	 */
-	@GetMapping("/{email}/{titulo}/editar")
-	public ModelAndView editarForm(@PathVariable(name = "email") String email,
+	@GetMapping("/{apelido}/{titulo}/editar")
+	public ModelAndView editarForm(@PathVariable(name = "apelido") String apelido,
 			@PathVariable(name = "titulo") String titulo, RedirectAttributes ra, HttpSession session,
 			HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/livro-form");
@@ -144,7 +144,7 @@ public class LivroController {
 		if (session.getAttribute("usuarioLogado") == null) {
 			ra.addFlashAttribute("alertErro", "Você precisa está logado para editar um livro");
 			ra.addAttribute("acessoNegado", true);
-			ra.addAttribute("retorno", "/" + email + "/" + titulo + "/editar");
+			ra.addAttribute("retorno", "/" + apelido + "/" + titulo + "/editar");
 
 			mv.setViewName("redirect:/login");
 			return mv;
@@ -154,7 +154,7 @@ public class LivroController {
 		Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("usuarioLogado");
 
 		// pegando usuario dono do livro
-		Usuario usuarioOwner = this.usuarioService.findUsuarioByEmail(email);
+		Usuario usuarioOwner = this.usuarioService.findByApelido(apelido.toLowerCase());
 
 		// Uma primeira validaçao para saber se o usuario é o dono do livro
 		if (!(usuarioLogado.getId() == usuarioOwner.getId())) {
@@ -163,9 +163,9 @@ public class LivroController {
 			return mv;
 		}
 
-		// Procurando livro com o email do usuario logado e o titulo passado no path,
+		// Procurando livro com o apelido do usuario logado e o titulo passado no path,
 		// para validar se o usuario logado é o dono do livro.
-		Livro livro = this.livroService.findByEmailOfAutorAndTitulo(usuarioLogado.getEmail(), titulo);
+		Livro livro = this.livroService.findByAutorApelidoAndTitulo(usuarioLogado.getApelido(), titulo);
 		if (livro == null) {
 			ra.addFlashAttribute("alertErro", "Não foi possível encontrar o livro");
 			mv.setViewName("redirect:/inicio");
@@ -177,10 +177,10 @@ public class LivroController {
 		return mv;
 	}
 
-	@PostMapping("/{email}/{titulo}/editar")
-	public String salvarEdicao(@PathVariable(name = "email") String autor, @PathVariable(name = "titulo") String titulo,
-			@Valid @ModelAttribute Livro livro, BindingResult br, RedirectAttributes ra, HttpSession session,
-			Model model, HttpServletRequest request) {
+	@PostMapping("/{apelido}/{titulo}/editar")
+	public String salvarEdicao(@PathVariable(name = "apelido") String autor,
+			@PathVariable(name = "titulo") String titulo, @Valid @ModelAttribute Livro livro, BindingResult br,
+			RedirectAttributes ra, HttpSession session, Model model, HttpServletRequest request) {
 		// Verificando se o usuario está logado
 		if (session.getAttribute("usuarioLogado") == null) {
 			ra.addFlashAttribute("alertErro", "Você precisa está logado para editar um livro");

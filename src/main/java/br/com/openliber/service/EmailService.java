@@ -57,7 +57,7 @@ public class EmailService {
 
 		// Criando mensagem do email
 		EmailMensagem mensagem = new EmailMensagem();
-		mensagem.setTitulo("Olá, " + usuario.getNome() + ". Ative sua conta!");
+		mensagem.setTitulo("Olá, " + usuario.getApelido() + ". Ative sua conta!");
 		mensagem.setMensagem("Para ter acesso total ao nosso site ative sua conta. (este email vence em: "
 				+ validade.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
 		;
@@ -69,7 +69,7 @@ public class EmailService {
 		emailConfirmacao.setMensagem(mensagem);
 		emailConfirmacao.setNomeRemetente("Openliber");
 		emailConfirmacao.setEmailRemetente("openliber@gmail.com");
-		emailConfirmacao.setNomeDestiantario(usuario.getNome() + " " + usuario.getSobrenome());
+		emailConfirmacao.setNomeDestiantario(usuario.getApelido());
 		emailConfirmacao.setEmailDestinatario(usuario.getEmail());
 		emailConfirmacao.setValidade(validade);
 		

@@ -2,7 +2,7 @@
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title th:text="|Openliber - ${usuario.nome} ${usuario.sobrenome}|">Openliber</title>
+	<title th:text="|Openliber - ${usuario.apelido}|">Openliber</title>
 
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
@@ -49,14 +49,14 @@
 				<div class="col-12 col-md-3">
 					<section>
 						<img class="avatar" id="foto-preview" th:src="${usuario.foto}"
-							th:alt="|Foto do perfil de ${usuario.nome} ${usuario.sobrenome}|">
+							th:alt="|Foto do perfil de ${usuario.apelido}|">
 						<div class="mt-1 text-center">
 							<span class="btn btn-info">
 								<label style="padding: 0; margin: 0" for="fotoArquivo">Escolher imagem</label>
 								<input class="d-none" type="file" id="fotoArquivo" name="fotoArquivo">
 							</span>
 						</div>
-						<h1 class="text-center mt-2" th:text="|${usuario.nome} ${usuario.sobrenome}|"></h1>
+						<h1 class="text-center mt-2" th:text="|${usuario.apelido}|"></h1>
 						<p class="text-center" th:text="${usuario.sobre}"></p>
 					</section>
 				</div>

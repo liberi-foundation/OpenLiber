@@ -1,5 +1,6 @@
 package br.com.openliber.controller;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -52,11 +53,13 @@ public class UsuarioController {
 	public String salvarUsuario(@Valid @ModelAttribute Usuario usuario, Errors errors, RedirectAttributes ra) {
 		if (errors.hasErrors()) {
 			ra.addFlashAttribute("mensagemErro", "Não foi possível criar usuário: " + errors.getFieldErrors());
+
+			return "redirect:/cadastro";
 		} else {
 			try {
 				this.usuarioService.criarUsuario(usuario);
 				ra.addFlashAttribute("mensagem", "Conta criada com sucesso!");
-			} catch (ServiceException e) {
+			} catch (ServiceException | MessagingException e) {
 				ra.addFlashAttribute("mensagemErro", "Não foi possível criar usuário: " + e.getMessage());
 
 				return "redirect:/cadastro";
@@ -221,5 +224,30 @@ public class UsuarioController {
 
 		ra.addFlashAttribute("alertSucesso", "Conta Ativada com sucesso!");
 		return "redirect:/login";
+	}
+
+	/*
+	 * Reenviar email de confirmação
+	 */
+	@PostMapping("/cadastro/reenviarConfirmacao")
+	public String reenviarEmailConfirmarcaoConta(@RequestParam(name = "email", required = true) String email,
+			RedirectAttributes ra) {
+		String retorno = "redirect:/cadastro/ativar";
+
+		Usuario usuario = this.usuarioService.findByEmail(email);
+
+		if (usuario == null) {
+			ra.addFlashAttribute("alertErro", "Email não cadastrado no sistema");
+		} else if (email.trim() != "") {
+			try {
+				this.usuarioService.reEnviarEmailConfirmacao(usuario.getEmail());
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+		} else {
+			ra.addFlashAttribute("alertErro", "Email inválido");
+		}
+
+		return retorno;
 	}
 }

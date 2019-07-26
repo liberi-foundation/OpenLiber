@@ -17,7 +17,6 @@ import br.com.openliber.model.Usuario;
 
 @Service
 public class UsuarioService {
-
 	@Autowired
 	private EmailService emailService;
 
@@ -40,15 +39,11 @@ public class UsuarioService {
 		return this.usuarioDAO.findByApelidoIgnoreCase(apelido);
 	}
 
-	public boolean save(Usuario usuario) {
-		if (this.usuarioDAO.save(usuario) != null) {
-			return true;
-		}
-
-		return false;
+	public void save(Usuario usuario) {
+		this.usuarioDAO.save(usuario);
 	}
 
-	public void criarUsuario(Usuario usuario) throws ServiceException {
+	public void criarUsuario(Usuario usuario) throws ServiceException, MessagingException {
 		if (this.findUsuarioByEmail(usuario.getEmail()) != null) {
 			throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
 		}
@@ -59,14 +54,10 @@ public class UsuarioService {
 
 		usuario.setTipoUsuario(TipoUsuarioEnum.PADRAO);
 		usuario.setToken(UUID.randomUUID().toString());
+		System.out.println(UUID.randomUUID().toString());
 
-		if (this.save(usuario)) {
-			try {
-				this.emailService.enviarConfirmacaoDeConta(usuario);
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
-		}
+		this.save(usuario);
+		this.emailService.enviarConfirmacaoDeConta(usuario);
 	}
 
 	public void atualizarUsuario(Usuario usuario) throws ServiceException, StorageException {
@@ -81,7 +72,7 @@ public class UsuarioService {
 				throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
 			}
 		}
-		
+
 		if (!(usuarioOriginal.getApelido().equals(usuario.getApelido()))) {
 			if (this.findByApelido(usuario.getApelido()) != null) {
 				throw new ServiceException("Já existe um usuário com este apelido: " + usuario.getApelido());
@@ -113,5 +104,13 @@ public class UsuarioService {
 		}
 
 		return usuario;
+	}
+	
+	public void reEnviarEmailConfirmacao(String email) throws MessagingException {
+		Usuario usuario = this.findByEmail(email);
+		
+		if (usuario.getAtivo() == false) {
+			this.emailService.enviarConfirmacaoDeConta(usuario);
+		}
 	}
 }

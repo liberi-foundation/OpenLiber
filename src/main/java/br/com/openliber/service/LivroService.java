@@ -34,7 +34,7 @@ public class LivroService {
 		return this.livroRep.findAll(sort);
 	}
 
-	public List<Livro>findByTituloContainingIgnoreCase(String titulo){
+	public List<Livro> findByTituloContainingIgnoreCase(String titulo) {
 		return this.livroRep.findByTituloContainingIgnoreCase(titulo);
 	}
 
@@ -64,7 +64,7 @@ public class LivroService {
 	public void salvarLivroEpub(Livro livro) throws StorageException, ServiceException {
 		// Gerando token do livro
 		livro.setToken(UUID.randomUUID().toString());
-		
+
 		if (livro.getAutor() == null) {
 			throw new StorageException("Erro ao salvar: Autor ausente");
 		}
@@ -79,7 +79,7 @@ public class LivroService {
 			throw new StorageException("Selecione um livro para enviar");
 		}
 
-		Livro other = this.findByEmailOfAutorAndTitulo(livro.getAutor().getEmail(), livro.getTitulo());
+		Livro other = this.findByAutorApelidoAndTitulo(livro.getAutor().getApelido(), livro.getTitulo());
 		if (other != null) {
 			throw new ServiceException("Você já possui um livro com esse nome");
 		}
@@ -105,5 +105,9 @@ public class LivroService {
 		}
 
 		this.livroRep.save(livro);
+	}
+
+	public Livro findByAutorApelidoAndTitulo(String apelido, String titulo) {
+		return this.livroRep.findByAutorApelidoAndTitulo(apelido.toLowerCase(), titulo.toLowerCase());
 	}
 }
