@@ -1,6 +1,7 @@
 package br.com.openliber.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -61,6 +62,9 @@ public class LivroService {
 	}
 
 	public void salvarLivroEpub(Livro livro) throws StorageException, ServiceException {
+		// Gerando token do livro
+		livro.setToken(UUID.randomUUID().toString());
+		
 		if (livro.getAutor() == null) {
 			throw new StorageException("Erro ao salvar: Autor ausente");
 		}

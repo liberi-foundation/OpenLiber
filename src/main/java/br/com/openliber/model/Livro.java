@@ -20,6 +20,8 @@ public class Livro {
 	@Column(name = "id_livro")
 	private Integer id;
 
+	private String token;
+
 	@Transient
 	private MultipartFile capaTemp;
 	@Column(nullable = false)
@@ -64,6 +66,14 @@ public class Livro {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getCapa() {

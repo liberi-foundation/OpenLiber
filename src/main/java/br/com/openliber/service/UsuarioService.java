@@ -1,7 +1,5 @@
 package br.com.openliber.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -13,8 +11,6 @@ import br.com.openliber.DAO.UsuarioDAO;
 import br.com.openliber.enums.TipoUsuarioEnum;
 import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
-import br.com.openliber.model.Email;
-import br.com.openliber.model.EmailMensagem;
 import br.com.openliber.model.Nacionalidade;
 import br.com.openliber.model.Storage;
 import br.com.openliber.model.Usuario;
@@ -29,15 +25,19 @@ public class UsuarioService {
 	private UsuarioDAO usuarioDAO;
 
 	public Usuario findUsuarioByEmail(String email) {
-		return usuarioDAO.findByEmail(email);
+		return usuarioDAO.findByEmailIgnoreCase(email);
 	}
-	
+
 	public Usuario findByEmail(String email) {
-		return usuarioDAO.findByEmail(email);
+		return usuarioDAO.findByEmailIgnoreCase(email);
 	}
 
 	public Usuario findById(Integer id) {
 		return this.usuarioDAO.findByID(id);
+	}
+
+	public Usuario findByApelido(String apelido) {
+		return this.usuarioDAO.findByApelidoIgnoreCase(apelido);
 	}
 
 	public boolean save(Usuario usuario) {
@@ -53,37 +53,16 @@ public class UsuarioService {
 			throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
 		}
 
+		if (this.findByApelido(usuario.getApelido()) != null) {
+			throw new ServiceException("Já existe um usuário com este apelido: " + usuario.getApelido());
+		}
+
 		usuario.setTipoUsuario(TipoUsuarioEnum.PADRAO);
 		usuario.setToken(UUID.randomUUID().toString());
 
-		/*
-		 * Envio do email
-		 */
-		// Setando validade
-		LocalDate agora = LocalDate.now();
-		LocalDate validade = agora.plusDays(5);
-
-		// Criando mensagem do email
-		EmailMensagem mensagem = new EmailMensagem();
-		mensagem.setTitulo("Olá, " + usuario.getNome() + ". Ative sua conta!");
-		mensagem.setMensagem("Para ter acesso total ao nosso site ative sua conta. (este email vence em: "
-				+ validade.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")");
-		;
-		mensagem.setController("/ativarConta");
-
-		// Configurando email
-		Email emailConfirmacao = new Email();
-		emailConfirmacao.setAssunto("Openliber - confirmar conta!");
-		emailConfirmacao.setMensagem(mensagem);
-		emailConfirmacao.setNomeRemetente("Openliber");
-		emailConfirmacao.setEmailRemetente("openliber@gmail.com");
-		emailConfirmacao.setNomeDestiantario(usuario.getNome() + " " + usuario.getSobrenome());
-		emailConfirmacao.setEmailDestinatario(usuario.getEmail());
-		emailConfirmacao.setValidade(validade);
-
 		if (this.save(usuario)) {
 			try {
-				this.emailService.sendEmailTSL(emailConfirmacao);
+				this.emailService.enviarConfirmacaoDeConta(usuario);
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
@@ -100,6 +79,12 @@ public class UsuarioService {
 		if (!(usuarioOriginal.getEmail().equals(usuario.getEmail()))) {
 			if (this.findUsuarioByEmail(usuario.getEmail()) != null) {
 				throw new ServiceException("Já existe um usuário com este e-mail: " + usuario.getEmail());
+			}
+		}
+		
+		if (!(usuarioOriginal.getApelido().equals(usuario.getApelido()))) {
+			if (this.findByApelido(usuario.getApelido()) != null) {
+				throw new ServiceException("Já existe um usuário com este apelido: " + usuario.getApelido());
 			}
 		}
 
@@ -122,8 +107,8 @@ public class UsuarioService {
 		if (usuario == null) {
 			throw new ServiceException("Login/senha não encontrados");
 		}
-		
-		if (usuario.getAtivado() == false) {
+
+		if (usuario.getAtivo() == false) {
 			throw new ServiceException("Conta desativada");
 		}
 

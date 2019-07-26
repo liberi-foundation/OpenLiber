@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,28 +23,42 @@ import br.com.openliber.enums.TipoUsuarioEnum;
 
 @Entity
 public class Usuario {
-
+	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Integer id;
 
+	@NotBlank
+	@Size(max = 255)
 	@Column(unique = true, nullable = false)
 	private String token;
 
+	@NotBlank
+	@Size(max = 100)
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
-	@Column(length = 255, nullable = false)
+	@NotBlank
+	@Size(max = 40)
+	@Column(length = 40, nullable = false, unique = true)
+	private String apelido;
+
+	@NotBlank
+	@Size(max = 30)
+	@Column(length = 30, nullable = false)
 	private String senha;
 
+	@Size(max = 30)
 	@Transient
 	private String confirmarSenha;
 
-	@Column(length = 50, nullable = false)
+	@Size(max = 50)
+	@Column(length = 50)
 	private String nome;
 
-	@Column(length = 50, nullable = false)
+	@Size(max = 50)
+	@Column(length = 50)
 	private String sobrenome;
 
 	@Temporal(TemporalType.DATE)
@@ -55,18 +72,20 @@ public class Usuario {
 
 	@Transient
 	private MultipartFile fotoTemp;
-	
-	private Boolean ativado = false;
 
+	@Size(max = 255)
 	@Column(length = 255)
 	private String foto = "/imagem/avatar/no_image.jpg";
 
+	@Size(max = 255)
 	@Column(length = 255)
 	private String cover = "/imagem/cover_user/galaxia.jpg";
 
+	@Size(max = 255)
 	@Column(length = 255)
 	private String sobre;
-	
+
+	@NotNull
 	@Column(nullable = false)
 	private Boolean ativo = false;
 
@@ -92,6 +111,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 
 	public String getSenha() {
@@ -182,14 +209,6 @@ public class Usuario {
 		this.sobre = sobre;
 	}
 
-	public Boolean getAtivado() {
-		return ativado;
-	}
-
-	public void setAtivado(Boolean ativado) {
-		this.ativado = ativado;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -197,5 +216,4 @@ public class Usuario {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
 }

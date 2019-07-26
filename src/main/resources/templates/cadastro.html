@@ -29,15 +29,8 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" placeholder="Nome" required onkeyup="validarNome(false)">
-							<div id="nome-feedback" class="d-none"></div>
-						</div>
-						<div class="input-group form-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text bg-primary"><i class="fas fa-user"></i></span>
-							</div>
-							<input type="text" class="form-control" id="sobrenome" name="sobrenome" th:field="*{sobrenome}" placeholder="Sobrenome" required onkeyup="validarSobrenome(false)">
-							<div id="sobrenome-feedback" class="d-none"></div>
+							<input type="text" class="form-control" id="apelido" name="apelido" th:field="*{apelido}" placeholder="Apelido" required onkeyup="validarApelido(false)">
+							<div id="apelido-feedback" class="d-none"></div>
 						</div>
 
 						<div class="input-group form-group">

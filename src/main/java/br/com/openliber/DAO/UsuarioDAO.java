@@ -8,9 +8,7 @@ import br.com.openliber.model.Usuario;
 
 @Repository
 public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
-
-	@Query("SELECT u from Usuario u WHERE u.email = :email")
-	public Usuario findByEmail(String email);
+	public Usuario findByEmailIgnoreCase(String email);
 
 	@Query("SELECT u FROM Usuario u WHERE u.nome LIKE %:nome% OR u.email LIKE %:email%")
 	public Usuario findByNomeEmailAprox(String nome, String email);
@@ -20,4 +18,6 @@ public interface UsuarioDAO extends JpaRepository<Usuario, Integer> {
 
 	@Query("FROM Usuario u WHERE u.id = :id")
 	public Usuario findByID(Integer id);
+
+	public Usuario findByApelidoIgnoreCase(String apelido);
 }

@@ -212,7 +212,7 @@ public class UsuarioController {
 
 		if (this.emailService.validarVencimento(email)) {
 			Usuario usuario = this.usuarioService.findByEmail(email.getEmailDestinatario());
-			usuario.setAtivado(true);
+			usuario.setAtivo(true);
 			this.usuarioService.save(usuario);
 		} else {
 			ra.addFlashAttribute("alertErro", "Token de ativação vencido, por favor re-envie o email de ativação");
