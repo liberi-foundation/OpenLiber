@@ -42,7 +42,6 @@ public class Usuario {
 	@Column(length = 40, nullable = false, unique = true)
 	private String apelido;
 
-	@NotBlank
 	@Size(max = 30)
 	@Column(length = 30, nullable = false)
 	private String senha;

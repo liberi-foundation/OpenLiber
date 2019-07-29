@@ -63,6 +63,16 @@ public class UsuarioService {
 	public void atualizarUsuario(Usuario usuario) throws ServiceException, StorageException {
 		Usuario usuarioOriginal = this.findById(usuario.getId());
 
+		if (usuarioOriginal == null) {
+			throw new ServiceException("Usuario não encontrado");
+		}
+
+		usuario.setToken(usuarioOriginal.getToken());
+		usuario.setApelido(usuarioOriginal.getApelido());
+		usuario.setEmail(usuarioOriginal.getEmail());
+		usuario.setSenha(usuarioOriginal.getSenha());
+		usuario.setAtivo(usuarioOriginal.getAtivo());
+
 		if (usuario.getNacionalidade() == null) {
 			usuario.setNacionalidade(new Nacionalidade("", "", ""));
 		}
@@ -105,10 +115,10 @@ public class UsuarioService {
 
 		return usuario;
 	}
-	
+
 	public void reEnviarEmailConfirmacao(String email) throws MessagingException {
 		Usuario usuario = this.findByEmail(email);
-		
+
 		if (usuario.getAtivo() == false) {
 			this.emailService.enviarConfirmacaoDeConta(usuario);
 		}

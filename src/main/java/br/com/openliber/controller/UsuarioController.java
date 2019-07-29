@@ -127,7 +127,7 @@ public class UsuarioController {
 	public ModelAndView exibirPerfil(@PathVariable String owner, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/perfil");
 
-		Usuario usuario = this.usuarioService.findUsuarioByEmail(owner);
+		Usuario usuario = this.usuarioService.findByApelido(owner);
 		if (usuario == null) {
 			ra.addFlashAttribute("alertErro", "Perfil não encontrado");
 
@@ -185,7 +185,7 @@ public class UsuarioController {
 			this.usuarioService.atualizarUsuario(usuario);
 			session.setAttribute("usuarioLogado", usuario);
 
-			return "redirect:/perfil/" + usuario.getEmail();
+			return "redirect:/perfil/" + usuario.getApelido();
 		} catch (ServiceException | StorageException e) {
 			ra.addFlashAttribute("erro", e.getMessage());
 

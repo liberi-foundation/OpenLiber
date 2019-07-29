@@ -35,7 +35,7 @@
 					<a href="#"><i class="fas fa-home"></i> Home</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a th:href="|/perfil/${usuario.email}|">Perfil</a>
+					<a th:href="|/perfil/${usuario.apelido}|">Perfil</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom"
 					title="Página atual">
@@ -44,7 +44,7 @@
 			</ol>
 		</nav> <!-- /.breadcrumb -->
 
-		<form th:action="@{/perfil/editar}" th:object="${usuario}" method="POST">
+		<form id="form-perfil" th:action="@{/perfil/editar}" th:object="${usuario}" method="POST" class="needs-validation" novalidate>
 			<div class="row mb-5">
 				<div class="col-12 col-md-3">
 					<section>
@@ -72,26 +72,37 @@
 
 						<h4>Informação pessoal</h4>
 						<fieldset>
+							<div class="form-group">
+								<label for="apelido">Apelido</label>
+								<input class="form-control" type="text" id="apelido" name="apelido" th:field="*{apelido}" onkeyup="validarApelido(false);" readonly>
+								<div id="apelido-feedback" class="d-none"></div>
+							</div>
 							<div class="form-row">
 								<div class="col">
 									<div class="form-group">
 										<label for="nome">Nome</label>
 										<input type="text" th:field="*{nome}" class="form-control" id="nome"
-											placeholder="Digite seu nome">
+											placeholder="Digite seu nome" onkeyup="validarNome(false);" >
+										<div id="nome-feedback" class="d-none"></div>
 									</div>
 								</div>
 								<div class="col">
 									<div class="form-group">
 										<label for="sobrenome">Sobrenome</label>
 										<input type="text" th:field="*{sobrenome}" class="form-control" id="sobrenome"
-											placeholder="Digite seu sobrenome">
+											placeholder="Digite seu sobrenome"
+											onkeyup="validarSobrenome(false);">
+										<div id="sobrenome-feedback" class="d-none"></div>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email">Email</label>
 								<input type="email" th:field="*{email}" class="form-control" id="email"
-									placeholder="Digite seu email">
+									placeholder="Digite seu email" 
+									onkeyup="validarEmail(false);"
+									readonly>
+								<div id="email-feedback" class="d-none"></div>
 							</div>
 						</fieldset>
 
@@ -102,24 +113,31 @@
 									<div class="form-group">
 										<label class="label-control" for="cidade">Cidade</label>
 										<input class="form-control" type="text" th:field="*{nacionalidade.cidade}"
-											id="cidade" placeholder="Digite sua cidade">
+											id="cidade" placeholder="Digite sua cidade"
+											onkeyup="validarNacionalidade('cidade', false);">
+										<div id="cidade-feedback" class="d-none"></div>
 									</div>
 								</div>
 								<div class="col">
 									<label class="label-control" for="estado">Estado</label>
 									<input class="form-control" type="text" th:field="*{nacionalidade.estado}"
-										id="estado" placeholder="Digite seu estado">
+										id="estado" placeholder="Digite seu estado"
+										onkeyup="validarNacionalidade('estado', false);">
+									<div id="estado-feedback" class="d-none"></div>
 								</div>
 								<div class="col">
 									<label class="label-control" for="pais">Pais</label>
 									<input class="form-control" type="text" th:field="*{nacionalidade.pais}" id="pais"
-										placeholder="Digite sua pais">
+										placeholder="Digite sua pais" onkeyup="validarNacionalidade('pais', false);">
+									<div id="pais-feedback" class="d-none"></div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="label-control" for="sobre">Sobre você</label>
 								<textarea th:field="*{sobre}" class="form-control" style="resize: none" rows="4"
-									id="sobre" placeholder="Escerva aqui sobre você"></textarea>
+									id="sobre" placeholder="Escerva aqui sobre você"
+									onkeyup="validarSobre(false);"></textarea>
+								<div id="sobre-feedback" class="d-none"></div>
 							</div>
 						</fieldset>
 
@@ -130,14 +148,17 @@
 									<div class="form-group">
 										<label class="label-control" for="senha">Digite a senha</label>
 										<input class="form-control" type="password" th:field="*{senha}" id="senha"
-											placeholder="Senha">
+											placeholder="Senha" onkeyup="validarSenha(false);">
+										<div id="senha-feedback" class="d-none"></div>
 									</div>
 								</div>
 								<div class="col">
 									<div class="form-group">
-										<label class="label-control" for="senhaRepita">Repita a senha</label>
+										<label class="label-control" for="confirmarSenha">Repita a senha</label>
 										<input class="form-control" type="password" th:field="*{confirmarSenha}"
-											id="senhaRepita" placeholder="Senha">
+											id="confirmarSenha" placeholder="Senha"
+											onkeyup="validarConfirmarSenha(false);">
+										<div id="confirmarSenha-feedback" class="d-none"></div>
 									</div>
 								</div>
 							</div>
@@ -167,7 +188,19 @@
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
 
+	<!-- Validações -->
+	<script th:src="@{/js/perfil-form.js}"></script>
+
 	<script type="text/javascript">
+		$("#form").submit(function(event) {
+			event.preventDefault();
+			if (validarFormulario()) {
+				$("#form").submit();
+			} else {
+				return false;
+			}
+		});
+
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();

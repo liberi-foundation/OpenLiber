@@ -191,41 +191,94 @@ function validarConfirmarSenha(submited) {
 	return false;
 }
 
+function validarNacionalidade(idInput, submited) {
+	var input = $("#" + idInput);
+	var inputFeedback = $("#" + idInput);
+	
+	if (submited == false) {
+        // Pré Validação
+        if (input.val().trim() > 80) {
+            inputInvalido(input, inputFeedback);
+        } else {
+            inputValido(input, inputFeedback);
+        }
+    } else {
+        if (input.val().trim() > 80) {
+            inputInvalido(input, inputFeedback, "Este campo não pode ter mais de 40 caracteres");
+
+            return false;
+        }
+
+        return true;
+    }
+
+    return false;
+}
+
+function validarSobre(submited) {
+	var sobre = $("#sobre");
+	var sobreFeedback = $("#sobre-feedback");
+
+	if (submited == false) {
+		// Pré validação
+		if (sobre.val().trim().length > 255) {
+			inputInvalido(sobre, sobreFeedback, "Sobre não pode ter mais de 255 caracteres. " + (sobre.val().trim().length - 255) + " caracteres a mais");
+		} else {
+			inputValido(sobre, sobreFeedback, "<span style='color: #000'>Restam: " + (255 - sobre.val().trim().length) + "</span>");
+		}
+	} else {
+		if (sobre.val().trim().length > 255) {
+			inputInvalido(sobre, sobreFeedback, "Sobre não pode ter mais de 255 caracteres. " + (sobre.val().trim().length - 255) + " caracteres a mais");
+
+			return false;
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 function validarFormulario() {
+	var apelido = $("#apelido");
 	var nome = $("#nome");
 	var sobrenome = $("#sobrenome");
 	var email = $("#email");
 	var senha = $("#senha");
 	var confirmarSenha = $("#confirmarSenha");
+	var sobre = $("#sobre");
+	
+	if (!validarApelido(true)) {
+		apelido.focus();
 
-	if (!validarNome(true)) {
-		validarSobrenome(true);
-		validarEmail(true);
-		validarSenha(true);
-		validarConfirmarSenha(true);
-
+		return false;
+	} else if (!validarNome(true)) {
 		nome.focus();
+
 		return false;
 	} else if (!validarSobrenome(true)) {
-		validarEmail(true);
-		validarSenha(true);
-		validarConfirmarSenha(true);
-
 		sobrenome.focus();
+
 		return false;
 	} else if (!validarEmail(true)) {
-		validarSenha(true);
-		validarConfirmarSenha(true);
-
 		email.focus();
+
+		return false;
+	} else if (!validarNacionalidade(true)) {
+		$("#cidade").focus;
+
+		return false;
+	} else if (!validarSobre(true)) {
+		sobre.focus();
+
 		return false;
 	} else if (!validarSenha(true)) {
-		validarConfirmarSenha(true);
-
 		senha.focus();
+
 		return false;
 	} else if (!validarConfirmarSenha(true)) {
 		confirmarSenha.focus();
+
 		return false;
 	}
 
