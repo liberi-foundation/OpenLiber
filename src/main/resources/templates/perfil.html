@@ -73,10 +73,9 @@
 				<h1 class="display-4 font-karla text-light text-left" style="margin-top: 20px" th:text="|${usuario.apelido}|"></h1>
 			</div> <!-- /.col-4 nome -->
 			<div class="col-md-2 offset-md-3 perfil-favoritar d-none d-md-block">
-				<button th:if="${session.usuarioLogado} == null" class="btn btn-lg btn-warning text-right"><i class="fas fa-star"></i> Favoritar</button>
 				<div th:if="${session.usuarioLogado} != null">
 					<a th:if="${session.usuarioLogado.email} == ${usuario.email}" class="btn btn-lg btn-info text-right" th:href="@{/perfil/editar}"><i class="fas fa-edit"></i> Editar meu perfil</a>
-					<button th:if="${session.usuarioLogado.email} != ${usuario.email}" class="btn btn-lg btn-warning text-right"><i class="fas fa-star"></i> Favoritar</button>
+					<button id="btn-favoritar" th:if="${session.usuarioLogado.email} != ${usuario.email}" onclick="favoritarAutor();" class="btn btn-lg btn-warning text-right"><i class="fas fa-star"></i> Favoritar</button>
 				</div>
 			</div>
 		</div> <!-- /.row avatar -->
@@ -146,5 +145,7 @@
 	
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
+	<!-- ## Favoritar Autor ## -->
+	<script th:src="@{/js/favoritarAutor.js}"></script>
 </body>
 </html>

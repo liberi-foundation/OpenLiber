@@ -45,11 +45,11 @@
 					<button class="btn btn-secondary"><i class="fas fa-bookmark mr-1"></i> Adicionar a lista de desejos</button>
 				</div>
 				<ul class="list-inline text-warning text-center mt-3">
-					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
-					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
-					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
-					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
-					<li class="list-inline-item"><i class="fas fa-star fa-2x"></i></li>
+					<li class="list-inline-item" onclick="vote(1)"><i id="1s" class="vote far fa-star fa-2x"></i></li>
+					<li class="list-inline-item" onclick="vote(2)"><i id="2s" class="vote far fa-star fa-2x"></i></li>
+					<li class="list-inline-item" onclick="vote(3)"><i id="3s" class="vote far fa-star fa-2x"></i></li>
+					<li class="list-inline-item" onclick="vote(4)"><i id="4s" class="vote far fa-star fa-2x"></i></li>
+					<li class="list-inline-item" onclick="vote(5)"><i id="5s" class="vote far fa-star fa-2x"></i></li>
 				</ul>
 			</div> <!-- /.col-12 col-md-3 -->
 			<div class="col-12 col-md-9">
@@ -71,13 +71,10 @@
 					</p>
 					<dl class="row">
 						<dt class="col-3">N. Páginas</dt>
-						<dd class="col-9">255</dd>
+						<dd class="col-9" th:text="${livro.numPaginas}"></dd>
 						
 						<dt class="col-3">Lançamento</dt>
-						<dd class="col-9">2018</dd>
-						
-						<dt class="col-3">Idioma(s)</dt>
-						<dd class="col-9">Português, Inglês</dd>
+						<dd class="col-9" th:text="${livro.anoLancamento}"></dd>
 					</dl>
 					<div class="sobre mt-3">
 						<p class="lead" th:text="${livro.sinopse}"></p>
@@ -234,5 +231,22 @@
 
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
+
+	<script>
+		$( "#1s, #2s, #3s, #4s, #5s" ).hover(
+			function() {
+				var id = $( this ).attr('id');
+				var number = id.slice(0)[0];
+				for (i = 0; i < number; i++) {
+					$( "#" + i + "s" ).removeClass("far").addClass("fas");
+				}
+			}, function(){
+				var id = $( this ).attr('id');
+				var number = id.slice(0)[0];
+				for (i = 0; i < number; i++) {
+					$( "#" + i + "s" ).removeClass("far").addClass("fas");
+				}
+		});
+	</script>
 </body>
 </html>

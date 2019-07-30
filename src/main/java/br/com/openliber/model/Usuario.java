@@ -1,6 +1,7 @@
 package br.com.openliber.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -85,6 +87,9 @@ public class Usuario {
 	@NotNull
 	@Column(nullable = false)
 	private Boolean ativo = false;
+
+	@OneToMany
+	private List<Usuario> favoritos;
 
 	public Integer getId() {
 		return id;
@@ -212,5 +217,13 @@ public class Usuario {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public List<Usuario> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<Usuario> favoritos) {
+		this.favoritos = favoritos;
 	}
 }

@@ -21,7 +21,7 @@ public class Storage {
 	public Storage(Usuario dirOwner) {
 		this.dirBase = Paths.get(new File("").getAbsolutePath(), "src", "main", "resources", "static").toString();
 		if (dirOwner.getEmail() != null) {
-			this.dirOwner = dirOwner.getEmail().toString();
+			this.dirOwner = dirOwner.getApelido().toString();
 			this.isOk = true;
 		}
 	}
