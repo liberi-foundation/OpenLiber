@@ -1,7 +1,6 @@
 package br.com.openliber.controller;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -274,7 +273,6 @@ public class UsuarioController {
 	/*
 	 * Favoritar autor
 	 */
-
 	@PostMapping(value = "/usuario/favoritar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String favoritarAutor(@RequestBody String data) {
 		String jsonRetorno = "{\"success\": true}";
@@ -284,21 +282,9 @@ public class UsuarioController {
 		Integer idFavoritado = json.getInt("idFavoritado");
 		Integer idFavoritou = json.getInt("idFavoritou");
 
-		Usuario usuarioFavoritado = this.usuarioService.findById(idFavoritado);
-		Usuario usuarioFavoritou = this.usuarioService.findById(idFavoritou);
-
-		List<Usuario> favoritos = usuarioFavoritado.getFavoritos();
-
-		for (Usuario usuario : favoritos) {
-			if (usuario.equals(usuarioFavoritado)) {
-				jsonRetorno = "{\"success\": false}";
-
-				return jsonRetorno;
-			}
+		if (!this.usuarioService.favoritarUsuario(idFavoritado, idFavoritou)) {
+			jsonRetorno = "{\"success\": false}";
 		}
-
-		favoritos.add(usuarioFavoritou);
-		usuarioFavoritado.setFavoritos(favoritos);
 
 		return jsonRetorno;
 	}

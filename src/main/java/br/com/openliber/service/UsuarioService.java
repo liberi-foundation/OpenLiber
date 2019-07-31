@@ -1,5 +1,6 @@
 package br.com.openliber.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -122,5 +123,24 @@ public class UsuarioService {
 		if (usuario.getAtivo() == false) {
 			this.emailService.enviarConfirmacaoDeConta(usuario);
 		}
+	}
+
+	public boolean favoritarUsuario(Integer idFavoritado, Integer idFavoritou) {
+		Usuario usuarioFavoritado = this.findById(idFavoritado);
+		Usuario usuarioFavoritou = this.findById(idFavoritou);
+
+		List<Usuario> favoritos = usuarioFavoritado.getFavoritos();
+
+		for (Usuario usuario : favoritos) {
+			if (usuario.equals(usuarioFavoritado)) {
+				return false;
+			}
+		}
+
+		favoritos.add(usuarioFavoritou);
+		usuarioFavoritado.setFavoritos(favoritos);
+		this.save(usuarioFavoritado);
+
+		return true;
 	}
 }
