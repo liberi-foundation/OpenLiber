@@ -3,8 +3,8 @@ function favoritarAutor(usuarioFavoritadoID, usuarioFavoritouID) {
     btn.attr('disabled', 'true').html('Carregando');
 
     var dados = {
-        "usuarioFavoritadoID": usuarioFavoritadoID,
-        "usuarioFavoritouID": usuarioFavoritouID
+        "idFavoritado": usuarioFavoritadoID,
+        "idFavoritou": usuarioFavoritouID
     };
 
     $.ajax({
@@ -12,9 +12,13 @@ function favoritarAutor(usuarioFavoritadoID, usuarioFavoritouID) {
         contentType: 'application/json; charset=utf-8',
         type: 'POST',
         data: JSON.stringify(dados),
-        success: function(data) {
-            btn.removeClass('btn-warning').addClass('btn-danger').attr('disabled', 'false');
-            console.log(data);
+        success: function(response) {
+        	console.log(response);
+        	if (response.success == true) {
+        		btn.removeClass('btn-warning').addClass('btn-danger');
+                btn.prop('disabled', false);
+                btn.html('Desfavoritar');
+        	}
         }
     });
 }

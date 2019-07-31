@@ -1,5 +1,8 @@
 package br.com.openliber.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -127,7 +131,7 @@ public class UsuarioController {
 	 * Perfil
 	 */
 	@GetMapping("/perfil/{owner}")
-	public ModelAndView exibirPerfil(@PathVariable String owner, RedirectAttributes ra) {
+	public ModelAndView exibirPerfil(@PathVariable String owner, HttpSession session, RedirectAttributes ra) {
 		ModelAndView mv = new ModelAndView("/perfil");
 
 		Usuario usuario = this.usuarioService.findByApelido(owner);
@@ -140,6 +144,19 @@ public class UsuarioController {
 
 		if (usuario.getNacionalidade() == null) {
 			usuario.setNacionalidade(new Nacionalidade("?", "?", "?"));
+		}
+
+		if (usuario.getFavoritos() == null) {
+			usuario.setFavoritos(Arrays.asList());
+		}
+
+		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLogado");
+		if (usuarioLogado != null) {
+			if (usuario.getFavoritos().contains(usuarioLogado)) {
+				mv.addObject("favoritado", true);
+			} else {
+				mv.addObject("favoritado", false);
+			}
 		}
 
 		int livrosPostados = this.livroService.findByEmailOfAutor(usuario.getEmail()).size();
@@ -257,9 +274,31 @@ public class UsuarioController {
 	/*
 	 * Favoritar autor
 	 */
-	@PostMapping(value = "{/usuario/favoritar}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String favoritarAutor(@RequestBody JSONObject data) {
+
+	@PostMapping(value = "/usuario/favoritar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String favoritarAutor(@RequestBody String data) {
 		String jsonRetorno = "{\"success\": true}";
+
+		JSONObject json = new JSONObject(data);
+
+		Integer idFavoritado = json.getInt("idFavoritado");
+		Integer idFavoritou = json.getInt("idFavoritou");
+
+		Usuario usuarioFavoritado = this.usuarioService.findById(idFavoritado);
+		Usuario usuarioFavoritou = this.usuarioService.findById(idFavoritou);
+
+		List<Usuario> favoritos = usuarioFavoritado.getFavoritos();
+
+		for (Usuario usuario : favoritos) {
+			if (usuario.equals(usuarioFavoritado)) {
+				jsonRetorno = "{\"success\": false}";
+
+				return jsonRetorno;
+			}
+		}
+
+		favoritos.add(usuarioFavoritou);
+		usuarioFavoritado.setFavoritos(favoritos);
 
 		return jsonRetorno;
 	}
