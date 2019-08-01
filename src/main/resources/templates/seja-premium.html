@@ -59,7 +59,7 @@
 									<h4 class="display-4 text-primary font-weight-bold mb-4">R$ 10,90</h4>
 									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no prazo de 30 dias.</p>
 									<p class="mt-0 pt-0">Toda transição é feita através do Pagseguro</p>
-									<button class="btn btn-success btn-lg btn-block mt-0 mt-md-5">Assinar</button>
+									<button class="btn btn-success btn-lg btn-block mt-0 mt-md-5" onclick="checkout(1, 'Assinatura premium durante 1 mês', 10.90, 1, $(this));">Assinar</button>
 								</div>
 							</div>
 						</div>
@@ -132,6 +132,7 @@
 	
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
+	<script src="@{/js/checkout.js}"></script>
 	<script>
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip()

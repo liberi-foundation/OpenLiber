@@ -72,6 +72,11 @@
 			<version>20180813</version>
 		</dependency>
 
+		<!-- JAXB Runtime (XML) -->
+		<dependency>
+		    <groupId>org.glassfish.jaxb</groupId>
+		    <artifactId>jaxb-runtime</artifactId>
+		</dependency>
 
 		<!-- H2 Database (temp) -->
 		<dependency>

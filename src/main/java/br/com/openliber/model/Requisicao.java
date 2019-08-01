@@ -45,7 +45,40 @@ public class Requisicao {
 		return response.toString();
 	}
 
-	public static String get(String url) {
-		return null;
+	public static String get(String url) throws IOException {
+		// Iniciando requisição, definindo a URL e abrindo a conexão
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		// Editando cabeçalho da requisição
+		con.setRequestMethod("GET");
+		con.setRequestProperty("Content-type", "application/x-www-form-urlencoded; charset=ISO-8859-1");
+
+		// Enviando a requisição via POST
+		con.setDoOutput(true);
+		con.connect();
+
+		// Codigo da resposta
+		int responseCode = con.getResponseCode();
+
+		// Imprimindo código da resposta
+		System.out.println("Código da resposta: " + responseCode);
+
+		// Pegados dados da resposta
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		// Retornando resposta
+		return response.toString();
+	}
+	
+	public static String gerarPar(String name, String dado) {
+		return "&" + name + "=" + dado;
 	}
 }

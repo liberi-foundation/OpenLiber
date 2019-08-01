@@ -2,6 +2,7 @@ package br.com.openliber.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 public class Email {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_email")
 	private Integer id;
 	private String nomeRemetente;
 	private String emailRemetente;
