@@ -25,21 +25,28 @@ public class CheckoutService {
 	public CheckoutSession realizarCheckout(Pagseguro pagseguro) throws IOException, JAXBException {
 		// valores
 		String id = Integer.toString(pagseguro.getCheckout().getItem().getId());
-		String descricao = pagseguro.getCheckout().getItem().getDescricao();
+		String descricao = pagseguro.getCheckout().getItem().getDescricao().replaceAll(" ", "%20");
 		String valor = Double.toString(pagseguro.getCheckout().getItem().getValor());
 		String qtd = Integer.toString(pagseguro.getCheckout().getItem().getQuantidade());
 
 		// Criando link da requisição
-		StringBuilder link = new StringBuilder();
-		link.append(pagseguro.getServico());
-		link.append(pagseguro.getEndpoint());
-		link.append(Requisicao.gerarPar("itemId1", id));
-		link.append(Requisicao.gerarPar("itemDescription1", descricao));
-		link.append(Requisicao.gerarPar("itemAmount1", valor));
-		link.append(Requisicao.gerarPar("itemQuantity1", qtd));
+		StringBuilder url = new StringBuilder();
+		url.append(pagseguro.getServico());
+		url.append(pagseguro.getEndpoint());
+		url.append("?");
+		url.append(pagseguro.getCredenciais());
+		System.out.println(url.toString());
+		
+		StringBuilder dados = new StringBuilder();
+		dados.append(Requisicao.gerarParUm("currency", pagseguro.getCheckout().getCurrency()));
+		dados.append(Requisicao.gerarPar("itemId1", id));
+		dados.append(Requisicao.gerarPar("itemDescription1", descricao));
+		dados.append(Requisicao.gerarPar("itemAmount1", valor));
+		dados.append(Requisicao.gerarPar("itemQuantity1", qtd));
+		System.out.println(dados.toString());
 
-		String xml = Requisicao.get(link.toString());
-
+		String xml = Requisicao.post(url.toString(), dados.toString());
+		System.out.println(xml);
 		// Lendo XML
 		JAXBContext jc = JAXBContext.newInstance(CheckoutSession.class);
 		Unmarshaller unmarshaller = jc.createUnmarshaller();

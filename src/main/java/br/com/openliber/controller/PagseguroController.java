@@ -22,8 +22,6 @@ public class PagseguroController {
 
 	@PostMapping(value = "/pagseguro/checkout", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String realizarCheckout(@RequestBody String item) {
-		String jsonRetorno = "{\"success\": false}";
-
 		JSONObject itemJson = new JSONObject(item);
 
 		int id = (int) itemJson.get("id");
@@ -33,13 +31,13 @@ public class PagseguroController {
 		Item item1 = new Item(id, descricao, valor, qtd);
 
 		try {
-			pagseguroService.realizarCheckout(item1);
+			String code = pagseguroService.realizarCheckout(item1);
+			return "{\"success\": true, \"code\": \"" + code + "\"}";
 		} catch (IOException e) {
-			jsonRetorno = "{\"success\": false, \"error\":" + e.getMessage() + "}";
+			return "{\"success\": false, \"error\":" + e.getMessage() + "}";
 		} catch (JAXBException e) {
 			e.printStackTrace();
+			return "{\"success\": false, \"error\":" + e.getMessage() + "}";
 		}
-
-		return jsonRetorno;
 	}
 }

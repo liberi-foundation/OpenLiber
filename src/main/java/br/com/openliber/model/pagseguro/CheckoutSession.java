@@ -1,7 +1,5 @@
 package br.com.openliber.model.pagseguro;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +16,7 @@ public class CheckoutSession {
 	@Column(name = "checkout_session_id")
 	private Integer Id;
 	private String code;
-	private LocalDate date;
+	private String date;
 
 	public Integer getId() {
 		return Id;
@@ -36,11 +34,11 @@ public class CheckoutSession {
 		this.code = code;
 	}
 
-	public LocalDate getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 }

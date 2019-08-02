@@ -21,7 +21,6 @@ public class AutorizadorInterceptor implements HandlerInterceptor {
 		System.out.println(" >>> INFO:: Interceptor antes da chamada <<< ");
 
 		String url = request.getPathInfo();
-		System.out.println(url);
 
 		HttpSession session = request.getSession();
 		Usuario usuarioLogado = (Usuario) session.getAttribute("usuarioLoado");
@@ -29,7 +28,6 @@ public class AutorizadorInterceptor implements HandlerInterceptor {
 		System.out.println(url);
 		if (usuarioLogado == null) {
 			for (String recurso : RECURSOS_BLOQUEADOS) {
-				System.out.println(recurso);
 				if (recurso == url) {
 					request.setAttribute("acessoNegado", true);
 					request.setAttribute("retorno", request.getRequestURI());

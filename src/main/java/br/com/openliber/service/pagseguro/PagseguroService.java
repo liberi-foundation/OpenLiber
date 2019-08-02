@@ -23,7 +23,7 @@ public class PagseguroService {
 		checkout.setTimeout(25);
 
 		Pagseguro pagseguro = new Pagseguro("https://ws.sandbox.pagseguro.uol.com.br");
-		pagseguro.setEndpoint("/v2/checkout?");
+		pagseguro.setEndpoint("/v2/checkout");
 		pagseguro.setCheckout(checkout);
 
 		CheckoutSession checkoutSession = this.checkoutService.realizarCheckout(pagseguro);

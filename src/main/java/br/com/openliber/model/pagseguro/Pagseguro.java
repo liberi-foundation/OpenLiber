@@ -3,7 +3,7 @@ package br.com.openliber.model.pagseguro;
 public class Pagseguro {
 	private final String email = "joaovitorvinezof@gmail.com";
 	private final String token = "3445221D340743E0B47B7A93DE8CA1B6";
-	private final String credenciais = "&email=" + this.email + "&token=" + this.token;
+	private final String credenciais = "email=" + this.email + "&token=" + this.token;
 
 	private String servico;
 	private String endpoint;

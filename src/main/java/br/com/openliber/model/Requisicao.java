@@ -16,7 +16,7 @@ public class Requisicao {
 
 		// Editando cabeçalho da requisição
 		con.setRequestMethod("POST");
-		con.setRequestProperty("Content-type", "application/x-www-form-urlencoded; charset=ISO-8859-1");
+		con.setRequestProperty("content-type", "application/x-www-form-urlencoded; charset=ISO-8859-1");
 
 		// Enviando a requisição via POST
 		con.setDoOutput(true);
@@ -80,5 +80,9 @@ public class Requisicao {
 	
 	public static String gerarPar(String name, String dado) {
 		return "&" + name + "=" + dado;
+	}
+
+	public static String gerarParUm(String name, String dado) {
+		return name + "=" + dado;
 	}
 }
