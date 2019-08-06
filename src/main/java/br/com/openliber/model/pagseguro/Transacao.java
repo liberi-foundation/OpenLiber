@@ -4,14 +4,22 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import br.com.openliber.enums.StatusTransacaoEnum;
 
 @Entity
 public class Transacao {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_transacao")
 	private Integer id;
-	private Integer id_pagseguro;
+	
+	
+	private String idPagseguro;
 	private LocalDate data;
 	private StatusTransacaoEnum status;
 
@@ -23,12 +31,12 @@ public class Transacao {
 		this.id = id;
 	}
 
-	public Integer getId_pagseguro() {
-		return id_pagseguro;
+	public String getIdPagseguro() {
+		return idPagseguro;
 	}
 
-	public void setId_pagseguro(Integer id_pagseguro) {
-		this.id_pagseguro = id_pagseguro;
+	public void setIdPagseguro(String idPagseguro) {
+		this.idPagseguro = idPagseguro;
 	}
 
 	public LocalDate getData() {
