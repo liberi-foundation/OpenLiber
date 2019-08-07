@@ -54,6 +54,6 @@ public class PagseguroController {
 
 		this.transacaoService.retorno(idPagseguro);
 
-		return "redirect:/retorno";
+		return "/retorno-pagseguro";
 	}
 }

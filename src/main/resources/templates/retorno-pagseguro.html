@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Inicio</title>
+
+	<!-- # Head Include # -->
+	<span th:replace="layout/head :: head"></span>
+
+	<!-- # CSS da página # -->
+	<!-- Index CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<!-- Gallery CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/gallery.css}">
+	<!-- ligthSlider CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/lightslider.css}">
+	<!-- ################# -->
+	<style type="text/css">
+		.card .image {
+			max-width: 360px !important;
+			max-height: 552px !important;
+		}
+	</style>
+</head>
+<body id="topo">
+	<a id="skippy" class="sr-only sr-only-focusable" href="#retorno">
+		<div class="container">
+			<span class="skiplink-text">Pular para conteúdo principal</span>
+		</div>
+	</a> <!-- /.atalho para o conteudo -->
+	<nav th:replace="layout/navbar :: ${session.usuarioLogado != null} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	
+	<div class="container-fluid mr-3 my-4">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+					<i class="fas fa-home"></i> Home <span class="sr-only">(página atual)</span>
+				</li>
+			</ol>
+		</nav> <!-- /.breadcrumb -->
+
+		<div class="row my-4" id="retorno">
+			<div class="col-12">
+				
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row retorno -->
+
+		<div class="row my-4 py-5 bg-1" id="enviarUmLivro">
+			<div class="col-12 text-center">
+				<h1 class="display-3 font-lobster2 text-light">
+					<strong>Ajude-nos a ampliar nossa estante de livros</strong>
+				</h1>
+				<a href="#" class="btn btn-block btn-primary btn-lg w-75 mr-auto ml-auto">
+					Envie-nos um livro
+				</a>
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row envie um livro -->
+
+		<div class="row my-4 bg-warning pt-5 pb-3 bg-1">
+			<div class="col-12" id="informacoes">
+				<div class="row text-center">
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>1.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Livros</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>200.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Escritores</p>
+							</li>
+						</ul>
+					</div>
+					<div class="col-12 col-md-4">
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<h2 class="display-4 font-karla text-primary"><strong>10.600.000</strong></h2>
+							</li>
+							<li class="list-inline-item">
+								<p class="text-light spotlight">Leitores</p>
+							</li>
+						</ul>
+					</div>
+				</div> <!-- /.row -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row geral dados -->
+
+		<div class="row my-4">
+			<div class="col-12">
+				<div class="row">
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3">
+									<i class="fas fa-book-open fa-10x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<p>
+									<span class="spotlight-sm">Leitura gratis</span> <br>
+									lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem  ipsum.
+								</p>
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3 py-2">
+									<i class="fas fa-book-reader fa-9x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<span class="spotlight-sm">Importância da leitura</span> <br>
+								lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem lorem ipsum.
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-4">
+								<div class="bg-warning rounded px-3 py-2">
+									<i class="fas fa-atlas fa-9x text-light rounded"></i>
+								</div>
+							</div>
+							<div class="col-6">
+								<span class="spotlight-sm">Diversidade na leitura</span> <br>
+								lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum.
+							</div>
+						</div>
+					</div> <!-- /.col-4 -->
+				</div> <!-- /.row geral interna -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row informações -->
+		<hr>
+
+		<div class="row my-4">
+			<div class="col-12">
+				<blockquote class="blockquote">
+					<p class="mb-0 display-4 font-karla text-center">
+						<i class="align-top fas fa-quote-left aspas"></i> A leitura é a viagem de quem não pode pegar um trem. <i class="align-top fas fa-quote-right aspas"></i>
+					</p>
+					<footer class="blockquote-footer">
+						<cite title="Francis de Croisset">Francis de Croisset</cite>
+					</footer>
+				</blockquote> <!-- /.blockquote -->
+			</div> <!-- /.col-12 -->
+		</div> <!-- /.row citação -->
+
+		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
+	</div> <!-- /.container geral -->
+
+	<!-- # Script Import -->
+	<span th:replace="layout/footer :: script"></span>
+	<!-- lightslider -->
+	<script th:src="@{/js/lightslider.js}"></script>
+
+	<!-- Index JS -->
+	<script th:src="@{/js/index.js}"></script>
+</body>
+</html>
