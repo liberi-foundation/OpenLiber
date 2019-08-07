@@ -11,6 +11,14 @@ function checkout(id, descricao, valor, quantidade, btn) {
 
     console.log('item enviado:');
     console.log(item);
+    
+    var usuario = "[[${usuarioLogado}]]";
+    if (usuario == null || usuario == "null") {
+    	$('#modalLogin').modal('show');
+
+    	return false;
+    }
+    
     $.ajax({
         url: '/pagseguro/checkout',
         contentType: 'application/json; charset=utf-8',

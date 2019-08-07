@@ -1,51 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Openliber - Inicio</title>
+<title>Openliber - Inicio</title>
 
-	<!-- # Head Include # -->
-	<span th:replace="layout/head :: head"></span>
+<!-- # Head Include # -->
+<span th:replace="layout/head :: head"></span>
 
-	<!-- # CSS da página # -->
-	<!-- Index CSS -->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
-	<style>
-		.card li {
-			font-size: 22px;
-		}
+<!-- # CSS da página # -->
+<!-- Index CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+<style>
+.card li {
+	font-size: 22px;
+}
 
-		.click a {
-			color: #fff;
-		}
-	</style>
-	<!-- ################# -->
+.click a {
+	color: #fff;
+}
+</style>
+<!-- ################# -->
 </head>
 <body>
 	<a id="skippy" class="sr-only sr-only-focusable" href="#assine">
 		<div class="container">
 			<span class="skiplink-text">Pular para conteúdo principal</span>
 		</div>
-	</a> <!-- /.atalho para o conteudo -->
-	<nav th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/assinar/logado'} ? 'login' : 'logout'"></nav> <!-- ./navbar -->
+	</a>
+	<!-- /.atalho para o conteudo -->
+	<nav
+		th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/assinar/logado'} ? 'login' : 'logout'"></nav>
+	<!-- ./navbar -->
 	<div class="container-fluid mr-3 mt-5">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item">
-					<a href="./index.html"><i class="fas fa-home"></i> Home</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page" data-toggle="tooltip" data-placement="bottom" title="Página atual">
+				<li class="breadcrumb-item"><a href="./index.html"><i
+						class="fas fa-home"></i> Home</a></li>
+				<li class="breadcrumb-item active" aria-current="page"
+					data-toggle="tooltip" data-placement="bottom" title="Página atual">
 					Seja premium <span class="sr-only">(página atual)</span>
 				</li>
 			</ol>
-		</nav> <!-- /.breadcrumb -->
-	
+		</nav>
+		<!-- /.breadcrumb -->
+
 		<div class="row mt-4 mb-5 mx-md-2" id="assine">
 			<div class="col-12">
 				<div class="card bg-5 py-md-3 py-0 px-md-3 px-0">
-					<h1 class="display-4 font-weight-bold text-primary text-shadow text-center">Seja Premium</h1>
+					<h1
+						class="display-4 font-weight-bold text-primary text-shadow text-center">Seja
+						Premium</h1>
 					<div class="row">
 						<div class="col-12 col-md-6">
-							<h2 class="font-weight-bold text-white text-center text-md-right pr-0 pr-md-5">Vantagens</h2>
+							<h2
+								class="font-weight-bold text-white text-center text-md-right pr-0 pr-md-5">Vantagens</h2>
 						</div>
 						<div class="col-12 col-md-6">
 							<ul class="list-unstyled text-white text-center text-md-left">
@@ -60,10 +68,15 @@
 							<div class="card text-center m-1 m-md-0">
 								<div class="card-body">
 									<h3 class="font-weight-bold mb-2">1 Mês</h3>
-									<h4 class="display-4 text-primary font-weight-bold mb-4">R$ 10,90</h4>
-									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no prazo de 30 dias.</p>
-									<p class="mt-0 pt-0">Toda transição é feita através do Pagseguro</p>
-									<button class="btn btn-success btn-lg btn-block mt-0 mt-md-5 click" onclick="checkout(1, 'Assinatura premium durante 1 mês', 10.99, 1, $(this));">Assinar</button>
+									<h4 class="display-4 text-primary font-weight-bold mb-4">R$
+										10,90</h4>
+									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no
+										prazo de 30 dias.</p>
+									<p class="mt-0 pt-0">Toda transição é feita através do
+										Pagseguro</p>
+									<button
+										class="btn btn-success btn-lg btn-block mt-0 mt-md-5 click"
+										onclick="checkout(1, 'Assinatura premium durante 1 mês', 10.99, 1, $(this));">Assinar</button>
 								</div>
 							</div>
 						</div>
@@ -71,9 +84,12 @@
 							<div class="card text-center m-1 m-md-0">
 								<div class="card-body">
 									<h3 class="font-weight-bold mb-2">6 Meses</h3>
-									<h4 class="display-4 text-primary font-weight-bold mb-4">R$ 14,90</h4>
-									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no prazo de 180 dias.</p>
-									<p class="mt-0 pt-0">Toda transição é feita através do Pagseguro</p>
+									<h4 class="display-4 text-primary font-weight-bold mb-4">R$
+										14,90</h4>
+									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no
+										prazo de 180 dias.</p>
+									<p class="mt-0 pt-0">Toda transição é feita através do
+										Pagseguro</p>
 									<button class="btn btn-success btn-lg btn-block mt-0 mt-md-5">Assinar</button>
 								</div>
 							</div>
@@ -82,9 +98,12 @@
 							<div class="card text-center m-1 m-md-0">
 								<div class="card-body">
 									<h3 class="font-weight-bold mb-2">1 Ano</h3>
-									<h4 class="display-4 text-primary font-weight-bold mb-4">R$ 17,90</h4>
-									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no prazo de 360 dias.</p>
-									<p class="mt-0 pt-0">Toda transição é feita através do Pagseguro</p>
+									<h4 class="display-4 text-primary font-weight-bold mb-4">R$
+										17,90</h4>
+									<p class="lead pb-0 mb-0">Obtenha todas as vantagens no
+										prazo de 360 dias.</p>
+									<p class="mt-0 pt-0">Toda transição é feita através do
+										Pagseguro</p>
 									<button class="btn btn-success btn-lg btn-block mt-0 mt-md-5">Assinar</button>
 								</div>
 							</div>
@@ -100,7 +119,9 @@
 					<div class="col-12 col-md-4">
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<h2 class="display-4 font-karla text-primary"><strong>1.600.000</strong></h2>
+								<h2 class="display-4 font-karla text-primary">
+									<strong>1.600.000</strong>
+								</h2>
 							</li>
 							<li class="list-inline-item">
 								<p class="text-light spotlight">Livros</p>
@@ -110,7 +131,9 @@
 					<div class="col-12 col-md-4">
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<h2 class="display-4 font-karla text-primary"><strong>200.000</strong></h2>
+								<h2 class="display-4 font-karla text-primary">
+									<strong>200.000</strong>
+								</h2>
 							</li>
 							<li class="list-inline-item">
 								<p class="text-light spotlight">Escritores</p>
@@ -120,25 +143,52 @@
 					<div class="col-12 col-md-4">
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<h2 class="display-4 font-karla text-primary"><strong>10.600.000</strong></h2>
+								<h2 class="display-4 font-karla text-primary">
+									<strong>10.600.000</strong>
+								</h2>
 							</li>
 							<li class="list-inline-item">
 								<p class="text-light spotlight">Leitores</p>
 							</li>
 						</ul>
 					</div>
-				</div> <!-- /.row -->
-			</div> <!-- /.col-12 -->
-		</div> <!-- /.row geral dados -->
-		
-		<footer th:replace="layout/footer :: footer"></footer> <!-- /.footer -->
-	</div> <!-- /.container geral -->
-	
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.col-12 -->
+		</div>
+		<!-- /.row geral dados -->
+
+		<footer th:replace="layout/footer :: footer"></footer>
+		<!-- /.footer -->
+	</div>
+	<!-- /.container geral -->
+
+	<!-- Modal Login -->
+	<div class="modal" tabindex="-1" role="dialog" id="modalLogin">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5>Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- # Script Import -->
 	<span th:replace="layout/footer :: script"></span>
 	<script th:src="@{/js/checkout.js}"></script>
 	<script>
-		$(function () {
+		$(function() {
 			$('[data-toggle="tooltip"]').tooltip()
 		})
 	</script>
