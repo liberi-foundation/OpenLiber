@@ -1,4 +1,4 @@
-package br.com.openliber.service;
+package br.com.openliber.service.pagseguro;
 
 import java.time.LocalDate;
 
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.openliber.DAO.TransacaoDAO;
+import br.com.openliber.enums.StatusTransacaoEnum;
 import br.com.openliber.model.pagseguro.Transacao;
 
 @Service
@@ -26,6 +27,7 @@ public class TransacaoService {
 		Transacao transacao = new Transacao();
 		transacao.setIdPagseguro(idPagseguro);
 		transacao.setData(LocalDate.now());
+		transacao.setStatus(StatusTransacaoEnum.PENDENTE);
 
 		this.salvar(transacao);
 	}

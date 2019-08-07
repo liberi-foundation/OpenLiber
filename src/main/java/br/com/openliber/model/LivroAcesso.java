@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.sun.istack.NotNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class LivroAcesso {
@@ -24,7 +23,7 @@ public class LivroAcesso {
 
 	private LocalDateTime data;
 
-	@NotNull
+	@NotNull(message = "livro não pode ser nulo")
 	@ManyToOne
 	private Livro livro;
 
