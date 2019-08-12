@@ -3,6 +3,12 @@
 <head>
 <title>Openliber - Login</title>
 
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};HandleGoogleApiLibrary()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+<meta name = "google-signin-client_id" content = 873820349999-fuedp5o3l38jjqn0b1jf6i193cnu5gv5.apps.googleusercontent.com>
+
+
 	<!-- # Head Include # -->
 	<span th:replace="layout/head :: head"></span>
 
@@ -18,14 +24,32 @@
 					<h3>Login</h3>
 				</div>
 				
+				<!-------------------Testando Login com o Google------------------------>
 				
 				<div class="card-body">
 					<div class="form-group text-center">
-						<button class="btn btn-block login_btn">
-							<i class="fab fa-google mr-1"></i> Login com Google
-						</button>
+						
+						<button   class="g-signin2" data-onsuccess="onSignIn">
+							<i class="fab fa-google mr-1"></i>Login com Google
+						</button> 
 					</div>
 					
+					<script>
+					function onSignIn(googleUser) {
+				        // Useful data for your client-side scripts:
+				        var profile = googleUser.getBasicProfile();
+				        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+				        console.log('Full Name: ' + profile.getName());
+				        console.log("Image URL: " + profile.getImageUrl());
+				        console.log("Email: " + profile.getEmail());
+
+				        // The ID token you need to pass to your backend:
+				        var id_token = googleUser.getAuthResponse().id_token;
+				        console.log("ID Token: " + id_token);
+				      }
+					</script>
+									
+				<!-- ----------------final----------------------- -->
 					
 					<form th:action="@{/login}" th:object="${usuario}" method="post">
 						<div th:if="${mensagemErro != null}" th:text="${mensagemErro}" class="alert alert-danger"></div>
