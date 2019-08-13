@@ -1,5 +1,7 @@
 package br.com.openliber.controller;
 
+import java.time.LocalDateTime;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,11 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.openliber.DAO.LivroAcessoDAO;
 import br.com.openliber.enums.GeneroEnum;
 import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
 import br.com.openliber.model.Livro;
+import br.com.openliber.model.LivroAcesso;
 import br.com.openliber.model.Usuario;
+import br.com.openliber.service.LivroAcessoService;
 import br.com.openliber.service.LivroService;
 import br.com.openliber.service.UsuarioService;
 
@@ -34,6 +39,9 @@ public class LivroController {
 
 	@Autowired
 	private LivroService livroService;
+	
+	@Autowired
+	private LivroAcessoService livroAcessoService;
 
 	/*
 	 * Upload
@@ -95,6 +103,14 @@ public class LivroController {
 			ra.addFlashAttribute("alertErro", true);
 		}
 
+		LivroAcesso livroAcesso = new LivroAcesso();
+		livroAcesso.setLivro(livro);
+		
+		LocalDateTime agora = LocalDateTime.now();
+		
+		livroAcesso.setData(agora);
+		
+		livroAcessoService.salvar(livroAcesso);
 		return mv;
 	}
 
@@ -113,6 +129,8 @@ public class LivroController {
 			ra.addFlashAttribute("alertErro", "Livro não encontrado");
 			mv.setViewName("redirect:/inicio");
 		}
+		
+		
 
 		return mv;
 	}

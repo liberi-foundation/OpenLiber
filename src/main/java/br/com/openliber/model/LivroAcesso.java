@@ -18,8 +18,8 @@ public class LivroAcesso {
 	@Column(name = "id_livro_acesso")
 	private Integer id;
 
-	@ManyToOne
-	private Usuario usuario;
+	//@ManyToOne
+	///private Usuario usuario;
 
 	private LocalDateTime data;
 
@@ -35,14 +35,14 @@ public class LivroAcesso {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	/*public Usuario getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
+*/
 	public LocalDateTime getData() {
 		return data;
 	}
