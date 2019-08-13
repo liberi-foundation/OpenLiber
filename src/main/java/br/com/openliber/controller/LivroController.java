@@ -126,23 +126,23 @@ public class LivroController {
 		/*
 		 * Guardando log do livro lido
 		 * 
-		 * 
-	         //if((this.livroAcessoService.findLogLeituraDeUmLivroByIdUsuarioAndIdLivro(idUsuario, idLivro) == null)) {
+		 **/ 
+	         
         	 
 		
-     		Usuario usuario = this.usuarioService.findById(idUsuario);
-	     	Livro livro = this.livroService.findById(idLivro);
+     		//Usuario usuario = this.usuarioService.findById(idUsuario);
+	     	
 
         	 LivroAcesso livroAcesso = new LivroAcesso();
         	 LocalDateTime agora = LocalDateTime.now();
-        	 livroAcesso.setUsuario(usuario);
+        	 //livroAcesso.setUsuario(usuario);
         	 livroAcesso.setLivro(livro);
         	 livroAcesso.setData(agora);
         	 
         	 this.livroAcessoService.save(livroAcesso);
         	 
-         //}
-		*/
+         
+		
 		return mv;
 	}
 
