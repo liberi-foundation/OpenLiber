@@ -73,10 +73,39 @@ public class EmailService {
 		emailConfirmacao.setEmailDestinatario(usuario.getEmail());
 		emailConfirmacao.setValidade(validade);
 		
-		this.sendEmailTSL(emailConfirmacao);
+		
+		//deverá seguir um tolken no corpo do email. 
+		boolean comTolken = true;
+
+		this.sendEmailTSL(emailConfirmacao, comTolken);
+	}
+	
+	public void enviarRecuperacaoDeSenha(String email, String apelidoUsuario, String novasenha) throws MessagingException{
+		
+		
+		// Criando mensagem do email
+		EmailMensagem mensagem = new EmailMensagem();
+		mensagem.setTitulo("Olá, " +  apelidoUsuario + "  recupere sua senha!");
+		mensagem.setMensagem("Sua nova senha é:  " + novasenha + "  (você pode muda-la depois na opção 'editar perfil no campo alterar senha')");
+				;
+
+		Email recuperacaoDeSenha =  new Email();
+		recuperacaoDeSenha.setAssunto("Openliber - Recuperacao de senha!!");
+		recuperacaoDeSenha.setMensagem(mensagem);
+		recuperacaoDeSenha.setNomeRemetente("Openliber");
+		recuperacaoDeSenha.setEmailRemetente("openliber@gmail.com");
+		recuperacaoDeSenha.setNomeDestiantario(apelidoUsuario);
+		recuperacaoDeSenha.setEmailDestinatario(email);
+
+		// nao deverá seguir nenhum tolken no corpo do email. apenas a senha 
+		boolean semTolken = false;
+		
+		this.sendEmailTSL(recuperacaoDeSenha, semTolken);
+		
+		
 	}
 
-	public void sendEmailTSL(Email email) throws MessagingException {
+	public void sendEmailTSL(Email email, boolean comTolken) throws MessagingException {
 		// Gerando token do email
 		email.setToken(UUID.randomUUID().toString());
 
@@ -86,6 +115,7 @@ public class EmailService {
 		// Propriedades do transport
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -97,12 +127,15 @@ public class EmailService {
 		});
 
 		session.setDebug(true);
+		
+		//email sera enviado com tolken
+		
 
 		Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress(email.getEmailRemetente()));
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getEmailDestinatario()));
 		message.setSubject(email.getAssunto());
-		message.setContent(email.getMensagem().gerarMensagem(), "text/html");
+		message.setContent(email.getMensagem().gerarMensagemComTolken(comTolken), "text/html");
 
 		Transport.send(message);
 		this.emailRep.save(email);

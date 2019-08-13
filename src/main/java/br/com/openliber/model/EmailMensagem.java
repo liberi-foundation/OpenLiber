@@ -55,7 +55,7 @@ public class EmailMensagem {
 		this.controller = controller;
 	}
 
-	public String gerarMensagem() {
+	public String gerarMensagemComTolken(boolean comTolken) {
 		StringBuilder mensagem = new StringBuilder();
 
 		// Gerando titulo da mensagem
@@ -64,10 +64,18 @@ public class EmailMensagem {
 		// Gerando corpo da mensagem
 		mensagem.append("<p>" + this.getMensagem() + "</p><br>");
 
+		
 		// Gerando link token
+		if ((comTolken == true)) {
 		mensagem.append("<p>" + "<a href=\"localhost:8090" + this.getController() + "?token=" + this.getTokenEmail()
 				+ "\">" + "localhost:8090" + this.getController() + "?token=" + this.getTokenEmail() + "</a>");
+		}
 
 		return mensagem.toString();
 	}
+	
+	
+	
+	
+	
 }

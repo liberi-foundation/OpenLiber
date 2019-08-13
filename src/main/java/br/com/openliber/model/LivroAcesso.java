@@ -15,11 +15,11 @@ public class LivroAcesso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_livro_acesso")
-	private Integer id;
+	@Column(name = "id_log")
+	private Integer idLog;
 
-	//@ManyToOne
-	///private Usuario usuario;
+	@ManyToOne
+	private Usuario usuario;
 
 	private LocalDateTime data;
 
@@ -27,22 +27,25 @@ public class LivroAcesso {
 	@ManyToOne
 	private Livro livro;
 
-	public Integer getId() {
-		return id;
+	
+	
+	
+	public Integer getIdLog() {
+		return idLog;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdLog(Integer idLog) {
+		this.idLog = idLog;
 	}
 
-	/*public Usuario getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-*/
+
 	public LocalDateTime getData() {
 		return data;
 	}

@@ -1,5 +1,7 @@
 package br.com.openliber.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import javax.mail.MessagingException;
@@ -99,7 +101,7 @@ public class UsuarioController {
 	@PostMapping("/login")
 	public String efetuarLogin(HttpServletRequest request, @ModelAttribute Usuario usuario,
 			@RequestParam(name = "retorno", required = false) String retorno, RedirectAttributes ra,
-			HttpSession session) {
+			HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		String redirect = "redirect:/inicio";
 		if (retorno != null) {
 			redirect = "redirect:" + retorno;
@@ -191,7 +193,7 @@ public class UsuarioController {
 
 	@PostMapping("/perfil/editar")
 	public String editarPerfil(@RequestParam(name = "fotoArquivo", required = false) MultipartFile fotoArquivo,
-			@Valid @ModelAttribute Usuario usuario, BindingResult br, HttpSession session, RedirectAttributes ra) {
+			@Valid @ModelAttribute Usuario usuario, BindingResult br, HttpSession session, RedirectAttributes ra) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		usuario.setFotoTemp(fotoArquivo);
 
 		if (br.hasErrors()) {
@@ -269,6 +271,35 @@ public class UsuarioController {
 
 		return retorno;
 	}
+	
+	
+	/*
+	 * Recuperar senha
+	 */
+	@GetMapping("/recuperarSenha")
+	public String recuperarSeha() {
+		return "/recuperar-senha";
+	}
+
+	/*
+	 * Recuperar senha enviando um email com uma nova senha
+	 */
+	@PostMapping("/recuperarSenha")
+	public ModelAndView recuperarSenha(@RequestParam(name = "email", required = true) String email) {
+		
+		
+		ModelAndView mv = new ModelAndView("/recuperar-senha");
+		
+		this.usuarioService.recuperarSenha(email);
+		
+		mv.addObject("emailEnviado", true);
+		mv.addObject("email", email);
+		
+		
+		return mv;
+	}
+	
+	
 
 	/*
 	 * Favoritar autor

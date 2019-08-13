@@ -45,35 +45,5 @@
 
 	<!-- Index JS -->
 	<script th:src="@{/js/index.js}"></script>
-	<script>
-	var livroAcesso={
-	
-	"autorLivro": "[[${param.book[0]}]]",
-	"idUsuario": "[[${session.usuarioLogado.id}]]"
-	
-	}
-	$.ajax({
-		url: '/registrarAcesso',
-		accept: 'application/json',
-		contenType: 'application/json; charset=utf-8',
-		type: 'POST',
-		data: JSON.stringify(livroAcesso),
-	}).done(function(response){
-		if (response.success == true) {
-			console.log(response);
-		}
-	}).fail(function(jqXHR, textStatus, errorThown){
-	
-		console.log(jqXHR.status);
-		console.log(textStatus);
-		console.log(errorThrown);
-	
-	})
-	
-	
-	
-	
-	
-	</script>
 </body>
 </html>

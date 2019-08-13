@@ -44,8 +44,8 @@ public class Usuario {
 	@Column(length = 40, nullable = false, unique = true)
 	private String apelido;
 
-	@Size(max = 30)
-	@Column(length = 30, nullable = false)
+	@Size(/*max = 30*/)
+	@Column(/*length = 255,*/ nullable = false)
 	private String senha;
 
 	@Size(max = 30)
