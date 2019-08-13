@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Openliber - Popularidade dos livros</title>
+<!-- # Head Include # -->
+<span th:replace="layout/head :: head"></span>
+
+<!-- # CSS da página # -->
+<!-- Index CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<body>
+	<!-- /.atalho para o conteudo -->
+	<nav
+		th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/assinar/logado'} ? 'login' : 'logout'"></nav>
+	<!-- ./navbar -->
+	<h2>Popularidade dos livros</h2>
+</body>
+</html>

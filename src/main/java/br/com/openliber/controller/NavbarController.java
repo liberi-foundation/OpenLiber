@@ -26,6 +26,11 @@ public class NavbarController {
 		return "seja-premium";
 	}
 	
+	@GetMapping("/popularidade")
+	public String popularidadeDosLivros() {
+		return "visualizarPopularidadeLivros";
+	}
+	
 	@GetMapping("/livro/novo")
 	public String novoLivro(Model model) {
 		model.addAttribute("capa", "/imagem/cover_livro/placeholder.jpg");
