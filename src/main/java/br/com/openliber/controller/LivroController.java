@@ -1,9 +1,8 @@
 package br.com.openliber.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -21,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.openliber.DAO.LivroAcessoDAO;
 import br.com.openliber.enums.GeneroEnum;
 import br.com.openliber.exception.ServiceException;
 import br.com.openliber.exception.StorageException;
@@ -39,10 +39,10 @@ public class LivroController {
 
 	@Autowired
 	private LivroService livroService;
-
 	
 	@Autowired
 	private LivroAcessoService livroAcessoService;
+
 	/*
 	 * Upload
 	 */
@@ -102,7 +102,18 @@ public class LivroController {
 			mv.setViewName("redirect:/inicio");
 			ra.addFlashAttribute("alertErro", true);
 		}
+		
+		livro.setQtdAcessos(livro.getQtdAcessos() + 1);
+		this.livroService.save(livro);
 
+//		LivroAcesso livroAcesso = new LivroAcesso();
+//		livroAcesso.setLivro(livro);
+//		
+//		LocalDateTime agora = LocalDateTime.now();
+//		
+//		livroAcesso.setData(agora);
+//		
+//		livroAcessoService.salvar(livroAcesso);
 		return mv;
 	}
 
@@ -122,27 +133,8 @@ public class LivroController {
 			mv.setViewName("redirect:/inicio");
 		}
 		
-		//
-		/*
-		 * Guardando log do livro lido
-		 * 
-		 **/ 
-	         
-        	 
 		
-     		//Usuario usuario = this.usuarioService.findById(idUsuario);
-	     	
 
-        	 LivroAcesso livroAcesso = new LivroAcesso();
-        	 LocalDateTime agora = LocalDateTime.now();
-        	 //livroAcesso.setUsuario(usuario);
-        	 livroAcesso.setLivro(livro);
-        	 livroAcesso.setData(agora);
-        	 
-        	 this.livroAcessoService.save(livroAcesso);
-        	 
-         
-		
 		return mv;
 	}
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+	<title>Openliber - Popularidade dos livros</title>
+<!-- # Head Include # -->
+<span th:replace="layout/head :: head"></span>
+
+<!-- # CSS da página # -->
+<!-- Index CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+</head>
+<body>
+	<!-- /.atalho para o conteudo -->
+	<nav
+		th:replace="layout/navbar :: ${#httpServletRequest.requestURI == '/assinar/logado'} ? 'login' : 'logout'"></nav>
+	<!-- ./navbar -->
+	<h2>Popularidade dos livros</h2>
+	
+	<script src= "https://www.chartjs.org/dist/2.8.0/Chart.min.js"> </script>
+<script src= "https://www.chartjs.org/samples/latest/utils.js"> </script>
+	<script th:inline="javascript">
+		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: /*[[${titulos}]]*/,
+			datasets: [{
+				label: 'Acessos',
+				backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.green,
+				borderWidth: 1,
+				data: /*[[${acessos}]]*/
+			}
+				
+				 ]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('graficoLivrosPopulares').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+						display: false
+					},
+					title: {
+						display: false,
+						text: 'Chart.js Bar Chart'
+					}
+				}
+			});
+
+		};
+	//	});
+
+	</script>
+	<div >
+	<canvas id="graficoLivrosPopulares" > </canvas>
+	</div>
+</body>
+</html>

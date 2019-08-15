@@ -1,11 +1,22 @@
 package br.com.openliber.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import br.com.openliber.DAO.LivroDAO;
+import br.com.openliber.model.Livro;
 
 @Controller
 public class NavbarController {
+	
+	@Autowired private LivroDAO livros;
+	
 	@GetMapping("/livro")
 	public String livro() {
 		return "/livro";
@@ -24,6 +35,26 @@ public class NavbarController {
 	@GetMapping("/assinar/logado")
 	public String sejaPremiumLogado() {
 		return "seja-premium";
+	}
+	
+	@GetMapping("/popularidade")
+	public ModelAndView popularidadeDosLivros() {
+		ModelAndView mv = new ModelAndView("visualizarPopularidadeLivros");
+		
+		List<Livro> livrosMaisAcessados = this.livros.listarOs7MaisAcessados();
+		
+		List<String> titulos = new ArrayList<>();
+		livrosMaisAcessados.forEach(livro -> titulos.add(livro.getTitulo()));
+		
+		List<Integer> acessos = new ArrayList<>();
+		for (Livro l : livrosMaisAcessados) {
+			acessos.add(l.getQtdAcessos());
+		}
+		
+		mv.addObject("titulos", titulos);
+		mv.addObject("acessos", acessos);
+		
+		return mv;
 	}
 	
 	@GetMapping("/livro/novo")

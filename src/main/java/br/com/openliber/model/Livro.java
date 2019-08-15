@@ -59,6 +59,8 @@ public class Livro {
 
 	@Column(nullable = false)
 	private String epub;
+	
+	private Integer qtdAcessos = 0;
 
 	public Integer getId() {
 		return id;
@@ -170,5 +172,13 @@ public class Livro {
 
 	public void setEpubTemp(MultipartFile epubTemp) {
 		this.epubTemp = epubTemp;
+	}
+
+	public Integer getQtdAcessos() {
+		return qtdAcessos;
+	}
+
+	public void setQtdAcessos(Integer qtdAcessos) {
+		this.qtdAcessos = qtdAcessos;
 	}
 }

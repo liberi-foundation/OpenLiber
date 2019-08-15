@@ -2,7 +2,6 @@ package br.com.openliber.DAO;
 
 import java.util.List;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -25,4 +24,8 @@ public interface LivroDAO extends JpaRepository<Livro, Integer> {
 
 	@Query("FROM Livro l WHERE lower(l.autor.apelido) = :apelido AND lower(l.titulo) = :titulo")
 	public Livro findByAutorApelidoAndTitulo(String apelido, String titulo);
+	
+	@Query(value = "SELECT * FROM livro ORDER BY qtd_acessos DESC LIMIT 7", nativeQuery = true)
+	public List<Livro> listarOs7MaisAcessados();
+	
 }
